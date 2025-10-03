@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lessonSection.dataset.lesson = lesson.lesson;
 
             const heading = document.createElement('h2');
-            heading.textContent = `Урок ${lesson.lesson}`;
+            heading.textContent = lesson.title ? `${lesson.title}` : `Урок ${lesson.lesson}`;
             lessonSection.appendChild(heading);
 
             const list = document.createElement('div');

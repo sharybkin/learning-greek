@@ -1,6 +1,6 @@
 window.LESSONS = [
     {
-        lesson: 1,
+        lesson: 1.0,
         words: [
             { greek: "το βιβλίο", russian: "книга" },
             { greek: "το τετράδιο", russian: "тетрадь" },
@@ -72,3 +72,133 @@ window.LESSONS = [
         ]
     }
 ];
+
+// Lesson 2: countries
+window.LESSONS.push({
+    lesson: 1.1,
+    title: 'Страны',
+    words: [
+        { greek: 'η Ρωσία', russian: 'Россия' },
+        { greek: 'η Ελλάδα', russian: 'Греция' },
+        { greek: 'η Τουρκία', russian: 'Турция' },
+        { greek: 'η Αγγλία', russian: 'Англия' },
+        { greek: 'η Ισπανία', russian: 'Испания' },
+        { greek: 'ο Καναδάς', russian: 'Канада' },
+        { greek: 'ο Λίβανος', russian: 'Ливан' },
+        { greek: 'η Βουλγαρία', russian: 'Болгария' },
+        { greek: 'το Βέλγιο', russian: 'Бельгия' },
+        { greek: 'η Γαλλία', russian: 'Франция' },
+        { greek: 'η Γερμανία', russian: 'Германия' },
+        { greek: 'η Κύπρος', russian: 'Кипр' },
+        { greek: 'η Ιταλία', russian: 'Италия' },
+        { greek: 'η Λευκορωσία', russian: 'Белоруссия' },
+        { greek: 'η Ουκρανία', russian: 'Украина' }
+    ]
+});
+
+// User-provided lesson (marked as "Урок 2" in user's list)
+window.LESSONS.push({
+    lesson: 2.0,
+    title: 'Урок 2',
+    words: [
+        { greek: 'το επώνυμο', russian: 'фамилия' },
+        { greek: 'το επίθετο', russian: 'фамилия' },
+        { greek: 'η διεύθυνση', russian: 'адрес' },
+        { greek: 'η περιοχή', russian: 'район' },
+        { greek: 'ο ταχυδρομικός κώδικας', russian: 'почтовый индекс' },
+        { greek: 'το σταθερό', russian: 'домашний телефон' },
+        { greek: 'το κινητό', russian: 'мобильный' },
+        { greek: 'ακριβώς', russian: 'именно, точно, ровно' },
+        { greek: 'το νούμερο', russian: 'номер' },
+        { greek: 'ο δρόμος', russian: 'дорога, улица, путь' },
+        { greek: 'η θάλασσα', russian: 'море' },
+        { greek: 'το φαρμακείο', russian: 'аптека' },
+        { greek: 'ο ήλιος', russian: 'солнце' },
+        { greek: 'ο ουρανός', russian: 'небо' },
+        { greek: 'το μουσείο', russian: 'музей' },
+        { greek: 'το εστιατόριο', russian: 'ресторан' },
+        { greek: 'το περίπτερο', russian: 'киоск' },
+        { greek: 'η ταβέρνα', russian: 'таверна' },
+        { greek: 'το νοσοκομείο', russian: 'больница' },
+        { greek: 'ο φούρνος', russian: 'хлебный магазин' },
+        { greek: 'το μαγαζί', russian: 'магазин, заведение' },
+        { greek: 'το θέατρο', russian: 'театр' },
+        { greek: 'το ξενοδοχείο', russian: 'гостиница' },
+        { greek: 'το πρόβλημα', russian: 'проблема' },
+        { greek: 'το δημαρχείο', russian: 'мэрия' },
+        { greek: 'το εργοστάσιο', russian: 'завод' },
+        { greek: 'το ταχυδρομείο', russian: 'почта' },
+        { greek: 'το βιβλιοπωλείο', russian: 'книжный магазин' },
+        { greek: 'το αεροδρόμιο', russian: 'аэропорт' },
+        { greek: 'το κρέας', russian: 'мясо' },
+        { greek: 'το κρασί', russian: 'вино' },
+        { greek: 'το γάλα', russian: 'молоко' },
+        { greek: 'το ποτήρι', russian: 'стакан' },
+        { greek: 'το μπουκάλι', russian: 'бутылка' },
+        { greek: 'τα λεφτά', russian: 'деньги' },
+        { greek: 'τα χρήματα', russian: 'деньги' },
+        { greek: 'η θέρμανση', russian: 'отопление' },
+        { greek: 'η εφημερίδα', russian: 'газета' },
+        { greek: 'το ποδόσφαιρο', russian: 'футбол' },
+        { greek: 'το ψάρι', russian: 'рыба' },
+        { greek: 'η έκθεση', russian: 'выставка, сочинение' },
+        { greek: 'το βράδυ', russian: 'вечер, вечером' },
+        { greek: 'το παγωτό', russian: 'мороженое' },
+        { greek: 'το πιάνο', russian: 'пианино' },
+        { greek: 'ο χυμός', russian: 'сок' },
+        { greek: 'ο καφές', russian: 'кофе' },
+        { greek: 'το λιμάνι', russian: 'порт' },
+        { greek: 'η στάση', russian: 'остановка' },
+        { greek: 'η τράπεζα', russian: 'банк' },
+        { greek: 'η πλατεία', russian: 'площадь' },
+        { greek: 'ο κινηματογράφος', russian: 'кинотеатр, кинематограф' },
+        { greek: 'το τρένο', russian: 'поезд' },
+        { greek: 'το μετρό', russian: 'метро' },
+        { greek: 'το λεωφορείο', russian: 'автобус' },
+        { greek: 'ήδη / πια', russian: 'уже' },
+        { greek: 'καλά', russian: 'хорошо' },
+        { greek: 'το σκυλάκι', russian: 'собачка' },
+        { greek: 'τώρα', russian: 'сейчас' },
+        { greek: 'κοντά', russian: 'недалеко' },
+        { greek: 'εδώ', russian: 'здесь' },
+        { greek: 'εκεί', russian: 'там' },
+        { greek: 'συχνά', russian: 'часто' },
+        { greek: 'συνήθως', russian: 'обычно' },
+        { greek: 'πάντα', russian: 'всегда' },
+        { greek: 'σπάνια', russian: 'редко' },
+        { greek: 'ποτέ', russian: 'никогда' },
+        { greek: 'τα Ελληνικά', russian: 'греческий язык' },
+        { greek: 'τα Ρωσικά', russian: 'русский язык' },
+        { greek: 'τα Αγγλικά', russian: 'английский язык' },
+        { greek: 'το πορτοφόλι', russian: 'кошелёк' },
+        { greek: 'το παραμύθι', russian: 'сказка' }
+    ]
+});
+
+// Lesson: Глаголы
+window.LESSONS.push({
+    lesson: 2.1,
+    title: 'Глаголы',
+    words: [
+        { greek: 'μένω', russian: 'жить' },
+        { greek: 'έχω', russian: 'иметь' },
+        { greek: 'κάνω', russian: 'делать' },
+        { greek: 'διαβάζω', russian: 'читать' },
+        { greek: 'γράφω', russian: 'писать' },
+        { greek: 'παίζω', russian: 'играть' },
+        { greek: 'μαθαίνω', russian: 'учить' },
+        { greek: 'μαγειρεύω', russian: 'готовить еду' },
+        { greek: 'ξέρω', russian: 'знать' },
+        { greek: 'βλέπω', russian: 'видеть' },
+        { greek: 'κοιτάζω', russian: 'смотреть' },
+        { greek: 'θέλω', russian: 'хотеть' },
+        { greek: 'αγοράζω', russian: 'покупать' },
+        { greek: 'δουλεύω', russian: 'работать' },
+        { greek: 'καπνίζω', russian: 'курить' },
+        { greek: 'καταλαβαίνω', russian: 'понимать' },
+        { greek: 'σπουδάζω', russian: 'учиться (в ВУЗЕ)' },
+        { greek: 'διδάσκω', russian: 'преподавать' },
+        { greek: 'πηγαίνω', russian: 'идти, ходить, ехать, ездить' },
+        { greek: 'περιμένω', russian: 'ждать' }
+    ]
+});
