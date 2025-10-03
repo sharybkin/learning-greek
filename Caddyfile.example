@@ -1,0 +1,12 @@
+# Replace example.com with your domain and save as Caddyfile
+example.com {
+    reverse_proxy site:80
+    encode zstd gzip
+}
+
+# If you want to serve on a specific path (e.g. /learn), use the following:
+# example.com {
+#   handle_path /learn/* {
+#     reverse_proxy site:80
+#   }
+# }

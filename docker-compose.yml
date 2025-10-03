@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  site:
+    build: .
+    image: learning-greek-site:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    networks:
+      - web
+
+  # Optional: Caddy for automatic HTTPS (edit Caddyfile.example and set domain)
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  caddy_data: {}
+  caddy_config: {}

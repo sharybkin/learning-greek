@@ -1,0 +1,10 @@
+greek.sharybkin.ru {
+    reverse_proxy site:80
+    encode zstd gzip
+    tls youremail@example.com
+}
+
+http:// {
+    # Optional: redirect plain http to https
+    redir https://{host}{uri} 308
+}
