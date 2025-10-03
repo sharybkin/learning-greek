@@ -41,9 +41,24 @@ h1 {
 }
 
 .words-container {
+    /* container for lesson sections */
+    display: block;
+}
+
+.lesson-section {
+    margin-bottom: 30px;
+}
+
+.lesson-section h2 {
+    margin: 0 0 12px 0;
+    color: #34495e;
+    font-size: 1.1rem;
+}
+
+.lesson-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
 }
 
 .word-card {
