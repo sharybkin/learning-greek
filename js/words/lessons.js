@@ -1,6 +1,7 @@
 window.LESSONS = [
     {
         lesson: 1.0,
+        title: 'Основные слова',
         words: [
             { greek: "το βιβλίο", russian: "книга" },
             { greek: "το τετράδιο", russian: "тетрадь" },
@@ -99,7 +100,7 @@ window.LESSONS.push({
 // User-provided lesson (marked as "Урок 2" in user's list)
 window.LESSONS.push({
     lesson: 2.0,
-    title: 'Урок 2',
+    title: 'Основные слова',
     words: [
         { greek: 'το επώνυμο', russian: 'фамилия' },
         { greek: 'το επίθετο', russian: 'фамилия' },
@@ -317,5 +318,15 @@ window.LESSONS.push({
         { greek: 'το δικηγορικό γραφείο', russian: 'адвокатская контора' },
         { greek: 'το φωτογραφείο', russian: 'фотоателье' },
         { greek: 'η φωτογραφία', russian: 'фотография' }
+    ]
+});
+
+
+window.LESSONS.push({
+    lesson: 999,
+    title: 'Дополнительные слова',
+    words: [
+        { greek: 'σήμερα', russian: 'сегодня' },
+        { greek: 'τίποτα', russian: 'ничего' }
     ]
 });

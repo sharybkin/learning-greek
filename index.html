@@ -7,17 +7,42 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Изучение греческих слов</h1>
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Поиск на греческом или русском...">
-        </div>
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-        <div class="words-container">
-            <!-- Words will be rendered here by script.js from LESSONS -->
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar collapsed" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Уроки</h2>
+            <p>Выберите урок</p>
         </div>
-    </div>
+        <nav class="lesson-menu" id="lessonMenu">
+            <!-- Lessons will be rendered here -->
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content expanded" id="mainContent">
+        <div class="container">
+            <h1>Изучение греческих слов</h1>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Поиск на греческом или русском...">
+            </div>
+
+            <div class="words-container" id="wordsContainer">
+                <!-- Words will be rendered here -->
+            </div>
+        </div>
+    </main>
+
     <script src="js/words/lessons.js"></script>
     <script src="script.js"></script>
 </body>
