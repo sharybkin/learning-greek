@@ -434,6 +434,12 @@ window.LESSONS.push({
     title: 'Дополнительные слова',
     words: [
         { greek: 'σήμερα', russian: 'сегодня' },
-        { greek: 'τίποτα', russian: 'ничего' }
+        { greek: 'τίποτα', russian: 'ничего' },
+        { greek: 'ο πεθερός', russian: 'тесть' },
+        { greek: 'η πεθερά', russian: 'тёща' },
+        { greek: 'η νοικοκυρά', russian: 'домохозяйка' },
+        { greek: 'η/ο συνταξιούχος', russian: 'пенсионер' },
+        { greek: 'πέθανε', russian: 'умер' },
+        { greek: 'επίσης', russian: 'тоже' }
     ]
 });

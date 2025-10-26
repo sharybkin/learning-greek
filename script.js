@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (hasSublessons) {
                 const groupDiv = document.createElement('div');
-                groupDiv.className = 'lesson-group';
+                // Start lesson groups collapsed by default
+                groupDiv.className = 'lesson-group collapsed';
 
                 const groupHeader = document.createElement('div');
                 groupHeader.className = 'lesson-group-header';
