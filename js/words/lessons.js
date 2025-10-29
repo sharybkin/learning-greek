@@ -422,9 +422,7 @@ window.LESSONS.push({
         { greek: 'απαντώ / απαντάω',  russian: 'отвечать' },
         { greek: 'σταματώ / σταματάω', russian: 'останавливаться' },
         { greek: 'φορώ / φοράω',      russian: 'носить' },
-        { greek: 'φωνάζω',            russian: 'кричать, звать' },
-        { greek: 'μένω',              russian: 'жить' },
-        { greek: 'έχω',               russian: 'иметь' }
+        { greek: 'φωνάζω',            russian: 'кричать, звать' }
     ]
 });
 
