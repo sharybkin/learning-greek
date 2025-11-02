@@ -438,6 +438,7 @@ window.LESSONS.push({
         { greek: 'η νοικοκυρά', russian: 'домохозяйка' },
         { greek: 'η/ο συνταξιούχος', russian: 'пенсионер' },
         { greek: 'πέθανε', russian: 'умер' },
-        { greek: 'επίσης', russian: 'тоже' }
+        { greek: 'επίσης', russian: 'тоже' },
+        { greek: 'ορίστε', russian: 'вот, пожалуйста' }
     ]
 });
