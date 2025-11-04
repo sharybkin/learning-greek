@@ -10,17 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
 
     let currentLesson = null;
-    let greekVoice = null;
 
-    // Fetch and set the Greek voice
-    function loadGreekVoice() {
-        const voices = window.speechSynthesis.getVoices();
-        greekVoice = voices.find(voice => voice.lang === 'el-GR');
+    // Get voices, waiting for them to be loaded
+    function getVoices() {
+        return new Promise(resolve => {
+            let voices = window.speechSynthesis.getVoices();
+            if (voices.length) {
+                resolve(voices);
+                return;
+            }
+            window.speechSynthesis.onvoiceschanged = () => {
+                voices = window.speechSynthesis.getVoices();
+                resolve(voices);
+            };
+        });
     }
 
     // Speak a Greek word
-    function speakGreek(text) {
+    async function speakGreek(text) {
         if (!text) return;
+
+        const voices = await getVoices();
+        const greekVoice = voices.find(voice => voice.lang === 'el-GR');
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'el-GR';
@@ -28,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (greekVoice) {
             utterance.voice = greekVoice;
         } else {
-            // Fallback in case the voice isn't found
             console.warn('Greek voice not found, using default.');
         }
 
@@ -42,11 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAllLessons();
         setupEventListeners();
 
-        // Load voices and set the Greek one if available
-        loadGreekVoice();
-        if (window.speechSynthesis.onvoiceschanged !== undefined) {
-            window.speechSynthesis.onvoiceschanged = loadGreekVoice;
-        }
+        // Pre-warm the voices list. Some browsers require a call to getVoices() first.
+        window.speechSynthesis.getVoices();
     }
 
     // Render lesson menu
