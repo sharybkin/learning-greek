@@ -10,12 +10,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
 
     let currentLesson = null;
+    let greekVoice = null;
+
+    // Fetch and set the Greek voice
+    function loadGreekVoice() {
+        const voices = window.speechSynthesis.getVoices();
+        greekVoice = voices.find(voice => voice.lang === 'el-GR');
+    }
+
+    // Speak a Greek word
+    function speakGreek(text) {
+        if (!text) return;
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'el-GR';
+
+        if (greekVoice) {
+            utterance.voice = greekVoice;
+        } else {
+            // Fallback in case the voice isn't found
+            console.warn('Greek voice not found, using default.');
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
 
     // Initialize
     function init() {
         renderLessonMenu();
         renderAllLessons();
         setupEventListeners();
+
+        // Load voices and set the Greek one if available
+        loadGreekVoice();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = loadGreekVoice;
+        }
     }
 
     // Render lesson menu
@@ -164,9 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 speakerIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>`;
                 speakerIcon.addEventListener('click', (e) => {
                     e.stopPropagation(); // prevent card click or other events
-                    const utterance = new SpeechSynthesisUtterance(w.greek);
-                    utterance.lang = 'el-GR';
-                    window.speechSynthesis.speak(utterance);
+                    speakGreek(w.greek);
                 });
                 greekDiv.appendChild(greekText);
                 greekDiv.appendChild(speakerIcon);
