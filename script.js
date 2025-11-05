@@ -10,12 +10,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
 
     let currentLesson = null;
+    let greekVoice = null;
+
+    // Get the Greek voice, caching it for future use.
+    // Voices are loaded asynchronously, so we need to wait for them.
+    function getGreekVoice(callback) {
+        if (greekVoice) {
+            return callback(greekVoice);
+        }
+
+        const setVoice = () => {
+            const voices = window.speechSynthesis.getVoices();
+            greekVoice = voices.find(v => v.lang === 'el-GR');
+            if (greekVoice) {
+                callback(greekVoice);
+            } else {
+                console.warn("Greek voice not found, falling back to default.");
+                callback(null); // Fallback to default
+            }
+        };
+
+        // If voices are already loaded, set immediately.
+        if (window.speechSynthesis.getVoices().length > 0) {
+            setVoice();
+        } else {
+            // Otherwise, wait for the voiceschanged event.
+            window.speechSynthesis.onvoiceschanged = setVoice;
+        }
+    }
+
 
     // Initialize
     function init() {
         renderLessonMenu();
         renderAllLessons();
         setupEventListeners();
+        // Pre-warm the Greek voice cache
+        getGreekVoice(() => {});
     }
 
     // Render lesson menu
@@ -164,9 +195,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 speakerIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>`;
                 speakerIcon.addEventListener('click', (e) => {
                     e.stopPropagation(); // prevent card click or other events
-                    const utterance = new SpeechSynthesisUtterance(w.greek);
-                    utterance.lang = 'el-GR';
-                    window.speechSynthesis.speak(utterance);
+
+                    // Use the centralized voice getter
+                    getGreekVoice(voice => {
+                        const utterance = new SpeechSynthesisUtterance(w.greek);
+                        utterance.lang = 'el-GR';
+                        if (voice) {
+                            utterance.voice = voice;
+                        }
+                        window.speechSynthesis.speak(utterance);
+                    });
                 });
                 greekDiv.appendChild(greekText);
                 greekDiv.appendChild(speakerIcon);
