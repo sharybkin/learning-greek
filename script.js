@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextWordBtn = document.getElementById('nextWord');
     const modeLessonsBtn = document.getElementById('modeLessons');
     const modeSelfCheckBtn = document.getElementById('modeSelfCheck');
+    const playAudioIcon = document.getElementById('playAudioIcon');
 
     let currentWord = null;
     let allWords = [];
@@ -273,7 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gameWord.textContent = currentWord.greek;
         gameTranslation.textContent = currentWord.russian;
         gameCard.classList.remove('is-flipped');
-        speak(currentWord.greek);
     }
 
     function flipCard() {
@@ -330,6 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modeSelfCheckBtn) modeSelfCheckBtn.addEventListener('click', () => switchView('self-check'));
 
         if (gameCard) gameCard.addEventListener('click', flipCard);
+        if (playAudioIcon) playAudioIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            speak(currentWord.greek);
+        });
         if (nextWordBtn) nextWordBtn.addEventListener('click', startSelfCheck);
 
         // IntersectionObserver to detect lesson in view
