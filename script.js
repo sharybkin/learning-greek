@@ -269,7 +269,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return allWords[Math.floor(Math.random() * allWords.length)];
     }
 
-    function startSelfCheck() {
+    function startSelfCheck(isNext = false) {
+        if (isNext) {
+            gameCard.classList.add('hide-animation');
+            gameCard.addEventListener('animationend', () => {
+                gameCard.classList.remove('hide-animation');
+                loadNewWord();
+                gameCard.classList.add('intro-animation');
+            }, { once: true });
+        } else {
+            loadNewWord();
+        }
+    }
+
+    function loadNewWord() {
         currentWord = getRandomWord();
         gameWord.textContent = currentWord.greek;
         gameTranslation.textContent = currentWord.russian;
@@ -317,6 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
             modeLessonsBtn.classList.remove('active');
             modeSelfCheckBtn.classList.add('active');
             startSelfCheck();
+            gameCard.classList.add('intro-animation');
+            gameCard.addEventListener('animationend', () => {
+                gameCard.classList.remove('intro-animation');
+            }, { once: true });
         }
     }
 
@@ -334,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             speak(currentWord.greek);
         });
-        if (nextWordBtn) nextWordBtn.addEventListener('click', startSelfCheck);
+        if (nextWordBtn) nextWordBtn.addEventListener('click', () => startSelfCheck(true));
 
         // IntersectionObserver to detect lesson in view
         const observerOptions = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };

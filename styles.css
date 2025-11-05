@@ -383,6 +383,36 @@ h1 {
     transform: translateY(-2px);
 }
 
+@keyframes show {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.intro-animation {
+    animation: show 0.5s ease-in-out;
+}
+
+@keyframes hide {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+}
+
+.hide-animation {
+    animation: hide 0.5s ease-in-out;
+}
+
 
 /* Mobile styles */
 @media (max-width: 768px) {
