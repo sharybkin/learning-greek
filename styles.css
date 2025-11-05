@@ -537,6 +537,7 @@ h1 {
     .game-settings {
         flex-direction: column;
         align-items: stretch;
+        margin-top: 60px;
     }
 
     .custom-select-wrapper {

@@ -408,19 +408,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const gameMode = document.querySelector('.game-mode-button.active').dataset.mode;
 
-        // Back of the card always shows the full translation
-        gameWord.textContent = currentWord.greek;
-        gameTranslation.textContent = currentWord.russian;
+        // Clear card faces
+        gameWord.textContent = '';
+        gameTranslation.textContent = '';
+        gameWordFront.textContent = '';
 
         // Front of the card content depends on the mode
         if (gameMode === 'audio') {
-            gameWordFront.textContent = '';
+            // Front: Speaker icon | Back: Full translation
             playAudioIcon.classList.remove('hidden');
+            gameWord.textContent = currentWord.greek;
+            gameTranslation.textContent = currentWord.russian;
         } else if (gameMode === 'ru-gr') {
+            // Front: Russian | Back: Greek
             gameWordFront.textContent = currentWord.russian;
+            gameWord.textContent = currentWord.greek;
             playAudioIcon.classList.add('hidden');
         } else if (gameMode === 'gr-ru') {
+            // Front: Greek | Back: Russian
             gameWordFront.textContent = currentWord.greek;
+            gameTranslation.textContent = currentWord.russian;
             playAudioIcon.classList.add('hidden');
         }
         gameCard.classList.remove('is-flipped');
@@ -495,19 +502,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (lessonFilterDropdown) {
-            lessonFilterDropdown.addEventListener('change', (e) => {
-                const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
-                const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+            // Handle clicks on the dropdown for better UX
+            lessonFilterDropdown.addEventListener('click', (e) => {
+                const option = e.target.closest('.custom-select-option');
+                if (!option) return;
 
-                if (e.target.value === 'all') {
-                    checkboxes.forEach(cb => cb.checked = allCheckbox.checked);
-                } else {
-                    allCheckbox.checked = Array.from(checkboxes).every(cb => cb.checked);
+                const checkbox = option.querySelector('input[type="checkbox"]');
+                if (!checkbox) return;
+
+                // Toggle checkbox only if the click was not on the checkbox itself
+                if (e.target !== checkbox) {
+                    checkbox.checked = !checkbox.checked;
                 }
 
-                updateLessonFilterButtonText();
-                startSelfCheck();
+                // Manually trigger the logic
+                handleFilterChange(checkbox);
             });
+        }
+
+        function handleFilterChange(changedCheckbox) {
+             const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+             const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+
+             if (changedCheckbox.value === 'all') {
+                 checkboxes.forEach(cb => cb.checked = allCheckbox.checked);
+             } else {
+                 allCheckbox.checked = Array.from(checkboxes).every(cb => cb.checked);
+             }
+
+             updateLessonFilterButtonText();
+             startSelfCheck();
         }
 
         // Close dropdown when clicking outside
