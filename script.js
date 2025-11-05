@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lessonsView = document.getElementById('lessonsView');
     const selfCheckView = document.getElementById('selfCheckView');
+    const gameCard = document.getElementById('gameCard');
     const gameWord = document.getElementById('gameWord');
-    const revealWordBtn = document.getElementById('revealWord');
     const gameTranslation = document.getElementById('gameTranslation');
     const nextWordBtn = document.getElementById('nextWord');
     const modeLessonsBtn = document.getElementById('modeLessons');
@@ -270,16 +270,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startSelfCheck() {
         currentWord = getRandomWord();
-        gameWord.textContent = '???';
-        gameTranslation.textContent = '';
-        revealWordBtn.disabled = false;
+        gameWord.textContent = currentWord.greek;
+        gameTranslation.textContent = currentWord.russian;
+        gameCard.classList.remove('is-flipped');
         speak(currentWord.greek);
     }
 
-    function revealWord() {
-        gameWord.textContent = currentWord.greek;
-        gameTranslation.textContent = currentWord.russian;
-        revealWordBtn.disabled = true;
+    function flipCard() {
+        gameCard.classList.toggle('is-flipped');
     }
 
     function speak(text) {
@@ -331,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modeLessonsBtn) modeLessonsBtn.addEventListener('click', () => switchView('lessons'));
         if (modeSelfCheckBtn) modeSelfCheckBtn.addEventListener('click', () => switchView('self-check'));
 
-        if (revealWordBtn) revealWordBtn.addEventListener('click', revealWord);
+        if (gameCard) gameCard.addEventListener('click', flipCard);
         if (nextWordBtn) nextWordBtn.addEventListener('click', startSelfCheck);
 
         // IntersectionObserver to detect lesson in view

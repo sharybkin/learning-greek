@@ -47,13 +47,21 @@
             </div>
 
             <div id="selfCheckView" class="hidden">
-                <div class="game-card">
-                    <div class="game-word" id="gameWord">???</div>
-                    <div class="game-translation" id="gameTranslation"></div>
-                    <div class="game-actions">
-                        <button id="revealWord">Показать слово</button>
-                        <button id="nextWord">Следующее слово</button>
+                <div class="game-scene">
+                    <div class="game-card" id="gameCard">
+                        <div class="card-face card-face-front">
+                            <span class="speaker-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                            </span>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div class="game-word" id="gameWord"></div>
+                            <div class="game-translation" id="gameTranslation"></div>
+                        </div>
                     </div>
+                </div>
+                <div class="game-controls">
+                    <button id="nextWord">Следующее слово</button>
                 </div>
             </div>
         </div>
