@@ -49,6 +49,7 @@ body {
     justify-content: space-around;
     padding: 10px;
     background-color: #34495e;
+    padding: 1rem;
 }
 
 .sidebar-mode-toggle button {
