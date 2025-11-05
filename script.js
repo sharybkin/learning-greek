@@ -19,9 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const modeLessonsBtn = document.getElementById('modeLessons');
     const modeSelfCheckBtn = document.getElementById('modeSelfCheck');
     const playAudioIcon = document.getElementById('playAudioIcon');
+    const gameWordFront = document.getElementById('gameWordFront');
+    const lessonFilterContainer = document.getElementById('lessonFilterContainer');
+    const lessonFilterButton = document.getElementById('lessonFilterButton');
+    const lessonFilterValue = document.getElementById('lessonFilterValue');
+    const lessonFilterDropdown = document.getElementById('lessonFilterDropdown');
 
     let currentWord = null;
     let allWords = [];
+    let filteredWords = [];
     let currentLesson = null;
     let greekVoice = null;
 
@@ -60,7 +66,63 @@ document.addEventListener('DOMContentLoaded', () => {
         // Pre-warm the Greek voice cache
         getGreekVoice(() => {});
         allWords = getAllWords();
+        populateLessonFilter();
         switchView('lessons');
+    }
+
+    function populateLessonFilter() {
+        if (!lessonFilterDropdown || !window.LESSONS) return;
+        lessonFilterDropdown.innerHTML = '';
+
+        // Add "Select All" option
+        const allOption = createCheckboxOption('all', 'Все уроки', true);
+        lessonFilterDropdown.appendChild(allOption);
+
+        LESSONS.forEach((lesson, index) => {
+            const option = createCheckboxOption(index, getDisplayTitle(lesson), true);
+            lessonFilterDropdown.appendChild(option);
+        });
+        updateLessonFilterButtonText();
+    }
+
+    function createCheckboxOption(value, text, checked = false) {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'custom-select-option';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = value;
+        checkbox.checked = checked;
+        checkbox.id = `lesson-${value}`;
+
+        const label = document.createElement('label');
+        label.htmlFor = `lesson-${value}`;
+        label.textContent = text;
+
+        optionDiv.appendChild(checkbox);
+        optionDiv.appendChild(label);
+
+        return optionDiv;
+    }
+
+    function updateLessonFilterButtonText() {
+        const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
+        const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+
+        if (allCheckbox.checked || checkboxes.length === 0 || checkboxes.length === LESSONS.length + 1) {
+            lessonFilterValue.textContent = 'Все уроки';
+            return;
+        }
+
+        if (checkboxes.length === 1) {
+            const id = checkboxes[0].id.replace('lesson-', '');
+            const lesson = LESSONS.find((l, i) => i == id)
+            if(lesson) {
+                lessonFilterValue.textContent = getDisplayTitle(lesson);
+            }
+        } else {
+            lessonFilterValue.textContent = `Выбрано: ${checkboxes.length}`;
+        }
     }
 
     // Render lesson menu
@@ -295,11 +357,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return window.LESSONS.flatMap(lesson => lesson.words);
     }
 
+    function updateFilteredWords() {
+        const selectedCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
+        const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+
+        if (allCheckbox.checked || selectedCheckboxes.length === 0) {
+            filteredWords = allWords;
+        } else {
+            const selectedLessons = Array.from(selectedCheckboxes)
+                .map(cb => cb.value)
+                .filter(value => value !== 'all');
+
+            filteredWords = selectedLessons.flatMap(index => LESSONS[index].words);
+        }
+    }
+
     function getRandomWord() {
-        return allWords[Math.floor(Math.random() * allWords.length)];
+        if (filteredWords.length === 0) {
+            return null;
+        }
+        return filteredWords[Math.floor(Math.random() * filteredWords.length)];
     }
 
     function startSelfCheck(isNext = false) {
+        updateFilteredWords();
         if (isNext) {
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
@@ -314,8 +395,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadNewWord() {
         currentWord = getRandomWord();
+
+        if (!currentWord) {
+            gameWord.textContent = 'Нет слов';
+            gameTranslation.textContent = 'Выберите урок';
+            gameWordFront.textContent = '';
+            playAudioIcon.classList.add('hidden');
+            return;
+        }
+
+        playAudioIcon.classList.remove('hidden');
+
+        const gameMode = document.querySelector('.game-mode-button.active').dataset.mode;
+
+        // Back of the card always shows the full translation
         gameWord.textContent = currentWord.greek;
         gameTranslation.textContent = currentWord.russian;
+
+        // Front of the card content depends on the mode
+        if (gameMode === 'audio') {
+            gameWordFront.textContent = '';
+            playAudioIcon.classList.remove('hidden');
+        } else if (gameMode === 'ru-gr') {
+            gameWordFront.textContent = currentWord.russian;
+            playAudioIcon.classList.add('hidden');
+        } else if (gameMode === 'gr-ru') {
+            gameWordFront.textContent = currentWord.greek;
+            playAudioIcon.classList.add('hidden');
+        }
         gameCard.classList.remove('is-flipped');
     }
 
@@ -370,6 +477,46 @@ document.addEventListener('DOMContentLoaded', () => {
             speak(currentWord.greek);
         });
         if (nextWordBtn) nextWordBtn.addEventListener('click', () => startSelfCheck(true));
+
+        // Game settings listeners
+        document.querySelectorAll('.game-mode-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.game-mode-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                startSelfCheck();
+            });
+        });
+
+        if (lessonFilterButton) {
+            lessonFilterButton.addEventListener('click', () => {
+                lessonFilterDropdown.classList.toggle('hidden');
+                lessonFilterContainer.classList.toggle('open');
+            });
+        }
+
+        if (lessonFilterDropdown) {
+            lessonFilterDropdown.addEventListener('change', (e) => {
+                const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+                const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+
+                if (e.target.value === 'all') {
+                    checkboxes.forEach(cb => cb.checked = allCheckbox.checked);
+                } else {
+                    allCheckbox.checked = Array.from(checkboxes).every(cb => cb.checked);
+                }
+
+                updateLessonFilterButtonText();
+                startSelfCheck();
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (lessonFilterContainer && !lessonFilterContainer.contains(e.target)) {
+                lessonFilterDropdown.classList.add('hidden');
+                lessonFilterContainer.classList.remove('open');
+            }
+        });
 
         // IntersectionObserver to detect lesson in view
         const observerOptions = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };
