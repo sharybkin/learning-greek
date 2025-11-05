@@ -23,6 +23,10 @@
             <h2>Уроки</h2>
             <p>Выберите урок</p>
         </div>
+        <div class="sidebar-mode-toggle">
+            <button id="modeLessons">Уроки</button>
+            <button id="modeGame">Игра</button>
+        </div>
         <nav class="lesson-menu" id="lessonMenu">
             <!-- Lessons will be rendered here -->
         </nav>
@@ -39,6 +43,16 @@
 
             <div class="words-container" id="wordsContainer">
                 <!-- Words will be rendered here -->
+            </div>
+
+            <div class="game-container hidden" id="gameContainer">
+                <h2>Игра в случайные слова</h2>
+                <div class="game-card">
+                    <div class="game-word" id="gameWord"></div>
+                    <button id="revealWord">Показать слово</button>
+                    <div class="game-translation" id="gameTranslation"></div>
+                </div>
+                <button id="nextWord">Следующее слово</button>
             </div>
         </div>
     </main>

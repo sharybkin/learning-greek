@@ -8,7 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const lessonMenu = document.getElementById('lessonMenu');
     const wordsContainer = document.getElementById('wordsContainer');
     const searchInput = document.getElementById('searchInput');
+    const gameContainer = document.getElementById('gameContainer');
+    const gameWord = document.getElementById('gameWord');
+    const revealWordBtn = document.getElementById('revealWord');
+    const gameTranslation = document.getElementById('gameTranslation');
+    const nextWordBtn = document.getElementById('nextWord');
+    const modeLessonsBtn = document.getElementById('modeLessons');
+    const modeGameBtn = document.getElementById('modeGame');
 
+    let currentWord = null;
+    let allWords = [];
     let currentLesson = null;
 
     // Initialize
@@ -247,11 +256,73 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Game Mode
+    function getAllWords() {
+        return window.LESSONS.flatMap(lesson => lesson.words);
+    }
+
+    function getRandomWord() {
+        return allWords[Math.floor(Math.random() * allWords.length)];
+    }
+
+    function playGame() {
+        currentWord = getRandomWord();
+        gameWord.textContent = '???';
+        gameTranslation.textContent = '';
+        revealWordBtn.disabled = false;
+        speak(currentWord.greek);
+    }
+
+    function revealWord() {
+        gameWord.textContent = currentWord.greek;
+        gameTranslation.textContent = currentWord.russian;
+        revealWordBtn.disabled = true;
+    }
+
+    function speak(text) {
+        // Wait for voices to be loaded
+        const voicesPromise = new Promise(resolve => {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                resolve(voices);
+                return;
+            }
+            window.speechSynthesis.onvoiceschanged = () => resolve(window.speechSynthesis.getVoices());
+        });
+
+        voicesPromise.then(voices => {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const greekVoice = voices.find(voice => voice.lang === 'el-GR');
+            if (greekVoice) {
+                utterance.voice = greekVoice;
+            } else {
+                utterance.lang = 'el-GR';
+            }
+            window.speechSynthesis.speak(utterance);
+        });
+    }
+
     // Setup event listeners
     function setupEventListeners() {
         if (sidebarToggle) sidebarToggle.addEventListener('click', toggleSidebar);
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
         if (searchInput) searchInput.addEventListener('input', handleSearch);
+
+        // Game listeners
+        if (modeGameBtn) modeGameBtn.addEventListener('click', () => {
+            wordsContainer.classList.add('hidden');
+            gameContainer.classList.remove('hidden');
+            allWords = getAllWords();
+            playGame();
+        });
+
+        if (modeLessonsBtn) modeLessonsBtn.addEventListener('click', () => {
+            wordsContainer.classList.remove('hidden');
+            gameContainer.classList.add('hidden');
+        });
+
+        if (revealWordBtn) revealWordBtn.addEventListener('click', revealWord);
+        if (nextWordBtn) nextWordBtn.addEventListener('click', playGame);
 
         // IntersectionObserver to detect lesson in view
         const observerOptions = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };
