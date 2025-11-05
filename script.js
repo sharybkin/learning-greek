@@ -23,12 +23,42 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentWord = null;
     let allWords = [];
     let currentLesson = null;
+    let greekVoice = null;
+
+    // Get the Greek voice, caching it for future use.
+    // Voices are loaded asynchronously, so we need to wait for them.
+    function getGreekVoice(callback) {
+        if (greekVoice) {
+            return callback(greekVoice);
+        }
+
+        const setVoice = () => {
+            const voices = window.speechSynthesis.getVoices();
+            greekVoice = voices.find(v => v.lang === 'el-GR');
+            if (greekVoice) {
+                callback(greekVoice);
+            } else {
+                console.warn("Greek voice not found, falling back to default.");
+                callback(null); // Fallback to default
+            }
+        };
+
+        // If voices are already loaded, set immediately.
+        if (window.speechSynthesis.getVoices().length > 0) {
+            setVoice();
+        } else {
+            // Otherwise, wait for the voiceschanged event.
+            window.speechSynthesis.onvoiceschanged = setVoice;
+        }
+    }
 
     // Initialize
     function init() {
         renderLessonMenu();
         renderAllLessons();
         setupEventListeners();
+        // Pre-warm the Greek voice cache
+        getGreekVoice(() => {});
         allWords = getAllWords();
         switchView('lessons');
     }
@@ -294,23 +324,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function speak(text) {
-        // Wait for voices to be loaded
-        const voicesPromise = new Promise(resolve => {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                resolve(voices);
-                return;
-            }
-            window.speechSynthesis.onvoiceschanged = () => resolve(window.speechSynthesis.getVoices());
-        });
-
-        voicesPromise.then(voices => {
+        getGreekVoice(voice => {
             const utterance = new SpeechSynthesisUtterance(text);
-            const greekVoice = voices.find(voice => voice.lang === 'el-GR');
-            if (greekVoice) {
-                utterance.voice = greekVoice;
-            } else {
-                utterance.lang = 'el-GR';
+            utterance.lang = 'el-GR';
+            if (voice) {
+                utterance.voice = voice;
             }
             window.speechSynthesis.speak(utterance);
         });
