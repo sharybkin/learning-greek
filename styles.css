@@ -47,9 +47,8 @@ body {
 .sidebar-mode-toggle {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
     background-color: #34495e;
-    padding: 1rem;
+    padding: 20px 1rem;
 }
 
 .sidebar-mode-toggle button {
