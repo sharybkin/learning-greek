@@ -8,13 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const lessonMenu = document.getElementById('lessonMenu');
     const wordsContainer = document.getElementById('wordsContainer');
     const searchInput = document.getElementById('searchInput');
-    const gameContainer = document.getElementById('gameContainer');
+    const mainTitle = document.querySelector('.container h1');
+
+    const lessonsView = document.getElementById('lessonsView');
+    const selfCheckView = document.getElementById('selfCheckView');
     const gameWord = document.getElementById('gameWord');
     const revealWordBtn = document.getElementById('revealWord');
     const gameTranslation = document.getElementById('gameTranslation');
     const nextWordBtn = document.getElementById('nextWord');
     const modeLessonsBtn = document.getElementById('modeLessons');
-    const modeGameBtn = document.getElementById('modeGame');
+    const modeSelfCheckBtn = document.getElementById('modeSelfCheck');
 
     let currentWord = null;
     let allWords = [];
@@ -25,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         renderLessonMenu();
         renderAllLessons();
         setupEventListeners();
+        allWords = getAllWords();
+        switchView('lessons');
     }
 
     // Render lesson menu
@@ -173,9 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 speakerIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>`;
                 speakerIcon.addEventListener('click', (e) => {
                     e.stopPropagation(); // prevent card click or other events
-                    const utterance = new SpeechSynthesisUtterance(w.greek);
-                    utterance.lang = 'el-GR';
-                    window.speechSynthesis.speak(utterance);
+                    speak(w.greek);
                 });
                 greekDiv.appendChild(greekText);
                 greekDiv.appendChild(speakerIcon);
@@ -265,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return allWords[Math.floor(Math.random() * allWords.length)];
     }
 
-    function playGame() {
+    function startSelfCheck() {
         currentWord = getRandomWord();
         gameWord.textContent = '???';
         gameTranslation.textContent = '';
@@ -302,27 +305,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function switchView(view) {
+        if (view === 'lessons') {
+            mainTitle.classList.remove('hidden');
+            lessonsView.classList.remove('hidden');
+            selfCheckView.classList.add('hidden');
+            modeLessonsBtn.classList.add('active');
+            modeSelfCheckBtn.classList.remove('active');
+        } else {
+            mainTitle.classList.add('hidden');
+            lessonsView.classList.add('hidden');
+            selfCheckView.classList.remove('hidden');
+            modeLessonsBtn.classList.remove('active');
+            modeSelfCheckBtn.classList.add('active');
+            startSelfCheck();
+        }
+    }
+
     // Setup event listeners
     function setupEventListeners() {
         if (sidebarToggle) sidebarToggle.addEventListener('click', toggleSidebar);
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
         if (searchInput) searchInput.addEventListener('input', handleSearch);
 
-        // Game listeners
-        if (modeGameBtn) modeGameBtn.addEventListener('click', () => {
-            wordsContainer.classList.add('hidden');
-            gameContainer.classList.remove('hidden');
-            allWords = getAllWords();
-            playGame();
-        });
-
-        if (modeLessonsBtn) modeLessonsBtn.addEventListener('click', () => {
-            wordsContainer.classList.remove('hidden');
-            gameContainer.classList.add('hidden');
-        });
+        if (modeLessonsBtn) modeLessonsBtn.addEventListener('click', () => switchView('lessons'));
+        if (modeSelfCheckBtn) modeSelfCheckBtn.addEventListener('click', () => switchView('self-check'));
 
         if (revealWordBtn) revealWordBtn.addEventListener('click', revealWord);
-        if (nextWordBtn) nextWordBtn.addEventListener('click', playGame);
+        if (nextWordBtn) nextWordBtn.addEventListener('click', startSelfCheck);
 
         // IntersectionObserver to detect lesson in view
         const observerOptions = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };

@@ -44,6 +44,29 @@ body {
     color: #bdc3c7;
 }
 
+.sidebar-mode-toggle {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #34495e;
+}
+
+.sidebar-mode-toggle button {
+    background: none;
+    border: 1px solid #7f8c8d;
+    color: #ecf0f1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-mode-toggle button.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
 .lesson-menu {
     padding: 10px 0;
 }
@@ -182,9 +205,6 @@ h1 {
     text-align: center;
     color: #2c3e50;
     margin-bottom: 30px;
-    /* offset when sidebar is visible on larger screens */
-    margin-left: 60px;
-    margin-right: 60px;
 }
 
 .search-container {
@@ -274,8 +294,57 @@ h1 {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
+
+.game-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.game-word {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    min-height: 50px;
+    margin-bottom: 20px;
+}
+
+.game-translation {
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    min-height: 30px;
+    margin-bottom: 30px;
+}
+
+.game-actions button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0 10px;
+}
+
+.game-actions button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.game-actions button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+}
+
 
 /* Mobile styles */
 @media (max-width: 768px) {

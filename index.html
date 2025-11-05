@@ -25,7 +25,7 @@
         </div>
         <div class="sidebar-mode-toggle">
             <button id="modeLessons">Уроки</button>
-            <button id="modeGame">Игра</button>
+            <button id="modeSelfCheck">Проверь себя</button>
         </div>
         <nav class="lesson-menu" id="lessonMenu">
             <!-- Lessons will be rendered here -->
@@ -36,23 +36,25 @@
     <main class="main-content expanded" id="mainContent">
         <div class="container">
             <h1>Изучение греческих слов</h1>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Поиск на греческом или русском...">
-            </div>
 
-            <div class="words-container" id="wordsContainer">
-                <!-- Words will be rendered here -->
-            </div>
-
-            <div class="game-container hidden" id="gameContainer">
-                <h2>Игра в случайные слова</h2>
-                <div class="game-card">
-                    <div class="game-word" id="gameWord"></div>
-                    <button id="revealWord">Показать слово</button>
-                    <div class="game-translation" id="gameTranslation"></div>
+            <div id="lessonsView">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Поиск на греческом или русском...">
                 </div>
-                <button id="nextWord">Следующее слово</button>
+                <div class="words-container" id="wordsContainer">
+                    <!-- Words will be rendered here -->
+                </div>
+            </div>
+
+            <div id="selfCheckView" class="hidden">
+                <div class="game-card">
+                    <div class="game-word" id="gameWord">???</div>
+                    <div class="game-translation" id="gameTranslation"></div>
+                    <div class="game-actions">
+                        <button id="revealWord">Показать слово</button>
+                        <button id="nextWord">Следующее слово</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
