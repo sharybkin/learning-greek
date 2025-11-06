@@ -386,11 +386,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const mode = gameMode || document.querySelector('.game-mode-button.active').dataset.mode;
 
         if (isNext) {
-            gameCard.classList.add('hide-animation');
+            gameCard.classList.add('fade-out');
             gameCard.addEventListener('animationend', () => {
-                gameCard.classList.remove('hide-animation');
+                gameCard.classList.remove('fade-out');
                 loadNewWord(mode);
-                gameCard.classList.add('intro-animation');
+                gameCard.classList.add('fade-in');
+                gameCard.addEventListener('animationend', () => {
+                    gameCard.classList.remove('fade-in');
+                }, { once: true });
             }, { once: true });
         } else {
             loadNewWord(mode);
