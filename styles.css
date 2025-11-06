@@ -22,6 +22,7 @@ body {
     transition: transform 0.3s ease;
     z-index: 1000;
     overflow-y: auto;
+    padding-top: 70px;
 }
 
 .sidebar.collapsed {
@@ -42,6 +43,32 @@ body {
 .sidebar-header p {
     font-size: 0.85rem;
     color: #bdc3c7;
+}
+
+.sidebar-mode-toggle {
+    display: flex;
+    justify-content: space-around;
+    background-color: #2c3e50;
+    padding: 0 1rem 1rem;
+    position: absolute;
+    top: 20px;
+    width: 100%;
+}
+
+.sidebar-mode-toggle button {
+    background: none;
+    border: 1px solid #7f8c8d;
+    color: #ecf0f1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-mode-toggle button.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
 }
 
 .lesson-menu {
@@ -182,9 +209,8 @@ h1 {
     text-align: center;
     color: #2c3e50;
     margin-bottom: 30px;
-    /* offset when sidebar is visible on larger screens */
-    margin-left: 60px;
     margin-right: 60px;
+    margin-left: 60px;
 }
 
 .search-container {
@@ -274,11 +300,258 @@ h1 {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
+
+.game-scene {
+    width: 300px;
+    height: 200px;
+    perspective: 600px;
+    margin: 50px auto;
+}
+
+.game-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s, box-shadow 0.3s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.game-card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-face-front {
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+.card-face-front .speaker-icon svg {
+    width: 48px;
+    height: 48px;
+    fill: #2c3e50;
+}
+
+.card-face-back {
+    background-color: #ffffff;
+    transform: rotateY(180deg);
+}
+
+.game-word {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.game-translation {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* Override for consistent styling on the game card's back face */
+.game-card .game-translation {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 0; /* Adjusted for visual balance with .game-word */
+}
+
+.game-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.game-controls button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.game-controls button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.game-settings {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.setting-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setting-group label {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.game-mode-selector {
+    display: flex;
+    background-color: #bdc3c7;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.game-mode-button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #2c3e50;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.game-mode-button.active {
+    background-color: #ffffff;
+    color: #3498db;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.custom-select-wrapper {
+    position: relative;
+    width: 250px;
+}
+
+.custom-select-button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.custom-select-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-select-arrow {
+    transition: transform 0.3s;
+}
+
+.custom-select-wrapper.open .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom-select-option {
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.custom-select-option:hover {
+    background-color: #f0f2f5;
+}
+
+.custom-select-option input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.game-word-front {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+@keyframes show {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.intro-animation {
+    animation: show 0.5s ease-in-out;
+}
+
+@keyframes hide {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+}
+
+.hide-animation {
+    animation: hide 0.5s ease-in-out;
+}
+
 
 /* Mobile styles */
 @media (max-width: 768px) {
+    .game-settings {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 60px;
+    }
+
+    .custom-select-wrapper {
+        width: 100%;
+    }
+
     .sidebar {
         transform: translateX(-280px);
     }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изучение греческих слов</title>
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
     <!-- Sidebar Toggle Button -->
@@ -19,9 +19,9 @@
 
     <!-- Sidebar -->
     <aside class="sidebar collapsed" id="sidebar">
-        <div class="sidebar-header">
-            <h2>Уроки</h2>
-            <p>Выберите урок</p>
+        <div class="sidebar-mode-toggle">
+            <button id="modeLessons">Поиск</button>
+            <button id="modeSelfCheck">Повторение</button>
         </div>
         <nav class="lesson-menu" id="lessonMenu">
             <!-- Lessons will be rendered here -->
@@ -32,18 +32,60 @@
     <main class="main-content expanded" id="mainContent">
         <div class="container">
             <h1>Изучение греческих слов</h1>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Поиск на греческом или русском...">
+
+            <div id="lessonsView">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Поиск на греческом или русском...">
+                </div>
+                <div class="words-container" id="wordsContainer">
+                    <!-- Words will be rendered here -->
+                </div>
             </div>
 
-            <div class="words-container" id="wordsContainer">
-                <!-- Words will be rendered here -->
+            <div id="selfCheckView" class="hidden">
+                <div class="game-settings">
+                    <div class="setting-group">
+                        <div class="game-mode-selector">
+                            <button class="game-mode-button active" data-mode="audio">Аудирование</button>
+                            <button class="game-mode-button" data-mode="ru-gr">Русский -> Греческий</button>
+                            <button class="game-mode-button" data-mode="gr-ru">Греческий -> Русский</button>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <div id="lessonFilterContainer" class="custom-select-wrapper">
+                            <button id="lessonFilterButton" class="custom-select-button">
+                                <span id="lessonFilterValue" class="custom-select-value">Все уроки</span>
+                                <span class="custom-select-arrow">▼</span>
+                            </button>
+                            <div id="lessonFilterDropdown" class="custom-select-dropdown hidden">
+                                <!-- Options populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-scene">
+                    <div class="game-card" id="gameCard">
+                        <div class="card-face card-face-front">
+                            <span class="speaker-icon" id="playAudioIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                            </span>
+                            <div class="game-word-front" id="gameWordFront"></div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div class="game-word" id="gameWord"></div>
+                            <div class="game-translation" id="gameTranslation"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button id="nextWord">Следующее слово</button>
+                </div>
             </div>
         </div>
     </main>
 
-    <script src="js/words/lessons.js?v=4"></script>
-    <script src="script.js?v=5"></script>
+    <script src="js/words/lessons.js?v=6"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>
