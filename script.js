@@ -379,21 +379,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return filteredWords[Math.floor(Math.random() * filteredWords.length)];
     }
 
-    function startSelfCheck(isNext = false) {
+    function startSelfCheck(isNext = false, gameMode = null) {
         updateFilteredWords();
+
+        // If no mode is passed, get it from the DOM (for initialization and 'next word')
+        const mode = gameMode || document.querySelector('.game-mode-button.active').dataset.mode;
+
         if (isNext) {
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('hide-animation');
-                loadNewWord();
+                loadNewWord(mode);
                 gameCard.classList.add('intro-animation');
             }, { once: true });
         } else {
-            loadNewWord();
+            loadNewWord(mode);
         }
     }
 
-    function loadNewWord() {
+    function loadNewWord(gameMode) {
         currentWord = getRandomWord();
 
         if (!currentWord) {
@@ -405,8 +409,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         playAudioIcon.classList.remove('hidden');
-
-        const gameMode = document.querySelector('.game-mode-button.active').dataset.mode;
 
         // Clear card faces
         gameWord.textContent = '';
@@ -490,7 +492,8 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.game-mode-button').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                startSelfCheck();
+                const newMode = button.dataset.mode;
+                startSelfCheck(false, newMode);
             });
         });
 
@@ -531,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
              }
 
              updateLessonFilterButtonText();
-             startSelfCheck();
+             startSelfCheck(); // This will correctly pick up the active mode from the DOM
         }
 
         // Close dropdown when clicking outside
