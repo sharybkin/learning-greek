@@ -409,19 +409,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const mode = gameMode || document.querySelector('.game-mode-button.active').dataset.mode;
 
         if (isNext) {
-            // To prevent a partial flip animation, we disable transitions, reset the state,
-            // force a browser repaint, and then re-enable transitions before the next animation.
-            gameCard.classList.add('no-transition');
-            gameCard.classList.remove('is-flipped');
-
-            // Force browser to apply the styles immediately
-            void gameCard.offsetHeight;
-
-            gameCard.classList.remove('no-transition');
-
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
+                // The card is now hidden. Reset its state without animation.
+                gameCard.classList.add('no-transition');
+                gameCard.classList.remove('is-flipped');
                 gameCard.classList.remove('hide-animation');
+
+                // Force browser to apply the styles immediately
+                void gameCard.offsetHeight;
+
+                // Re-enable transitions and load the new word, which will trigger the intro animation.
+                gameCard.classList.remove('no-transition');
                 loadNewWord(mode, isNext);
                 gameCard.classList.add('intro-animation');
             }, { once: true });
