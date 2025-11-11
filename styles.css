@@ -509,9 +509,10 @@ h1 {
 }
 
 .game-word-front {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 5vw, 2.2rem);
     font-weight: bold;
     color: #2c3e50;
+    word-break: break-word;
 }
 
 @keyframes show {
