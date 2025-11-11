@@ -399,7 +399,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startSelfCheck(isNext = false, gameMode = null) {
-        updateFilteredWords();
+        // Only reset the word queue if this is not a "next word" action
+        // (i.e., when changing modes, filters, or switching to the view).
+        if (!isNext) {
+            updateFilteredWords();
+        }
 
         // If no mode is passed, get it from the DOM (for initialization and 'next word')
         const mode = gameMode || document.querySelector('.game-mode-button.active').dataset.mode;
@@ -408,15 +412,15 @@ document.addEventListener('DOMContentLoaded', () => {
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('hide-animation');
-                loadNewWord(mode);
+                loadNewWord(mode, isNext);
                 gameCard.classList.add('intro-animation');
             }, { once: true });
         } else {
-            loadNewWord(mode);
+            loadNewWord(mode, isNext);
         }
     }
 
-    function loadNewWord(gameMode) {
+    function loadNewWord(gameMode, isNext = false) {
         currentWord = getNextWordFromQueue();
 
         if (!currentWord) {
@@ -441,8 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
             gameWord.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
 
-            // Autoplay audio if the setting is enabled
-            if (autoplayAudioCheckbox.checked) {
+            // Autoplay audio if the setting is enabled and it's a "next word" action
+            if (autoplayAudioCheckbox.checked && isNext) {
                 // Use a short timeout to let the card animation start
                 setTimeout(() => speak(currentWord.greek), 100);
             }
