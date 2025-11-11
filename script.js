@@ -425,8 +425,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameCard.classList.add('intro-animation');
             }, { once: true });
         } else {
-            // Initial load or mode change, ensure the card is not flipped.
-            gameCard.classList.remove('is-flipped');
             loadNewWord(mode, isNext);
         }
     }
