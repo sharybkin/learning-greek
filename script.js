@@ -24,10 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const lessonFilterButton = document.getElementById('lessonFilterButton');
     const lessonFilterValue = document.getElementById('lessonFilterValue');
     const lessonFilterDropdown = document.getElementById('lessonFilterDropdown');
+    const autoplayAudioCheckbox = document.getElementById('autoplayAudio');
 
     let currentWord = null;
     let allWords = [];
     let filteredWords = [];
+    let wordQueue = [];
     let currentLesson = null;
     let greekVoice = null;
 
@@ -357,6 +359,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return window.LESSONS.flatMap(lesson => lesson.words);
     }
 
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
     function updateFilteredWords() {
         const selectedCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
         const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
@@ -370,13 +379,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             filteredWords = selectedLessons.flatMap(index => LESSONS[index].words);
         }
+        // When the filter is updated, reset the word queue.
+        wordQueue = [...filteredWords];
+        shuffleArray(wordQueue);
     }
 
-    function getRandomWord() {
-        if (filteredWords.length === 0) {
-            return null;
+    function getNextWordFromQueue() {
+        if (wordQueue.length === 0) {
+             if (filteredWords.length === 0) {
+                return null;
+            }
+            console.log("Queue is empty, refilling and shuffling.");
+            // Refill and shuffle the queue.
+            wordQueue = [...filteredWords];
+            shuffleArray(wordQueue);
         }
-        return filteredWords[Math.floor(Math.random() * filteredWords.length)];
+        // Return the next word from the queue.
+        return wordQueue.pop();
     }
 
     function startSelfCheck(isNext = false, gameMode = null) {
@@ -398,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadNewWord(gameMode) {
-        currentWord = getRandomWord();
+        currentWord = getNextWordFromQueue();
 
         if (!currentWord) {
             gameWord.textContent = 'Нет слов';
@@ -421,6 +440,12 @@ document.addEventListener('DOMContentLoaded', () => {
             playAudioIcon.classList.remove('hidden');
             gameWord.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
+
+            // Autoplay audio if the setting is enabled
+            if (autoplayAudioCheckbox.checked) {
+                // Use a short timeout to let the card animation start
+                setTimeout(() => speak(currentWord.greek), 100);
+            }
         } else if (gameMode === 'ru-gr') {
             // Front: Russian | Back: Greek
             gameWordFront.textContent = currentWord.russian;
