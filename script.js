@@ -425,6 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameCard.classList.add('intro-animation');
             }, { once: true });
         } else {
+            // Initial load or mode change, ensure the card is not flipped.
+            gameCard.classList.remove('is-flipped');
             loadNewWord(mode, isNext);
         }
     }
@@ -470,7 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
             gameTranslation.textContent = currentWord.russian;
             playAudioIcon.classList.add('hidden');
         }
-        gameCard.classList.remove('is-flipped');
     }
 
     function flipCard() {
