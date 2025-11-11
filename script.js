@@ -409,6 +409,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const mode = gameMode || document.querySelector('.game-mode-button.active').dataset.mode;
 
         if (isNext) {
+            // Immediately reset the card to its front face before starting the animation
+            // to avoid a flip animation during the word change on some browsers (e.g. Safari).
+            gameCard.classList.remove('is-flipped');
+
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('hide-animation');
