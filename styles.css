@@ -304,10 +304,11 @@ h1 {
 }
 
 .game-scene {
-    width: 300px;
-    height: 200px;
-    perspective: 600px;
-    margin: 50px auto;
+    width: 90%;
+    max-width: 400px;
+    min-height: 250px;
+    perspective: 1000px;
+    margin: 30px auto;
 }
 
 .game-card {
@@ -320,7 +321,7 @@ h1 {
 }
 
 .game-card:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
 }
 
 .game-card.is-flipped {
@@ -332,12 +333,15 @@ h1 {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    min-height: 250px; /* Ensure a consistent minimum size */
 }
 
 .card-face-front {
@@ -352,28 +356,29 @@ h1 {
 }
 
 .card-face-back {
-    background-color: #ffffff;
+    background-color: #f8f9fa;
     transform: rotateY(180deg);
 }
 
 .game-word {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 5vw, 2.2rem);
     font-weight: bold;
     color: #2c3e50;
+    word-break: break-word;
+    margin-bottom: 10px;
 }
 
 .game-translation {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-    margin-top: 10px;
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    color: #555;
+    word-break: break-word;
 }
 
-/* Override for consistent styling on the game card's back face */
 .game-card .game-translation {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 5vw, 2.2rem);
     font-weight: bold;
     color: #2c3e50;
-    margin-top: 0; /* Adjusted for visual balance with .game-word */
+    margin-top: 0;
 }
 
 .game-controls {
