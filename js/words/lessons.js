@@ -426,6 +426,115 @@ window.LESSONS.push({
     ]
 });
 
+window.LESSONS.push({
+    lesson: 5.1,
+    title: 'Прилагательные',
+    words: [
+        { greek: 'μεγάλος',   russian: 'большой' },
+        { greek: 'μικρός',    russian: 'маленький' },
+        { greek: 'όμορφος',   russian: 'красивый' },
+        { greek: 'άσχημος',   russian: 'некрасивый, плохой' },
+        { greek: 'ακριβός',   russian: 'дорогой' },
+        { greek: 'φτηνός',    russian: 'дешёвый' },
+        { greek: 'καθαρός',   russian: 'чистый' },
+        { greek: 'καλός',     russian: 'хороший' },
+        { greek: 'ζεστός',    russian: 'горячий' },
+        { greek: 'έξυπνος',   russian: 'умный' },
+        { greek: 'εύκολος',   russian: 'лёгкий' },
+        { greek: 'δύσκολος',  russian: 'трудный' },
+        { greek: 'γεμάτος',   russian: 'полный' },
+        { greek: 'έτοιμος',   russian: 'готовый' },
+        { greek: 'ανοικτός',  russian: 'открытый' },
+        { greek: 'κλειστός',  russian: 'закрытый' },
+        { greek: 'γρήγορος',  russian: 'быстрый' },
+        { greek: 'ευγενικός', russian: 'вежливый' },
+        { greek: 'δυνατός',   russian: 'сильный, крепкий, реальный, громкий' },
+        { greek: 'βρώμικος',  russian: 'грязный' },
+        { greek: 'αυστηρός',  russian: 'строгий' },
+        { greek: 'ψηλός',     russian: 'высокий' },
+        { greek: 'χαμηλός',   russian: 'низкий (о предметах)' },
+        { greek: 'κοντός',    russian: 'низкий (о людях)' },
+        { greek: 'νέος',      russian: 'новый, молодой' },
+        { greek: 'ωραίος',    russian: 'прекрасный' },
+        { greek: 'παλιός',    russian: 'старый' },
+        { greek: 'καινούργιος', russian: 'новый' },
+        { greek: 'κρύος',     russian: 'холодный' },
+        { greek: 'άδειος',    russian: 'пустой' },
+        { greek: 'μοντέρνος', russian: 'современный' },
+        { greek: 'σκούρος',   russian: 'тёмный' },
+        { greek: 'γκρίζος',   russian: 'серый' }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 5.2,
+    title: 'Существительные, Наречия, Вопросы',
+    words: [
+        { greek: 'το τουριστικό γραφείο', russian: 'туристическая фирма' },
+        { greek: 'η οδός (στην οδό)',   russian: 'улица (на улице)' },
+        { greek: 'το κέντρο',           russian: 'центр' },
+        { greek: 'η μέρα',              russian: 'день' },
+        { greek: 'ο πολιτικός',         russian: 'политик' },
+        { greek: 'ο κόσμος',            russian: 'мир, люди' },
+        { greek: 'το εκατομμύριο',      russian: 'миллион' },
+        { greek: 'ο ποδοσφαιριστής',    russian: 'футболист' },
+        { greek: 'η λέξη',              russian: 'слово' },
+        { greek: 'το ποτό',             russian: 'напиток' },
+        { greek: 'η βοήθεια',           russian: 'помощь' },
+        { greek: 'το φαγητό',           russian: 'еда' },
+        { greek: 'το ταξί',             russian: 'такси' },
+        { greek: 'ο ταξιτζής',          russian: 'таксист' },
+        { greek: 'ο άνθρωπος',          russian: 'человек' },
+        { greek: 'η σχέση (έχω σχέση)', russian: 'связь, отношения' },
+        { greek: 'ο δεσμός (έχω δεσμό)', russian: 'узел, связь, отношения' },
+        { greek: 'η κοπέλα',            russian: 'девушка' },
+        { greek: 'το μοναχοπαίδι',      russian: 'единственный ребёнок в семье' },
+        { greek: 'το κουδούνι',         russian: 'звонок' },
+        { greek: 'ο συμφοιτητής / η συμφοιτήτρια', russian: 'однокурсник / однокурсница' },
+        { greek: 'ο κήπος',             russian: 'сад' },
+        { greek: 'η ζακέτα',            russian: 'жакет' },
+        { greek: 'η άσκηση',            russian: 'упражнение' },
+        { greek: 'η έγκυος',            russian: 'женщина в положении' },
+        { greek: 'το σαλόνι',           russian: 'зал' },
+        { greek: 'η ταινία',            russian: 'фильм' },
+        { greek: 'το ρεπορτάζ',         russian: 'репортаж' },
+        { greek: 'η ηλικία',            russian: 'возраст' },
+        { greek: 'ο τόπος',             russian: 'место' },
+        { greek: 'η κατοικία',          russian: 'дом' },
+        { greek: 'η απάντηση',          russian: 'ответ' },
+        { greek: 'η μουσική',           russian: 'музыка' },
+        { greek: 'η Φιλοσοφική σχολή',  russian: 'философский факультет' },
+        { greek: 'ο / η ψυχολόγος',     russian: 'психолог' },
+        { greek: 'ο / η φιλόλογος',     russian: 'филолог' },
+        { greek: 'το τσάι',             russian: 'чай' },
+        { greek: 'μήπως',               russian: 'может быть (вопрос)' },
+        { greek: 'ίσως',                russian: 'может быть (утверждение)' },
+        { greek: 'μια μέρα',            russian: 'однажды, когда-нибудь, как-нибудь' },
+        { greek: 'πόσα',                russian: 'сколько' },
+        { greek: 'ακόμα',               russian: 'ещё' },
+        { greek: 'σωστά',               russian: 'правильно' },
+        { greek: 'σε λίγο',             russian: 'скоро' }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 5.3,
+    title: 'Глаголы',
+    words: [
+        { greek: 'συμπληρώνω',  russian: 'заполнять' },
+        { greek: 'πάω',         russian: 'идти' },
+        { greek: 'τρώω',        russian: 'кушать' },
+        { greek: 'πίνω',        russian: 'пить' },
+        { greek: 'φτιάχνω',     russian: 'делать (что-то вещественное)' },
+        { greek: 'σερβίρω',     russian: 'сервировать' },
+        { greek: 'ανοίγω',      russian: 'открывать' },
+        { greek: 'κλείνω',      russian: 'закрывать' },
+        { greek: 'αρχίζω',      russian: 'начинать' },
+        { greek: 'τελειώνω',    russian: 'заканчивать' },
+        { greek: 'φωτογραφίζω', russian: 'фотографировать' },
+        { greek: 'κουρεύω',     russian: 'стричь' }
+    ]
+});
 
 window.LESSONS.push({
     lesson: 999,
