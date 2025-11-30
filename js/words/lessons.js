@@ -532,7 +532,12 @@ window.LESSONS.push({
         { greek: 'αρχίζω',      russian: 'начинать' },
         { greek: 'τελειώνω',    russian: 'заканчивать' },
         { greek: 'φωτογραφίζω', russian: 'фотографировать' },
-        { greek: 'κουρεύω',     russian: 'стричь' }
+        { greek: 'κουρεύω',     russian: 'стричь' },
+        { greek: 'λέω', russian: 'говорить, сказать' },
+        { greek: 'φταίω', russian: 'быть виноватым' },
+        { greek: 'καίω', russian: 'жечь, сжигать' },
+        { greek: 'κλαίω', russian: 'плакать' },
+        { greek: 'ακούω', russian: 'слушать' }
     ]
 });
 
@@ -548,6 +553,9 @@ window.LESSONS.push({
         { greek: 'η/ο συνταξιούχος', russian: 'пенсионер' },
         { greek: 'πέθανε', russian: 'умер' },
         { greek: 'επίσης', russian: 'тоже' },
-        { greek: 'ορίστε', russian: 'вот, пожалуйста' }
+        { greek: 'ορίστε', russian: 'вот, пожалуйста' },
+        { greek: 'για', russian: 'для' },
+        { greek: 'ότι', russian: 'что' },
+        { greek: 'όλα', russian: 'всё, все (вещи)' }
     ]
 });
