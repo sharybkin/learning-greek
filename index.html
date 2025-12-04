@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изучение греческих слов</title>
     <link rel="stylesheet" href="styles.css?v=10">
 </head>
+
 <body>
     <!-- Sidebar Toggle Button -->
     <button class="sidebar-toggle" id="sidebarToggle">
@@ -62,19 +64,23 @@
                             </div>
                         </div>
                     </div>
-                <div class="setting-group">
-                    <div class="autoplay-setting">
-                        <input type="checkbox" id="autoplayAudio" checked>
-                        <label for="autoplayAudio">Автовоспроизведение</label>
+                    <div class="setting-group">
+                        <div class="autoplay-setting">
+                            <input type="checkbox" id="autoplayAudio" checked>
+                            <label for="autoplayAudio">Автовоспроизведение</label>
+                        </div>
                     </div>
-                </div>
                 </div>
 
                 <div class="game-scene">
                     <div class="game-card" id="gameCard">
                         <div class="card-face card-face-front">
                             <span class="speaker-icon" id="playAudioIcon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                                    <path
+                                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z">
+                                    </path>
+                                </svg>
                             </span>
                             <div class="game-word-front" id="gameWordFront"></div>
                         </div>
@@ -91,7 +97,8 @@
         </div>
     </main>
 
-    <script src="js/words/lessons.js?v=8"></script>
+    <script src="js/words/lessons.js?v=9"></script>
     <script src="script.js?v=9"></script>
 </body>
+
 </html>
