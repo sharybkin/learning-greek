@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAllLessons();
         setupEventListeners();
         // Pre-warm the Greek voice cache
-        getGreekVoice(() => {});
+        getGreekVoice(() => { });
         allWords = getAllWords();
         populateLessonFilter();
         switchView('lessons');
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkboxes.length === 1) {
             const id = checkboxes[0].id.replace('lesson-', '');
             const lesson = LESSONS.find((l, i) => i == id)
-            if(lesson) {
+            if (lesson) {
                 lessonFilterValue.textContent = getDisplayTitle(lesson);
             }
         } else {
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const main = Math.floor(Number(rawLesson));
         if (lesson.title) {
 
-            if(main === 999) {
+            if (main === 999) {
                 return lesson.title;
             }
 
@@ -328,9 +328,22 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarOverlay.classList.remove('active');
     }
 
+    // Helper to normalize text (remove accents and lower case)
+    function normalizeText(text) {
+        return text.normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replace(/ё/g, "е")     // Map Russian yo to ye
+            .replace(/ει|οι/g, "ι") // Map digraphs to iota
+            .replace(/αι/g, "ε")    // Map alpha-iota to epsilon
+            .replace(/[ηυ]/g, "ι")  // Map eta and upsilon to iota
+            .replace(/ω/g, "ο");    // Map omega to omicron
+    }
+
     // Search functionality
     function handleSearch() {
-        const searchTerm = (searchInput.value || '').toLowerCase().trim();
+        // Get the value and immediately normalize it for comparison
+        const searchTerm = normalizeText(searchInput.value || '').trim();
         const lessonSections = document.querySelectorAll('.lesson-section');
 
         lessonSections.forEach(section => {
@@ -338,8 +351,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let anyVisible = false;
 
             cards.forEach(card => {
-                const greek = (card.dataset.greek || '').toLowerCase();
-                const russian = (card.dataset.russian || '').toLowerCase();
+                // Normalize the content of the cards as well
+                const greek = normalizeText(card.dataset.greek || '');
+                const russian = normalizeText(card.dataset.russian || '');
+
+                // Compare normalized strings
                 const matches = !searchTerm || greek.includes(searchTerm) || russian.includes(searchTerm);
 
                 if (matches) {
@@ -386,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getNextWordFromQueue() {
         if (wordQueue.length === 0) {
-             if (filteredWords.length === 0) {
+            if (filteredWords.length === 0) {
                 return null;
             }
             console.log("Queue is empty, refilling and shuffling.");
@@ -563,17 +579,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function handleFilterChange(changedCheckbox) {
-             const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
-             const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+            const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+            const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
 
-             if (changedCheckbox.value === 'all') {
-                 checkboxes.forEach(cb => cb.checked = allCheckbox.checked);
-             } else {
-                 allCheckbox.checked = Array.from(checkboxes).every(cb => cb.checked);
-             }
+            if (changedCheckbox.value === 'all') {
+                checkboxes.forEach(cb => cb.checked = allCheckbox.checked);
+            } else {
+                allCheckbox.checked = Array.from(checkboxes).every(cb => cb.checked);
+            }
 
-             updateLessonFilterButtonText();
-             startSelfCheck(); // This will correctly pick up the active mode from the DOM
+            updateLessonFilterButtonText();
+            startSelfCheck(); // This will correctly pick up the active mode from the DOM
         }
 
         // Close dropdown when clicking outside
