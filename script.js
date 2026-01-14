@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const main = Math.floor(Number(rawLesson));
         if (lesson.title) {
 
-            if (main === 999) {
+            if (main === 999 || main === 998) {
                 return lesson.title;
             }
 
