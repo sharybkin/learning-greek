@@ -496,7 +496,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function speak(text) {
         getGreekVoice(voice => {
-            const utterance = new SpeechSynthesisUtterance(text);
+            // Remove verb type annotations (1) or (2) before pronunciation
+            const cleanText = text.replace(/\s*\([12]\)\s*/g, '').trim();
+            const utterance = new SpeechSynthesisUtterance(cleanText);
             utterance.lang = 'el-GR';
             if (voice) {
                 utterance.voice = voice;
