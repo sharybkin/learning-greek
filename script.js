@@ -507,6 +507,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function updateAutoplayVisibility(gameMode) {
+        const autoplaySetting = document.querySelector('.autoplay-setting');
+        if (autoplaySetting) {
+            if (gameMode === 'audio') {
+                autoplaySetting.parentElement.style.visibility = 'visible';
+            } else {
+                autoplaySetting.parentElement.style.visibility = 'hidden';
+            }
+        }
+    }
+
     function switchView(view) {
         if (view === 'lessons') {
             mainTitle.classList.remove('hidden');
@@ -520,6 +531,9 @@ document.addEventListener('DOMContentLoaded', () => {
             selfCheckView.classList.remove('hidden');
             modeLessonsBtn.classList.remove('active');
             modeSelfCheckBtn.classList.add('active');
+            // Initialize autoplay visibility based on the current mode
+            const currentMode = document.querySelector('.game-mode-button.active').dataset.mode;
+            updateAutoplayVisibility(currentMode);
             startSelfCheck();
             gameCard.classList.add('intro-animation');
             gameCard.addEventListener('animationend', () => {
@@ -550,6 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('.game-mode-button').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const newMode = button.dataset.mode;
+                updateAutoplayVisibility(newMode);
                 startSelfCheck(false, newMode);
             });
         });
