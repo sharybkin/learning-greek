@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let wordQueue = [];
     let currentLesson = null;
     let greekVoice = null;
+    let audioKeepAliveInterval = null;
 
     // Get the Greek voice, caching it for future use.
     // Voices are loaded asynchronously, so we need to wait for them.
@@ -44,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const voices = window.speechSynthesis.getVoices();
             greekVoice = voices.find(v => v.lang === 'el-GR');
             if (greekVoice) {
+                // Pre-warm the audio system with a silent utterance
+                const warmup = new SpeechSynthesisUtterance(' ');
+                warmup.lang = 'el-GR';
+                warmup.voice = greekVoice;
+                warmup.volume = 0;
+                window.speechSynthesis.speak(warmup);
                 callback(greekVoice);
             } else {
                 console.warn("Greek voice not found, falling back to default.");
@@ -57,6 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Otherwise, wait for the voiceschanged event.
             window.speechSynthesis.onvoiceschanged = setVoice;
+        }
+    }
+
+    // Start audio keep-alive to prevent stuttering on mobile/Bluetooth devices
+    function startAudioKeepAlive() {
+        // Clear any existing interval
+        stopAudioKeepAlive();
+
+        // Speak silent text every 4 seconds to keep audio context active
+        audioKeepAliveInterval = setInterval(() => {
+            getGreekVoice(voice => {
+                const keepAlive = new SpeechSynthesisUtterance(' ');
+                keepAlive.lang = 'el-GR';
+                if (voice) {
+                    keepAlive.voice = voice;
+                }
+                keepAlive.volume = 0;
+                window.speechSynthesis.speak(keepAlive);
+            });
+        }, 4000);
+    }
+
+    // Stop audio keep-alive
+    function stopAudioKeepAlive() {
+        if (audioKeepAliveInterval) {
+            clearInterval(audioKeepAliveInterval);
+            audioKeepAliveInterval = null;
         }
     }
 
@@ -496,14 +530,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function speak(text) {
         getGreekVoice(voice => {
-            // Remove verb type annotations (1) or (2) before pronunciation
-            const cleanText = text.replace(/\s*\([12]\)\s*/g, '').trim();
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            utterance.lang = 'el-GR';
+            // Cancel any ongoing speech to prevent queue buildup
+            window.speechSynthesis.cancel();
+
+            // Prime the audio system with a very short silent utterance
+            const primer = new SpeechSynthesisUtterance(' ');
+            primer.lang = 'el-GR';
             if (voice) {
-                utterance.voice = voice;
+                primer.voice = voice;
             }
-            window.speechSynthesis.speak(utterance);
+            primer.volume = 0;
+            primer.rate = 10; // Very fast to minimize delay
+
+            // Speak the actual text after priming
+            primer.onend = () => {
+                // Remove verb type annotations (1) or (2) before pronunciation
+                const cleanText = text.replace(/\s*\([12]\)\s*/g, '').trim();
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.lang = 'el-GR';
+                if (voice) {
+                    utterance.voice = voice;
+                }
+
+                // Add error handling
+                utterance.onerror = (event) => {
+                    console.warn('Speech synthesis error:', event);
+                    // Retry once on error
+                    setTimeout(() => {
+                        window.speechSynthesis.speak(utterance);
+                    }, 100);
+                };
+
+                window.speechSynthesis.speak(utterance);
+            };
+
+            window.speechSynthesis.speak(primer);
         });
     }
 
@@ -525,6 +586,8 @@ document.addEventListener('DOMContentLoaded', () => {
             selfCheckView.classList.add('hidden');
             modeLessonsBtn.classList.add('active');
             modeSelfCheckBtn.classList.remove('active');
+            // Stop audio keep-alive when leaving self-check mode
+            stopAudioKeepAlive();
         } else {
             mainTitle.classList.add('hidden');
             lessonsView.classList.add('hidden');
@@ -534,6 +597,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Initialize autoplay visibility based on the current mode
             const currentMode = document.querySelector('.game-mode-button.active').dataset.mode;
             updateAutoplayVisibility(currentMode);
+            // Start audio keep-alive when entering self-check mode
+            startAudioKeepAlive();
             startSelfCheck();
             gameCard.classList.add('intro-animation');
             gameCard.addEventListener('animationend', () => {
