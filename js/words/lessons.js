@@ -818,6 +818,41 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
+    lesson: 7.3,
+    title: 'Дни недели',
+    words: [
+        { greek: 'η Δευτέρα', russian: 'понедельник' },
+        { greek: 'η Τρίτη', russian: 'вторник' },
+        { greek: 'η Τετάρτη', russian: 'среда' },
+        { greek: 'η Πέμπτη', russian: 'четверг' },
+        { greek: 'η Παρασκευή', russian: 'пятница' },
+        { greek: 'το Σάββατο', russian: 'суббота' },
+        { greek: 'η Κυριακή', russian: 'воскресенье' },
+        { greek: 'η εβδομάδα', russian: 'неделя' },
+        { greek: 'το Σαββατοκύριακο', russian: 'выходные (суббота и воскресенье)' }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 7.4,
+    title: 'Месяцы',
+    words: [
+        { greek: 'ο Ιανουάριος', russian: 'январь' },
+        { greek: 'ο Φεβρουάριος', russian: 'февраль' },
+        { greek: 'ο Μάρτιος', russian: 'март' },
+        { greek: 'ο Απρίλιος', russian: 'апрель' },
+        { greek: 'ο Μάιος', russian: 'май' },
+        { greek: 'ο Ιούνιος', russian: 'июнь' },
+        { greek: 'ο Ιούλιος', russian: 'июль' },
+        { greek: 'ο Αύγουστος', russian: 'август' },
+        { greek: 'ο Σεπτέμβριος', russian: 'сентябрь' },
+        { greek: 'ο Οκτώβριος', russian: 'октябрь' },
+        { greek: 'ο Νοέμβριος', russian: 'ноябрь' },
+        { greek: 'ο Δεκέμβριος', russian: 'декабрь' }
+    ]
+});
+
+window.LESSONS.push({
     lesson: 998,
     title: 'Числа 1–1000',
     words: [
