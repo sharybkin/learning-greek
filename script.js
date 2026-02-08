@@ -187,7 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 groupHeader.className = 'lesson-group-header';
 
                 const headerTitle = document.createElement('span');
-                headerTitle.textContent = `Урок ${mainLesson}`;
+                if (mainLesson >= 900 && lessons.length > 0) {
+                    headerTitle.textContent = lessons[0].title;
+                } else {
+                    headerTitle.textContent = `Урок ${mainLesson}`;
+                }
 
                 const toggle = document.createElement('span');
                 toggle.className = 'lesson-group-toggle';
@@ -229,15 +233,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const main = Math.floor(Number(rawLesson));
         if (lesson.title) {
 
-            if (main === 999 || main === 998) {
-                return lesson.title;
+            // For special lessons (>= 900), just show Title - Subtitle
+            if (main >= 900) {
+                let display = lesson.title;
+                if (lesson.subtitle) {
+                    display += ` - ${lesson.subtitle}`;
+                }
+                return display;
             }
 
             // If title already starts with 'Урок' leave it as-is
             if (/^Урок\s+/i.test(lesson.title)) return lesson.title;
-            // For headings, always prefix with main lesson number (so sublessons like 1.1
-            // will show as 'Урок 1 - Title')
-            return `Урок ${main}: ${lesson.title}`;
+
+            let displayTitle = `Урок ${main}: ${lesson.title}`;
+            if (lesson.subtitle) {
+                displayTitle += ` - ${lesson.subtitle}`;
+            }
+            return displayTitle;
         }
 
         return `Урок ${rawLesson}`;
@@ -251,9 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const title = document.createElement('div');
         title.className = 'lesson-item-title';
-        // In the sidebar/menu we want the original behavior: show lesson.title if present,
-        // otherwise fallback to `Урок {lesson.lesson}`. Do not prefix sublessons here.
-        title.textContent = lesson.title || `Урок ${lesson.lesson}`;
+        // In the sidebar/menu we want to show the subtitle if available (e.g. "Nouns") 
+        // fallback to title, otherwise fallback to `Урок {lesson.lesson}`.
+        if (lesson.subtitle) {
+            title.textContent = lesson.subtitle;
+        } else {
+            title.textContent = lesson.title || `Урок ${lesson.lesson}`;
+        }
 
         const count = document.createElement('div');
         count.className = 'lesson-item-count';
