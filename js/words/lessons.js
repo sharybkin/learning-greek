@@ -950,6 +950,28 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
+    lesson: 901.1,
+    title: 'Женский род на -ος',
+    words: [
+        { greek: 'η οδός', russian: 'улица' },
+        { greek: 'η λεωφόρος', russian: 'проспект' },
+        { greek: 'η πάροδος', russian: 'переулок' },
+        { greek: 'η μέθοδος', russian: 'метод' },
+        { greek: 'η περίοδος', russian: 'период' },
+        { greek: 'η πρόοδος', russian: 'прогресс' },
+        { greek: 'η είσοδος', russian: 'вход' },
+        { greek: 'η έξοδος', russian: 'выход' },
+        { greek: 'η παράγραφος', russian: 'параграф, абзац' },
+        { greek: 'η άμμος', russian: 'песок' },
+        { greek: 'η νήσος', russian: 'остров' },
+        { greek: 'η σύζυγος', russian: 'супруга' },
+        { greek: 'η αεροσυνοδός', russian: 'стюардесса' },
+        { greek: 'η έρημος', russian: 'пустыня' },
+        { greek: 'η ήπειρος', russian: 'континент, материк' }
+    ]
+});
+
+window.LESSONS.push({
     lesson: 998,
     title: 'Числа 1–1000',
     words: [
@@ -1026,6 +1048,12 @@ window.LESSONS.push({
         { greek: 'λογαριασμός', russian: 'счёт' },
         { greek: 'πληρώνω', russian: 'оплачивать' },
         { greek: 'έξω', russian: 'снаружи/внешний' },
-        { greek: 'τυρόπιτα', russian: 'пирог с сыром' }
+        { greek: 'τυρόπιτα', russian: 'пирог с сыром' },
+        { greek: 'το λάθος', russian: 'ошибка' },
+        { greek: 'η σελίδα', russian: 'страница' },
+        { greek: 'η Ευρώπη', russian: 'Европа' },
+        { greek: 'ευρωπαϊκός', russian: 'европейский' },
+        { greek: 'η αρχή', russian: 'власть' },
+        { greek: 'χρυσός', russian: 'золотой' }
     ]
 });
