@@ -950,7 +950,7 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
-    lesson: 901.1,
+    lesson: 900.4,
     title: 'Женский род на -ος',
     words: [
         { greek: 'η οδός', russian: 'улица' },
@@ -972,8 +972,9 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
-    lesson: 998,
-    title: 'Числа 1–1000',
+    lesson: 999.1,
+    title: 'Дополнительные',
+    subtitle: 'Числа 1–1000',
     words: [
         // 1–10
         { greek: 'ένα', russian: '1' },
@@ -1025,8 +1026,9 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
-    lesson: 999,
-    title: 'Дополнительные слова',
+    lesson: 999.2,
+    title: 'Дополнительные',
+    subtitle: 'Слова',
     words: [
         { greek: 'σήμερα', russian: 'сегодня' },
         { greek: 'τίποτα', russian: 'ничего' },
