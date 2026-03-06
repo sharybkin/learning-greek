@@ -387,7 +387,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/ει|οι/g, "ι") // Map digraphs to iota
             .replace(/αι/g, "ε")    // Map alpha-iota to epsilon
             .replace(/[ηυ]/g, "ι")  // Map eta and upsilon to iota
-            .replace(/ω/g, "ο");    // Map omega to omicron
+            .replace(/ω/g, "ο")     // Map omega to omicron
+            .replace(/θ/g, "φ");    // Map theta to phi (for search interchangeability)
     }
 
     // Search functionality
