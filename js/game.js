@@ -1,34 +1,67 @@
-// js/game.js — Self-check game module
+// js/game.js — Flashcard learning module (Quizlet-style)
 window.Game = (function () {
+    // DOM elements
     let gameCard, gameWord, gameTranslation, gameWordFront;
-    let nextWordBtn, playAudioIcon, autoplayAudioCheckbox;
+    let playAudioIcon, autoplayAudioCheckbox;
     let lessonFilterContainer, lessonFilterButton, lessonFilterValue, lessonFilterDropdown;
+    let btnRemember, btnForget;
+    let fcProgressText, fcProgressFill, fcComplete, fcResetBtn;
+    let gameScene, gameControls;
+    let mixSetting, mixWordsCheckbox;
 
+    // State
     let currentWord = null;
-    let allWords = [];
-    let filteredWords = [];
-    let wordQueue = [];
+    let allWords = [];       // [{greek, russian, lessonIndex, wordIndex, id}, ...]
+    let wordQueue = [];      // current queue of words to study
+    let totalWordsCount = 0; // total words for current session
+    let learnedCount = 0;    // words learned in current session
+
+    let currentStudyType = 'lesson'; // 'lesson' or 'review'
+    let currentGameMode = 'audio';   // 'audio', 'ru-gr', 'gr-ru'
 
     function init(elements) {
         gameCard = elements.gameCard;
         gameWord = elements.gameWord;
         gameTranslation = elements.gameTranslation;
         gameWordFront = elements.gameWordFront;
-        nextWordBtn = elements.nextWordBtn;
         playAudioIcon = elements.playAudioIcon;
         autoplayAudioCheckbox = elements.autoplayAudioCheckbox;
         lessonFilterContainer = elements.lessonFilterContainer;
         lessonFilterButton = elements.lessonFilterButton;
         lessonFilterValue = elements.lessonFilterValue;
         lessonFilterDropdown = elements.lessonFilterDropdown;
+        btnRemember = elements.btnRemember;
+        btnForget = elements.btnForget;
+        fcProgressText = elements.fcProgressText;
+        fcProgressFill = elements.fcProgressFill;
+        fcComplete = elements.fcComplete;
+        fcResetBtn = elements.fcResetBtn;
+        gameScene = elements.gameScene;
+        gameControls = elements.gameControls;
+        mixSetting = elements.mixSetting;
+        mixWordsCheckbox = elements.mixWordsCheckbox;
 
-        allWords = getAllWords();
+        allWords = buildAllWords();
         populateLessonFilter();
         setupEventListeners();
+        restoreLastLesson();
     }
 
-    function getAllWords() {
-        return window.LESSONS.flatMap(lesson => lesson.words);
+    // Build flat array of all words with IDs
+    function buildAllWords() {
+        const words = [];
+        window.LESSONS.forEach((lesson, lessonIndex) => {
+            lesson.words.forEach((word, wordIndex) => {
+                words.push({
+                    greek: word.greek,
+                    russian: word.russian,
+                    lessonIndex,
+                    wordIndex,
+                    id: `${lessonIndex}:${wordIndex}`
+                });
+            });
+        });
+        return words;
     }
 
     function shuffleArray(array) {
@@ -37,6 +70,76 @@ window.Game = (function () {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
+
+    // ---- localStorage helpers ----
+
+    function getStorageKey() {
+        if (currentStudyType === 'review') {
+            return `fc_${currentGameMode}_review`;
+        }
+        const selectedLessons = getSelectedLessonIndices();
+        const lessonKey = selectedLessons.sort((a, b) => a - b).join('-');
+        return `fc_${currentGameMode}_lesson_${lessonKey}`;
+    }
+
+    function getLearnedSet() {
+        const key = getStorageKey();
+        try {
+            const data = localStorage.getItem(key);
+            return data ? new Set(JSON.parse(data)) : new Set();
+        } catch {
+            return new Set();
+        }
+    }
+
+    function saveLearnedSet(learnedSet) {
+        const key = getStorageKey();
+        localStorage.setItem(key, JSON.stringify([...learnedSet]));
+    }
+
+    function clearLearnedSet() {
+        const key = getStorageKey();
+        localStorage.removeItem(key);
+    }
+
+    function saveLastLesson() {
+        const selected = getSelectedLessonIndices();
+        if (selected.length > 0 && selected.length < LESSONS.length) {
+            localStorage.setItem('fc_last_lesson', JSON.stringify(selected));
+        } else {
+            localStorage.removeItem('fc_last_lesson');
+        }
+    }
+
+    function restoreLastLesson() {
+        try {
+            const data = localStorage.getItem('fc_last_lesson');
+            if (!data) return;
+            const indices = JSON.parse(data);
+            if (!Array.isArray(indices) || indices.length === 0) return;
+
+            // Uncheck all, then check the saved ones
+            const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+            const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+
+            allCheckbox.checked = false;
+            checkboxes.forEach(cb => {
+                cb.checked = indices.includes(parseInt(cb.value));
+            });
+
+            // Check if all are selected → check "all"
+            if (indices.length >= LESSONS.length) {
+                allCheckbox.checked = true;
+                checkboxes.forEach(cb => cb.checked = true);
+            }
+
+            updateLessonFilterButtonText();
+        } catch {
+            // ignore
+        }
+    }
+
+    // ---- Lesson filter ----
 
     function populateLessonFilter() {
         if (!lessonFilterDropdown || !window.LESSONS) return;
@@ -68,7 +171,6 @@ window.Game = (function () {
 
         optionDiv.appendChild(checkbox);
         optionDiv.appendChild(label);
-
         return optionDiv;
     }
 
@@ -92,43 +194,127 @@ window.Game = (function () {
         }
     }
 
-    function updateFilteredWords() {
-        const selectedCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
+    function getSelectedLessonIndices() {
         const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+        const selectedCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
 
         if (allCheckbox.checked || selectedCheckboxes.length === 0) {
-            filteredWords = allWords;
+            return LESSONS.map((_, i) => i);
+        }
+
+        return Array.from(selectedCheckboxes)
+            .map(cb => parseInt(cb.value))
+            .filter(v => !isNaN(v));
+    }
+
+    // ---- Flashcard session ----
+
+    function startSession() {
+        const learnedSet = getLearnedSet();
+
+        // Get words for the current context
+        let sessionWords;
+        if (currentStudyType === 'review') {
+            sessionWords = [...allWords];
         } else {
-            const selectedLessons = Array.from(selectedCheckboxes)
-                .map(cb => cb.value)
-                .filter(value => value !== 'all');
-
-            filteredWords = selectedLessons.flatMap(index => LESSONS[index].words);
+            const selectedLessons = getSelectedLessonIndices();
+            sessionWords = allWords.filter(w => selectedLessons.includes(w.lessonIndex));
         }
-        wordQueue = [...filteredWords];
+
+        // Filter out already learned words
+        const unlearnedWords = sessionWords.filter(w => !learnedSet.has(w.id));
+
+        // Word mixing (only in lesson mode)
+        let mixedWords = [];
+        if (currentStudyType === 'lesson' && mixWordsCheckbox && mixWordsCheckbox.checked) {
+            mixedWords = getMixWords(sessionWords);
+        }
+
+        totalWordsCount = sessionWords.length;
+        learnedCount = sessionWords.length - unlearnedWords.length;
+
+        // Build queue from unlearned + mixed
+        wordQueue = [...unlearnedWords, ...mixedWords];
         shuffleArray(wordQueue);
-    }
 
-    function getNextWordFromQueue() {
+        updateProgress();
+
         if (wordQueue.length === 0) {
-            if (filteredWords.length === 0) {
-                return null;
-            }
-            console.log("Queue is empty, refilling and shuffling.");
-            wordQueue = [...filteredWords];
-            shuffleArray(wordQueue);
+            showComplete();
+        } else {
+            hideComplete();
+            showNextCard(false);
         }
-        return wordQueue.pop();
+
+        saveLastLesson();
     }
 
-    function startSelfCheck(isNext = false, gameMode = null) {
-        if (!isNext) {
-            updateFilteredWords();
+    function getMixWords(currentSessionWords) {
+        const currentIds = new Set(currentSessionWords.map(w => w.id));
+
+        // Get unlearned words from review mode for other lessons
+        const reviewKey = `fc_${currentGameMode}_review`;
+        let reviewLearned = new Set();
+        try {
+            const data = localStorage.getItem(reviewKey);
+            if (data) reviewLearned = new Set(JSON.parse(data));
+        } catch { /* ignore */ }
+
+        // Words from other lessons that are NOT learned in review
+        const otherUnlearned = allWords.filter(w =>
+            !currentIds.has(w.id) && !reviewLearned.has(w.id)
+        );
+
+        if (otherUnlearned.length === 0) return [];
+
+        // 10% of current lesson size, min 3, max 10
+        const count = Math.min(
+            Math.max(3, Math.ceil(currentSessionWords.length * 0.1)),
+            10,
+            otherUnlearned.length
+        );
+
+        shuffleArray(otherUnlearned);
+        return otherUnlearned.slice(0, count);
+    }
+
+    function handleRemember() {
+        if (!currentWord) return;
+
+        // Mark as learned (only for non-mixed words, i.e. words belonging to current session)
+        const learnedSet = getLearnedSet();
+        learnedSet.add(currentWord.id);
+        saveLearnedSet(learnedSet);
+        learnedCount++;
+
+        updateProgress();
+        advanceToNext();
+    }
+
+    function handleForget() {
+        if (!currentWord) return;
+
+        // Put word back in queue
+        wordQueue.unshift(currentWord);
+
+        advanceToNext();
+    }
+
+    function advanceToNext() {
+        if (wordQueue.length === 0) {
+            showComplete();
+            return;
+        }
+        showNextCard(true);
+    }
+
+    function showNextCard(animate) {
+        if (wordQueue.length === 0) {
+            showComplete();
+            return;
         }
 
-        const mode = gameMode || document.querySelector('.game-mode-button.active').dataset.mode;
-
-        if (isNext) {
+        if (animate) {
             gameCard.classList.add('no-transition');
             gameCard.classList.remove('is-flipped');
             void gameCard.offsetHeight;
@@ -137,20 +323,27 @@ window.Game = (function () {
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('hide-animation');
-                loadNewWord(mode, isNext);
+                loadNewWord();
                 gameCard.classList.add('intro-animation');
+                gameCard.addEventListener('animationend', () => {
+                    gameCard.classList.remove('intro-animation');
+                }, { once: true });
             }, { once: true });
         } else {
-            loadNewWord(mode, isNext);
+            loadNewWord();
+            gameCard.classList.add('intro-animation');
+            gameCard.addEventListener('animationend', () => {
+                gameCard.classList.remove('intro-animation');
+            }, { once: true });
         }
     }
 
-    function loadNewWord(gameMode, isNext = false) {
-        currentWord = getNextWordFromQueue();
+    function loadNewWord() {
+        currentWord = wordQueue.pop();
 
         if (!currentWord) {
             gameWord.textContent = 'Нет слов';
-            gameTranslation.textContent = 'Выберите урок';
+            gameTranslation.textContent = '';
             gameWordFront.textContent = '';
             playAudioIcon.classList.add('hidden');
             return;
@@ -161,19 +354,21 @@ window.Game = (function () {
         gameTranslation.textContent = '';
         gameWordFront.textContent = '';
 
-        if (gameMode === 'audio') {
+        const mode = currentGameMode;
+
+        if (mode === 'audio') {
             playAudioIcon.classList.remove('hidden');
             gameWord.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
 
-            if (autoplayAudioCheckbox.checked && isNext) {
+            if (autoplayAudioCheckbox.checked) {
                 setTimeout(() => Speech.speak(currentWord.greek), 100);
             }
-        } else if (gameMode === 'ru-gr') {
+        } else if (mode === 'ru-gr') {
             gameWordFront.textContent = currentWord.russian;
             gameWord.textContent = currentWord.greek;
             playAudioIcon.classList.add('hidden');
-        } else if (gameMode === 'gr-ru') {
+        } else if (mode === 'gr-ru') {
             gameWordFront.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
             playAudioIcon.classList.add('hidden');
@@ -181,9 +376,32 @@ window.Game = (function () {
         gameCard.classList.remove('is-flipped');
     }
 
-    function flipCard() {
-        gameCard.classList.toggle('is-flipped');
+    // ---- Progress UI ----
+
+    function updateProgress() {
+        const percent = totalWordsCount > 0 ? Math.round((learnedCount / totalWordsCount) * 100) : 0;
+        fcProgressText.textContent = `Выучено: ${learnedCount} / ${totalWordsCount}`;
+        fcProgressFill.style.width = `${percent}%`;
     }
+
+    function showComplete() {
+        gameScene.classList.add('hidden');
+        gameControls.classList.add('hidden');
+        fcComplete.classList.remove('hidden');
+    }
+
+    function hideComplete() {
+        gameScene.classList.remove('hidden');
+        gameControls.classList.remove('hidden');
+        fcComplete.classList.add('hidden');
+    }
+
+    function handleReset() {
+        clearLearnedSet();
+        startSession();
+    }
+
+    // ---- UI visibility ----
 
     function updateAutoplayVisibility(gameMode) {
         const autoplaySetting = document.querySelector('.autoplay-setting');
@@ -196,24 +414,67 @@ window.Game = (function () {
         }
     }
 
+    function updateMixVisibility() {
+        if (mixSetting) {
+            if (currentStudyType === 'lesson') {
+                mixSetting.classList.remove('hidden');
+            } else {
+                mixSetting.classList.add('hidden');
+            }
+        }
+    }
+
+    function flipCard() {
+        gameCard.classList.toggle('is-flipped');
+    }
+
+    // ---- Event listeners ----
+
     function setupEventListeners() {
+        // Card flip
         if (gameCard) gameCard.addEventListener('click', flipCard);
+
+        // Audio play
         if (playAudioIcon) playAudioIcon.addEventListener('click', (e) => {
             e.stopPropagation();
-            Speech.speak(currentWord.greek);
+            if (currentWord) Speech.speak(currentWord.greek);
         });
-        if (nextWordBtn) nextWordBtn.addEventListener('click', () => startSelfCheck(true));
+
+        // Remember / Forget
+        if (btnRemember) btnRemember.addEventListener('click', handleRemember);
+        if (btnForget) btnForget.addEventListener('click', handleForget);
+
+        // Reset
+        if (fcResetBtn) fcResetBtn.addEventListener('click', handleReset);
+
+        // Study type toggle
+        document.querySelectorAll('.study-type-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.study-type-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentStudyType = button.dataset.study;
+                updateMixVisibility();
+                startSession();
+            });
+        });
 
         // Game mode buttons
         document.querySelectorAll('.game-mode-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.game-mode-button').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                const newMode = button.dataset.mode;
-                updateAutoplayVisibility(newMode);
-                startSelfCheck(false, newMode);
+                currentGameMode = button.dataset.mode;
+                updateAutoplayVisibility(currentGameMode);
+                startSession();
             });
         });
+
+        // Mix words checkbox
+        if (mixWordsCheckbox) {
+            mixWordsCheckbox.addEventListener('change', () => {
+                startSession();
+            });
+        }
 
         // Lesson filter
         if (lessonFilterButton) {
@@ -259,12 +520,12 @@ window.Game = (function () {
         }
 
         updateLessonFilterButtonText();
-        startSelfCheck();
+        startSession();
     }
 
     return {
         init,
-        startSelfCheck,
+        startSelfCheck: startSession,
         updateAutoplayVisibility
     };
 })();

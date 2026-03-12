@@ -52,10 +52,16 @@
             <div id="selfCheckView" class="hidden">
                 <div class="game-settings">
                     <div class="setting-group">
+                        <div class="study-type-selector">
+                            <button class="study-type-button active" data-study="lesson">Изучение урока</button>
+                            <button class="study-type-button" data-study="review">Повторение всех</button>
+                        </div>
+                    </div>
+                    <div class="setting-group">
                         <div class="game-mode-selector">
                             <button class="game-mode-button active" data-mode="audio">Аудирование</button>
-                            <button class="game-mode-button" data-mode="ru-gr">Русский -> Греческий</button>
-                            <button class="game-mode-button" data-mode="gr-ru">Греческий -> Русский</button>
+                            <button class="game-mode-button" data-mode="ru-gr">Русский → Греческий</button>
+                            <button class="game-mode-button" data-mode="gr-ru">Греческий → Русский</button>
                         </div>
                     </div>
                     <div class="setting-group">
@@ -75,9 +81,22 @@
                             <label for="autoplayAudio">Автовоспроизведение</label>
                         </div>
                     </div>
+                    <div class="setting-group mix-setting hidden" id="mixSetting">
+                        <div class="autoplay-setting">
+                            <input type="checkbox" id="mixWords">
+                            <label for="mixWords">Подмешивать слова</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="game-scene">
+                <div class="fc-progress" id="fcProgress">
+                    <div class="fc-progress-text" id="fcProgressText">Выучено: 0 / 0</div>
+                    <div class="fc-progress-bar">
+                        <div class="fc-progress-fill" id="fcProgressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="game-scene" id="gameScene">
                     <div class="game-card" id="gameCard">
                         <div class="card-face card-face-front">
                             <span class="speaker-icon" id="playAudioIcon">
@@ -95,8 +114,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="game-controls">
-                    <button id="nextWord">Следующее слово</button>
+
+                <div class="fc-complete hidden" id="fcComplete">
+                    <div class="fc-complete-text">Все слова пройдены!</div>
+                    <button class="fc-reset-btn" id="fcResetBtn">Сбросить прогресс</button>
+                </div>
+
+                <div class="game-controls" id="gameControls">
+                    <button class="fc-btn fc-btn-forget" id="btnForget">Не помню ✗</button>
+                    <button class="fc-btn fc-btn-remember" id="btnRemember">Помню ✓</button>
                 </div>
             </div>
         </div>

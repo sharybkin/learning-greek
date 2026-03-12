@@ -27,13 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
         gameWord: document.getElementById('gameWord'),
         gameTranslation: document.getElementById('gameTranslation'),
         gameWordFront: document.getElementById('gameWordFront'),
-        nextWordBtn: document.getElementById('nextWord'),
         playAudioIcon: document.getElementById('playAudioIcon'),
         autoplayAudioCheckbox: document.getElementById('autoplayAudio'),
         lessonFilterContainer: document.getElementById('lessonFilterContainer'),
         lessonFilterButton: document.getElementById('lessonFilterButton'),
         lessonFilterValue: document.getElementById('lessonFilterValue'),
-        lessonFilterDropdown: document.getElementById('lessonFilterDropdown')
+        lessonFilterDropdown: document.getElementById('lessonFilterDropdown'),
+        btnRemember: document.getElementById('btnRemember'),
+        btnForget: document.getElementById('btnForget'),
+        fcProgressText: document.getElementById('fcProgressText'),
+        fcProgressFill: document.getElementById('fcProgressFill'),
+        fcComplete: document.getElementById('fcComplete'),
+        fcResetBtn: document.getElementById('fcResetBtn'),
+        gameScene: document.getElementById('gameScene'),
+        gameControls: document.getElementById('gameControls'),
+        mixSetting: document.getElementById('mixSetting'),
+        mixWordsCheckbox: document.getElementById('mixWords')
     });
 
     // Pre-warm the Greek voice cache

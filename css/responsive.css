@@ -9,6 +9,34 @@
     .custom-select-wrapper {
         width: 100%;
     }
+    
+    .study-type-selector {
+        margin-bottom: 15px;
+        flex-direction: column;
+        border-radius: 12px;
+    }
+    
+    .study-type-button {
+        padding: 12px;
+        text-align: center;
+        border-radius: 8px;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 15px;
+    }
+
+    .fc-btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 1.15rem;
+    }
+    
+    .fc-progress {
+        padding: 0 20px;
+    }
 
     .sidebar {
         transform: translateX(-280px);
