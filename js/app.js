@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gameScene: document.getElementById('gameScene'),
         gameControls: document.getElementById('gameControls'),
         mixSetting: document.getElementById('mixSetting'),
-        mixWordsCheckbox: document.getElementById('mixWords')
+        mixWordsCheckbox: document.getElementById('mixWords'),
+        mixedBadge: document.getElementById('mixedBadge')
     });
 
     // Pre-warm the Greek voice cache

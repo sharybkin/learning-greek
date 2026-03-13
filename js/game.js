@@ -7,7 +7,7 @@ window.Game = (function () {
     let btnRemember, btnForget;
     let fcProgressText, fcProgressFill, fcComplete, fcResetBtn;
     let gameScene, gameControls;
-    let mixSetting, mixWordsCheckbox;
+    let mixSetting, mixWordsCheckbox, mixedBadge;
 
     // State
     let currentWord = null;
@@ -16,8 +16,19 @@ window.Game = (function () {
     let totalWordsCount = 0; // total words for current session
     let learnedCount = 0;    // words learned in current session
 
-    let currentStudyType = 'lesson'; // 'lesson' or 'review'
     let currentGameMode = 'audio';   // 'audio', 'ru-gr', 'gr-ru'
+
+    function getCurrentStudyType() {
+        const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+        const selectedCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"]):checked');
+        if (allCheckbox && allCheckbox.checked) {
+            return 'review';
+        }
+        if (selectedCheckboxes.length === 0 || selectedCheckboxes.length === LESSONS.length) {
+            return 'review';
+        }
+        return 'lesson';
+    }
 
     function init(elements) {
         gameCard = elements.gameCard;
@@ -40,6 +51,7 @@ window.Game = (function () {
         gameControls = elements.gameControls;
         mixSetting = elements.mixSetting;
         mixWordsCheckbox = elements.mixWordsCheckbox;
+        mixedBadge = elements.mixedBadge;
 
         allWords = buildAllWords();
         populateLessonFilter();
@@ -74,7 +86,7 @@ window.Game = (function () {
     // ---- localStorage helpers ----
 
     function getStorageKey() {
-        if (currentStudyType === 'review') {
+        if (getCurrentStudyType() === 'review') {
             return `fc_${currentGameMode}_review`;
         }
         const selectedLessons = getSelectedLessonIndices();
@@ -211,10 +223,17 @@ window.Game = (function () {
 
     function startSession() {
         const learnedSet = getLearnedSet();
+        const studyType = getCurrentStudyType();
+
+        // Handle mix settings visibility
+        if (mixSetting) {
+            if (studyType === 'lesson') mixSetting.classList.remove('hidden');
+            else mixSetting.classList.add('hidden');
+        }
 
         // Get words for the current context
         let sessionWords;
-        if (currentStudyType === 'review') {
+        if (studyType === 'review') {
             sessionWords = [...allWords];
         } else {
             const selectedLessons = getSelectedLessonIndices();
@@ -226,7 +245,7 @@ window.Game = (function () {
 
         // Word mixing (only in lesson mode)
         let mixedWords = [];
-        if (currentStudyType === 'lesson' && mixWordsCheckbox && mixWordsCheckbox.checked) {
+        if (studyType === 'lesson' && mixWordsCheckbox && mixWordsCheckbox.checked) {
             mixedWords = getMixWords(sessionWords);
         }
 
@@ -243,7 +262,8 @@ window.Game = (function () {
             showComplete();
         } else {
             hideComplete();
-            showNextCard(false);
+            // Pass false for isNext to prevent audio auto-play on load
+            showNextCard(false, false);
         }
 
         saveLastLesson();
@@ -275,17 +295,29 @@ window.Game = (function () {
         );
 
         shuffleArray(otherUnlearned);
-        return otherUnlearned.slice(0, count);
+        return otherUnlearned.slice(0, count).map(w => ({ ...w, isMixed: true }));
     }
 
     function handleRemember() {
         if (!currentWord) return;
 
-        // Mark as learned (only for non-mixed words, i.e. words belonging to current session)
-        const learnedSet = getLearnedSet();
-        learnedSet.add(currentWord.id);
-        saveLearnedSet(learnedSet);
-        learnedCount++;
+        if (!currentWord.isMixed) {
+            // Mark as learned for the current session
+            const learnedSet = getLearnedSet();
+            learnedSet.add(currentWord.id);
+            saveLearnedSet(learnedSet);
+            learnedCount++;
+        } else {
+            // If it's a mixed word from review mode, record the progress there
+            const reviewKey = `fc_${currentGameMode}_review`;
+            let reviewLearned = new Set();
+            try {
+                const data = localStorage.getItem(reviewKey);
+                if (data) reviewLearned = new Set(JSON.parse(data));
+            } catch { /* ignore */ }
+            reviewLearned.add(currentWord.id);
+            localStorage.setItem(reviewKey, JSON.stringify([...reviewLearned]));
+        }
 
         updateProgress();
         advanceToNext();
@@ -305,10 +337,10 @@ window.Game = (function () {
             showComplete();
             return;
         }
-        showNextCard(true);
+        showNextCard(true, true);
     }
 
-    function showNextCard(animate) {
+    function showNextCard(animate, isNext = true) {
         if (wordQueue.length === 0) {
             showComplete();
             return;
@@ -323,14 +355,14 @@ window.Game = (function () {
             gameCard.classList.add('hide-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('hide-animation');
-                loadNewWord();
+                loadNewWord(isNext);
                 gameCard.classList.add('intro-animation');
                 gameCard.addEventListener('animationend', () => {
                     gameCard.classList.remove('intro-animation');
                 }, { once: true });
             }, { once: true });
         } else {
-            loadNewWord();
+            loadNewWord(isNext);
             gameCard.classList.add('intro-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('intro-animation');
@@ -338,8 +370,14 @@ window.Game = (function () {
         }
     }
 
-    function loadNewWord() {
+    function loadNewWord(isNext = true) {
         currentWord = wordQueue.pop();
+
+        if (currentWord && currentWord.isMixed) {
+            if (mixedBadge) mixedBadge.classList.remove('hidden');
+        } else {
+            if (mixedBadge) mixedBadge.classList.add('hidden');
+        }
 
         if (!currentWord) {
             gameWord.textContent = 'Нет слов';
@@ -361,7 +399,7 @@ window.Game = (function () {
             gameWord.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
 
-            if (autoplayAudioCheckbox.checked) {
+            if (autoplayAudioCheckbox.checked && isNext) {
                 setTimeout(() => Speech.speak(currentWord.greek), 100);
             }
         } else if (mode === 'ru-gr') {
@@ -414,16 +452,6 @@ window.Game = (function () {
         }
     }
 
-    function updateMixVisibility() {
-        if (mixSetting) {
-            if (currentStudyType === 'lesson') {
-                mixSetting.classList.remove('hidden');
-            } else {
-                mixSetting.classList.add('hidden');
-            }
-        }
-    }
-
     function flipCard() {
         gameCard.classList.toggle('is-flipped');
     }
@@ -446,17 +474,6 @@ window.Game = (function () {
 
         // Reset
         if (fcResetBtn) fcResetBtn.addEventListener('click', handleReset);
-
-        // Study type toggle
-        document.querySelectorAll('.study-type-button').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.study-type-button').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                currentStudyType = button.dataset.study;
-                updateMixVisibility();
-                startSession();
-            });
-        });
 
         // Game mode buttons
         document.querySelectorAll('.game-mode-button').forEach(button => {

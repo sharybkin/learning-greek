@@ -4,6 +4,7 @@
     min-height: 250px;
     perspective: 1000px;
     margin: 30px auto;
+    position: relative;
 }
 
 .game-card {
@@ -103,6 +104,8 @@
     background-color: #ecf0f1;
     border-radius: 8px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     align-items: center;
 }
@@ -314,9 +317,11 @@
 /* ---- Progress Bar ---- */
 
 .fc-progress {
-    margin: 15px auto;
+    margin: 0 auto 10px auto;
     max-width: 400px;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .fc-progress-text {
@@ -418,6 +423,26 @@
 .fc-reset-btn:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
+}
+
+.mixed-badge {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #e67e22;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.mixed-badge.hidden {
+    display: none;
 }
 
 /* ---- Mix Setting toggle ---- */

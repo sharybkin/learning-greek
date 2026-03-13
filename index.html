@@ -52,12 +52,6 @@
             <div id="selfCheckView" class="hidden">
                 <div class="game-settings">
                     <div class="setting-group">
-                        <div class="study-type-selector">
-                            <button class="study-type-button active" data-study="lesson">Изучение урока</button>
-                            <button class="study-type-button" data-study="review">Повторение всех</button>
-                        </div>
-                    </div>
-                    <div class="setting-group">
                         <div class="game-mode-selector">
                             <button class="game-mode-button active" data-mode="audio">Аудирование</button>
                             <button class="game-mode-button" data-mode="ru-gr">Русский → Греческий</button>
@@ -74,29 +68,28 @@
                                 <!-- Options populated by JS -->
                             </div>
                         </div>
-                    </div>
                     <div class="setting-group">
                         <div class="autoplay-setting">
                             <input type="checkbox" id="autoplayAudio" checked>
                             <label for="autoplayAudio">Автовоспроизведение</label>
                         </div>
                     </div>
-                    <div class="setting-group mix-setting hidden" id="mixSetting">
+                    <div class="setting-group" id="mixSetting">
                         <div class="autoplay-setting">
-                            <input type="checkbox" id="mixWords">
+                            <input type="checkbox" id="mixWords" checked>
                             <label for="mixWords">Подмешивать слова</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="fc-progress" id="fcProgress">
-                    <div class="fc-progress-text" id="fcProgressText">Выучено: 0 / 0</div>
-                    <div class="fc-progress-bar">
-                        <div class="fc-progress-fill" id="fcProgressFill" style="width: 0%"></div>
-                    </div>
-                </div>
-
                 <div class="game-scene" id="gameScene">
+                    <div class="fc-progress" id="fcProgress">
+                        <div class="fc-progress-text" id="fcProgressText">Выучено: 0 / 0</div>
+                        <div class="fc-progress-bar">
+                            <div class="fc-progress-fill" id="fcProgressFill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div id="mixedBadge" class="mixed-badge hidden">★ Из других уроков</div>
                     <div class="game-card" id="gameCard">
                         <div class="card-face card-face-front">
                             <span class="speaker-icon" id="playAudioIcon">
