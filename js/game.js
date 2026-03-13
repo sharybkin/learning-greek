@@ -263,7 +263,9 @@ window.Game = (function () {
 
         updateProgress();
 
-        if (wordQueue.length === 0) {
+        if (totalWordsCount > 0 && learnedCount >= totalWordsCount) {
+            showComplete();
+        } else if (wordQueue.length === 0) {
             showComplete();
         } else {
             hideComplete();
@@ -338,6 +340,10 @@ window.Game = (function () {
     }
 
     function advanceToNext() {
+        if (totalWordsCount > 0 && learnedCount >= totalWordsCount) {
+            showComplete();
+            return;
+        }
         if (wordQueue.length === 0) {
             showComplete();
             return;
@@ -346,6 +352,10 @@ window.Game = (function () {
     }
 
     function showNextCard(animate, isNext = true) {
+        if (totalWordsCount > 0 && learnedCount >= totalWordsCount) {
+            showComplete();
+            return;
+        }
         if (wordQueue.length === 0) {
             showComplete();
             return;
