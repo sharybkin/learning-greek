@@ -227,8 +227,13 @@ window.Game = (function () {
 
         // Handle mix settings visibility
         if (mixSetting) {
-            if (studyType === 'lesson') mixSetting.classList.remove('hidden');
-            else mixSetting.classList.add('hidden');
+            if (studyType === 'lesson') {
+                mixSetting.classList.remove('disabled-setting');
+                if (mixWordsCheckbox) mixWordsCheckbox.disabled = false;
+            } else {
+                mixSetting.classList.add('disabled-setting');
+                if (mixWordsCheckbox) mixWordsCheckbox.disabled = true;
+            }
         }
 
         // Get words for the current context
@@ -442,12 +447,15 @@ window.Game = (function () {
     // ---- UI visibility ----
 
     function updateAutoplayVisibility(gameMode) {
-        const autoplaySetting = document.querySelector('.autoplay-setting');
-        if (autoplaySetting) {
-            if (gameMode === 'audio') {
-                autoplaySetting.parentElement.style.visibility = 'visible';
-            } else {
-                autoplaySetting.parentElement.style.visibility = 'hidden';
+        const autoplayAudioCheckbox = document.getElementById('autoplayAudio');
+        if (autoplayAudioCheckbox) {
+            const settingGroup = autoplayAudioCheckbox.closest('.setting-group');
+            if (settingGroup) {
+                if (gameMode === 'audio') {
+                    settingGroup.style.visibility = 'visible';
+                } else {
+                    settingGroup.style.visibility = 'hidden';
+                }
             }
         }
     }

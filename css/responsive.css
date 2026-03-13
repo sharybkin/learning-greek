@@ -23,15 +23,16 @@
     }
     
     .game-controls {
-        flex-direction: column;
+        flex-direction: row;
         padding: 0 20px;
         gap: 15px;
     }
 
     .fc-btn {
-        width: 100%;
-        padding: 16px;
-        font-size: 1.15rem;
+        flex: 1;
+        min-width: 0;
+        padding: 14px 10px;
+        font-size: 1rem;
     }
     
     .fc-progress {
