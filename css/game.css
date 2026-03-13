@@ -349,49 +349,44 @@
 
 .fc-btn {
     border: none;
-    border-radius: 18px;
+    border-radius: 12px;
     padding: 16px 24px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
     min-width: 150px;
     font-family: inherit;
     letter-spacing: 0.5px;
     user-select: none;
     touch-action: manipulation;
-    background-color: #ffffff;
+    color: #ffffff;
 }
 
 .fc-btn:active {
     transform: scale(0.96);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .fc-btn-remember {
-    color: #34c759;
-    background-color: #f2fcf5;
-    border: 1px solid rgba(52, 199, 89, 0.1);
-    box-shadow: 0 8px 20px rgba(52, 199, 89, 0.15);
+    background-color: #27ae60;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.25);
 }
 
 .fc-btn-remember:hover {
-    background-color: #e6faeb;
-    box-shadow: 0 12px 24px rgba(52, 199, 89, 0.2);
-    transform: translateY(-2px);
+    background-color: #219a52;
+    box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+    transform: translateY(-1px);
 }
 
 .fc-btn-forget {
-    color: #ff3b30;
-    background-color: #fff2f2;
-    border: 1px solid rgba(255, 59, 48, 0.1);
-    box-shadow: 0 8px 20px rgba(255, 59, 48, 0.15);
+    background-color: #e74c3c;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
 }
 
 .fc-btn-forget:hover {
-    background-color: #ffe6e6;
-    box-shadow: 0 12px 24px rgba(255, 59, 48, 0.2);
-    transform: translateY(-2px);
+    background-color: #c0392b;
+    box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
+    transform: translateY(-1px);
 }
 
 /* ---- Completion Block ---- */
