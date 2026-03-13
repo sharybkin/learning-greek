@@ -82,22 +82,6 @@
     margin-top: 20px;
 }
 
-.game-controls button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.game-controls button:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-}
-
 .game-settings {
     margin-bottom: 20px;
     padding: 15px;
@@ -363,41 +347,49 @@
 
 .fc-btn {
     border: none;
-    border-radius: 12px;
-    padding: 14px 32px;
-    font-size: 1.05rem;
+    border-radius: 18px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    min-width: 140px;
-}
-
-.fc-btn:hover {
-    transform: translateY(-2px);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    min-width: 150px;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    user-select: none;
+    touch-action: manipulation;
+    background-color: #ffffff;
 }
 
 .fc-btn:active {
-    transform: translateY(0);
+    transform: scale(0.96);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .fc-btn-remember {
-    background-color: #27ae60;
-    color: white;
-    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    color: #34c759;
+    background-color: #f2fcf5;
+    border: 1px solid rgba(52, 199, 89, 0.1);
+    box-shadow: 0 8px 20px rgba(52, 199, 89, 0.15);
 }
 
 .fc-btn-remember:hover {
-    background-color: #219a52;
+    background-color: #e6faeb;
+    box-shadow: 0 12px 24px rgba(52, 199, 89, 0.2);
+    transform: translateY(-2px);
 }
 
 .fc-btn-forget {
-    background-color: #e74c3c;
-    color: white;
-    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    color: #ff3b30;
+    background-color: #fff2f2;
+    border: 1px solid rgba(255, 59, 48, 0.1);
+    box-shadow: 0 8px 20px rgba(255, 59, 48, 0.15);
 }
 
 .fc-btn-forget:hover {
-    background-color: #c0392b;
+    background-color: #ffe6e6;
+    box-shadow: 0 12px 24px rgba(255, 59, 48, 0.2);
+    transform: translateY(-2px);
 }
 
 /* ---- Completion Block ---- */
