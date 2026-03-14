@@ -8,6 +8,7 @@ window.Game = (function () {
     let fcProgressText, fcProgressFill, fcComplete, fcResetBtn;
     let gameScene, gameControls;
     let mixSetting, mixWordsCheckbox, mixedBadge;
+    let settingsBtn, settingsModal, closeSettingsBtn;
 
     // State
     let currentWord = null;
@@ -52,6 +53,10 @@ window.Game = (function () {
         mixSetting = elements.mixSetting;
         mixWordsCheckbox = elements.mixWordsCheckbox;
         mixedBadge = elements.mixedBadge;
+
+        settingsBtn = document.getElementById('settingsBtn');
+        settingsModal = document.getElementById('settingsModal');
+        closeSettingsBtn = document.getElementById('closeSettingsBtn');
 
         allWords = buildAllWords();
         populateLessonFilter();
@@ -474,9 +479,9 @@ window.Game = (function () {
             const settingGroup = autoplayAudioCheckbox.closest('.setting-group');
             if (settingGroup) {
                 if (gameMode === 'audio') {
-                    settingGroup.style.visibility = 'visible';
+                    settingGroup.style.display = 'flex';
                 } else {
-                    settingGroup.style.visibility = 'hidden';
+                    settingGroup.style.display = 'none';
                 }
             }
         }
@@ -554,6 +559,25 @@ window.Game = (function () {
                 lessonFilterContainer.classList.remove('open');
             }
         });
+
+        // Settings Modal
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => {
+                settingsModal.classList.remove('hidden');
+            });
+        }
+        if (closeSettingsBtn) {
+            closeSettingsBtn.addEventListener('click', () => {
+                settingsModal.classList.add('hidden');
+            });
+        }
+        if (settingsModal) {
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) {
+                    settingsModal.classList.add('hidden');
+                }
+            });
+        }
     }
 
     function handleFilterChange(changedCheckbox) {
