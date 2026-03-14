@@ -160,10 +160,22 @@ window.Game = (function () {
         const allOption = createCheckboxOption('all', 'Все уроки', true);
         lessonFilterDropdown.appendChild(allOption);
 
-        LESSONS.forEach((lesson, index) => {
-            const option = createCheckboxOption(index, Sidebar.getDisplayTitle(lesson), true);
+        const sortedLessons = LESSONS.map((lesson, index) => ({
+            ...lesson, 
+            originalIndex: index,
+            mainLesson: Math.floor(lesson.lesson)
+        })).sort((a, b) => {
+            if (a.mainLesson !== b.mainLesson) {
+                return a.mainLesson - b.mainLesson;
+            }
+            return a.lesson - b.lesson; 
+        });
+
+        sortedLessons.forEach((lesson) => {
+            const option = createCheckboxOption(lesson.originalIndex, Sidebar.getDisplayTitle(lesson), true);
             lessonFilterDropdown.appendChild(option);
         });
+
         updateLessonFilterButtonText();
     }
 
