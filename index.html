@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изучение греческих слов</title>
-    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="css/base.css?v=1">
+    <link rel="stylesheet" href="css/sidebar.css?v=1">
+    <link rel="stylesheet" href="css/search.css?v=1">
+    <link rel="stylesheet" href="css/game.css?v=1">
+    <link rel="stylesheet" href="css/responsive.css?v=1">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
@@ -50,8 +54,8 @@
                     <div class="setting-group">
                         <div class="game-mode-selector">
                             <button class="game-mode-button active" data-mode="audio">Аудирование</button>
-                            <button class="game-mode-button" data-mode="ru-gr">Русский -> Греческий</button>
-                            <button class="game-mode-button" data-mode="gr-ru">Греческий -> Русский</button>
+                            <button class="game-mode-button" data-mode="ru-gr">Русский → Греческий</button>
+                            <button class="game-mode-button" data-mode="gr-ru">Греческий → Русский</button>
                         </div>
                     </div>
                     <div class="setting-group">
@@ -65,6 +69,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="setting-group" id="mixSetting">
+                        <div class="autoplay-setting">
+                            <input type="checkbox" id="mixWords" checked>
+                            <label for="mixWords">Подмешивать слова</label>
+                        </div>
+                    </div>
                     <div class="setting-group">
                         <div class="autoplay-setting">
                             <input type="checkbox" id="autoplayAudio" checked>
@@ -73,7 +83,15 @@
                     </div>
                 </div>
 
-                <div class="game-scene">
+                <div class="fc-progress" id="fcProgress">
+                    <div class="fc-progress-text" id="fcProgressText">Выучено: 0 / 0</div>
+                    <div class="fc-progress-bar">
+                        <div class="fc-progress-fill" id="fcProgressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="game-scene" id="gameScene">
+                    <div id="mixedBadge" class="mixed-badge hidden">★ Из других уроков</div>
                     <div class="game-card" id="gameCard">
                         <div class="card-face card-face-front">
                             <span class="speaker-icon" id="playAudioIcon">
@@ -91,15 +109,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="game-controls">
-                    <button id="nextWord">Следующее слово</button>
+
+                <div class="fc-complete hidden" id="fcComplete">
+                    <div class="fc-complete-text">Все слова пройдены!</div>
+                    <button class="fc-reset-btn" id="fcResetBtn">Сбросить прогресс</button>
+                </div>
+
+                <div class="game-controls" id="gameControls">
+                    <button class="fc-btn fc-btn-forget" id="btnForget">Не помню ✗</button>
+                    <button class="fc-btn fc-btn-remember" id="btnRemember">Помню ✓</button>
                 </div>
             </div>
         </div>
     </main>
 
     <script src="js/words/lessons.js?v=17"></script>
-    <script src="script.js?v=16"></script>
+    <script src="js/speech.js?v=1"></script>
+    <script src="js/sidebar.js?v=1"></script>
+    <script src="js/search.js?v=1"></script>
+    <script src="js/game.js?v=1"></script>
+    <script src="js/app.js?v=1"></script>
 </body>
 
 </html>

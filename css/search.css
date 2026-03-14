@@ -1,0 +1,85 @@
+.search-container {
+    margin-bottom: 30px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #3498db;
+}
+
+.words-container {
+    display: block;
+}
+
+.lesson-section {
+    margin-bottom: 30px;
+    scroll-margin-top: 80px;
+}
+
+.lesson-section h2 {
+    margin: 0 0 12px 0;
+    color: #34495e;
+    font-size: 1.1rem;
+}
+
+.lesson-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.word-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.word-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.greek {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.greek-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.speaker-icon {
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-left: 10px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.speaker-icon:hover {
+    opacity: 1;
+}
+
+.speaker-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.russian {
+    color: #7f8c8d;
+}
