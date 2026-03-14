@@ -142,7 +142,9 @@
 
 .custom-select-button {
     width: 100%;
-    padding: 10px 15px;
+    padding: 0 15px;
+    height: 44px;
+    box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #bdc3c7;
     border-radius: 8px;
@@ -483,7 +485,10 @@
     background: #fff;
     border: 1px solid #bdc3c7;
     border-radius: 8px;
-    padding: 8px 10px;
+    padding: 0;
+    height: 44px;
+    width: 44px;
+    box-sizing: border-box;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -587,4 +592,52 @@
         padding-top: 0; 
         /* On mobile, center completely to leave room for keyboard if ever added */
     }
+
+    .settings-btn {
+        min-width: 44px; /* Ensure button stays square on mobile */
+    }
+}
+
+/* ---- Settings Actions ---- */
+.settings-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.settings-action-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+    width: 100%;
+}
+
+.settings-action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.settings-action-btn:active {
+    transform: translateY(2px);
+}
+
+.btn-warning {
+    background-color: #f39c12;
+}
+
+.btn-warning:hover {
+    background-color: #d68910;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
 }

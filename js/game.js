@@ -9,6 +9,7 @@ window.Game = (function () {
     let gameScene, gameControls;
     let mixSetting, mixWordsCheckbox, mixedBadge;
     let settingsBtn, settingsModal, closeSettingsBtn;
+    let settingsResetCurrentBtn, settingsResetAllBtn;
 
     // State
     let currentWord = null;
@@ -57,6 +58,8 @@ window.Game = (function () {
         settingsBtn = document.getElementById('settingsBtn');
         settingsModal = document.getElementById('settingsModal');
         closeSettingsBtn = document.getElementById('closeSettingsBtn');
+        settingsResetCurrentBtn = document.getElementById('settingsResetCurrentBtn');
+        settingsResetAllBtn = document.getElementById('settingsResetAllBtn');
 
         allWords = buildAllWords();
         populateLessonFilter();
@@ -574,6 +577,34 @@ window.Game = (function () {
         if (settingsModal) {
             settingsModal.addEventListener('click', (e) => {
                 if (e.target === settingsModal) {
+                    settingsModal.classList.add('hidden');
+                }
+            });
+        }
+        
+        if (settingsResetCurrentBtn) {
+            settingsResetCurrentBtn.addEventListener('click', () => {
+                if (confirm('Уверены, что хотите сбросить прогресс текущего набора?')) {
+                    handleReset();
+                    settingsModal.classList.add('hidden');
+                }
+            });
+        }
+
+        if (settingsResetAllBtn) {
+            settingsResetAllBtn.addEventListener('click', () => {
+                if (confirm('Внимание! Вы собираетесь сбросить ВЕСЬ прогресс по ВСЕМ урокам.\nЭто действие нельзя отменить. Продолжить?')) {
+                    const keysToRemove = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key && key.startsWith('fc_')) {
+                            if (key !== 'fc_last_lesson') {
+                                keysToRemove.push(key);
+                            }
+                        }
+                    }
+                    keysToRemove.forEach(k => localStorage.removeItem(k));
+                    startSession();
                     settingsModal.classList.add('hidden');
                 }
             });
