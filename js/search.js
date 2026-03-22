@@ -15,6 +15,7 @@ window.Search = (function () {
             .replace(/[\u0300-\u036f]/g, "")
             .toLowerCase()
             .replace(/ё/g, "е")     // Map Russian yo to ye
+            .replace(/ς/g, "σ")     // Map final sigma to regular sigma
             .replace(/ει|οι/g, "ι") // Map digraphs to iota
             .replace(/αι/g, "ε")    // Map alpha-iota to epsilon
             .replace(/[ηυ]/g, "ι")  // Map eta and upsilon to iota
