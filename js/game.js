@@ -373,6 +373,7 @@ window.Game = (function () {
 
         // Build queue from unlearned + mixed
         wordQueue = [...unlearnedWords, ...mixedWords];
+        wordQueue.reverse(); // Reverse so pop() returns words in forward order
         if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
             shuffleArray(wordQueue);
         }
