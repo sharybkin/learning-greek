@@ -8,6 +8,7 @@ window.Game = (function () {
     let fcProgressText, fcProgressFill, fcComplete, fcResetBtn;
     let gameScene, gameControls;
     let mixSetting, mixWordsCheckbox, mixedBadge;
+    let shuffleWordsCheckbox;
     let settingsBtn, settingsModal, closeSettingsBtn;
     let settingsResetCurrentBtn, settingsResetAllBtn;
 
@@ -54,6 +55,7 @@ window.Game = (function () {
         mixSetting = elements.mixSetting;
         mixWordsCheckbox = elements.mixWordsCheckbox;
         mixedBadge = elements.mixedBadge;
+        shuffleWordsCheckbox = document.getElementById('shuffleWords');
 
         settingsBtn = document.getElementById('settingsBtn');
         settingsModal = document.getElementById('settingsModal');
@@ -64,6 +66,8 @@ window.Game = (function () {
         allWords = buildAllWords();
         populateLessonFilter();
         setupEventListeners();
+        restoreSettings();
+        restoreGameMode();
         restoreLastLesson();
     }
 
@@ -89,6 +93,48 @@ window.Game = (function () {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+    }
+
+    // ---- Settings & mode persistence ----
+
+    function saveGameMode() {
+        localStorage.setItem('fc_game_mode', currentGameMode);
+    }
+
+    function restoreGameMode() {
+        const saved = localStorage.getItem('fc_game_mode');
+        if (!saved) return;
+        currentGameMode = saved;
+        document.querySelectorAll('.game-mode-button').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === saved);
+        });
+        updateAutoplayVisibility(saved);
+    }
+
+    function saveSettings() {
+        const settings = {
+            shuffleWords: shuffleWordsCheckbox ? shuffleWordsCheckbox.checked : false,
+            mixWords: mixWordsCheckbox ? mixWordsCheckbox.checked : true,
+            autoplayAudio: autoplayAudioCheckbox ? autoplayAudioCheckbox.checked : true
+        };
+        localStorage.setItem('fc_settings', JSON.stringify(settings));
+    }
+
+    function restoreSettings() {
+        try {
+            const data = localStorage.getItem('fc_settings');
+            if (!data) return;
+            const settings = JSON.parse(data);
+            if (shuffleWordsCheckbox && settings.shuffleWords !== undefined) {
+                shuffleWordsCheckbox.checked = settings.shuffleWords;
+            }
+            if (mixWordsCheckbox && settings.mixWords !== undefined) {
+                mixWordsCheckbox.checked = settings.mixWords;
+            }
+            if (autoplayAudioCheckbox && settings.autoplayAudio !== undefined) {
+                autoplayAudioCheckbox.checked = settings.autoplayAudio;
+            }
+        } catch { /* ignore */ }
     }
 
     // ---- localStorage helpers ----
@@ -140,17 +186,26 @@ window.Game = (function () {
 
             // Uncheck all, then check the saved ones
             const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
-            const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+            const leafCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"]):not([value^="main-"])');
+            const mainHeaders = lessonFilterDropdown.querySelectorAll('input[value^="main-"]');
 
             allCheckbox.checked = false;
-            checkboxes.forEach(cb => {
+            leafCheckboxes.forEach(cb => {
                 cb.checked = indices.includes(parseInt(cb.value));
+            });
+
+            // Sync main-lesson group headers
+            mainHeaders.forEach(mainCb => {
+                const mainLesson = mainCb.dataset.mainLesson;
+                const subOptions = lessonFilterDropdown.querySelectorAll(`.custom-select-sub-option[data-main-lesson="${mainLesson}"] input[type="checkbox"]`);
+                mainCb.checked = subOptions.length > 0 && Array.from(subOptions).every(cb => cb.checked);
             });
 
             // Check if all are selected → check "all"
             if (indices.length >= LESSONS.length) {
                 allCheckbox.checked = true;
-                checkboxes.forEach(cb => cb.checked = true);
+                leafCheckboxes.forEach(cb => cb.checked = true);
+                mainHeaders.forEach(cb => cb.checked = true);
             }
 
             updateLessonFilterButtonText();
@@ -168,20 +223,47 @@ window.Game = (function () {
         const allOption = createCheckboxOption('all', 'Все уроки', true);
         lessonFilterDropdown.appendChild(allOption);
 
-        const sortedLessons = LESSONS.map((lesson, index) => ({
-            ...lesson, 
-            originalIndex: index,
-            mainLesson: Math.floor(lesson.lesson)
-        })).sort((a, b) => {
-            if (a.mainLesson !== b.mainLesson) {
-                return a.mainLesson - b.mainLesson;
-            }
-            return a.lesson - b.lesson; 
+        // Group lessons by main lesson number
+        const grouped = {};
+        LESSONS.forEach((lesson, index) => {
+            const mainLesson = Math.floor(lesson.lesson);
+            if (!grouped[mainLesson]) grouped[mainLesson] = [];
+            grouped[mainLesson].push({ ...lesson, originalIndex: index });
         });
 
-        sortedLessons.forEach((lesson) => {
-            const option = createCheckboxOption(lesson.originalIndex, Sidebar.getDisplayTitle(lesson), true);
-            lessonFilterDropdown.appendChild(option);
+        Object.keys(grouped).sort((a, b) => a - b).forEach(mainLesson => {
+            const subLessons = grouped[mainLesson].sort((a, b) => a.lesson - b.lesson);
+            const hasMultiple = subLessons.length > 1;
+
+            if (hasMultiple) {
+                // Add group header with "whole lesson" checkbox
+                const isSpecial = parseInt(mainLesson) >= 900;
+                const headerLabel = isSpecial
+                    ? subLessons[0].title
+                    : `Урок ${mainLesson}`;
+                const groupHeader = createCheckboxOption(
+                    `main-${mainLesson}`,
+                    headerLabel,
+                    true
+                );
+                groupHeader.classList.add('custom-select-group-header');
+                const cb = groupHeader.querySelector('input');
+                cb.dataset.mainLesson = mainLesson;
+                lessonFilterDropdown.appendChild(groupHeader);
+            }
+
+            subLessons.forEach((lesson) => {
+                const option = createCheckboxOption(
+                    lesson.originalIndex,
+                    Sidebar.getDisplayTitle(lesson),
+                    true
+                );
+                if (hasMultiple) {
+                    option.classList.add('custom-select-sub-option');
+                    option.dataset.mainLesson = mainLesson;
+                }
+                lessonFilterDropdown.appendChild(option);
+            });
         });
 
         updateLessonFilterButtonText();
@@ -207,34 +289,46 @@ window.Game = (function () {
     }
 
     function updateLessonFilterButtonText() {
-        const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
         const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
+        // Only count leaf checkboxes (not "all", not "main-*" group headers)
+        const leafCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"]):not([value^="main-"])');
+        const checkedLeaf = Array.from(leafCheckboxes).filter(cb => cb.checked);
 
-        if (allCheckbox.checked || checkboxes.length === 0 || checkboxes.length === LESSONS.length + 1) {
+        if (allCheckbox.checked || checkedLeaf.length === 0 || checkedLeaf.length === leafCheckboxes.length) {
             lessonFilterValue.textContent = 'Все уроки';
             return;
         }
 
-        if (checkboxes.length === 1) {
-            const id = checkboxes[0].id.replace('lesson-', '');
+        if (checkedLeaf.length === 1) {
+            const id = checkedLeaf[0].value;
             const lesson = LESSONS.find((l, i) => i == id);
             if (lesson) {
                 lessonFilterValue.textContent = Sidebar.getDisplayTitle(lesson);
             }
         } else {
-            lessonFilterValue.textContent = `Выбрано: ${checkboxes.length}`;
+            // Check if a whole main lesson is selected (all its sub-lessons)
+            const mainLessonHeaders = lessonFilterDropdown.querySelectorAll('input[value^="main-"]:checked');
+            if (mainLessonHeaders.length === 1) {
+                const header = mainLessonHeaders[0];
+                const label = lessonFilterDropdown.querySelector(`label[for="lesson-${header.value}"]`);
+                lessonFilterValue.textContent = label ? label.textContent : `📚 Урок ${header.dataset.mainLesson}`;
+            } else {
+                lessonFilterValue.textContent = `Выбрано: ${checkedLeaf.length}`;
+            }
         }
     }
 
     function getSelectedLessonIndices() {
         const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
-        const selectedCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:checked');
+        // Only consider leaf checkboxes (not group headers)
+        const leafCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"]):not([value^="main-"])');
+        const selectedLeaf = Array.from(leafCheckboxes).filter(cb => cb.checked);
 
-        if (allCheckbox.checked || selectedCheckboxes.length === 0) {
+        if (allCheckbox.checked || selectedLeaf.length === 0) {
             return LESSONS.map((_, i) => i);
         }
 
-        return Array.from(selectedCheckboxes)
+        return selectedLeaf
             .map(cb => parseInt(cb.value))
             .filter(v => !isNaN(v));
     }
@@ -279,7 +373,9 @@ window.Game = (function () {
 
         // Build queue from unlearned + mixed
         wordQueue = [...unlearnedWords, ...mixedWords];
-        shuffleArray(wordQueue);
+        if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
+            shuffleArray(wordQueue);
+        }
 
         updateProgress();
 
@@ -520,6 +616,7 @@ window.Game = (function () {
                 button.classList.add('active');
                 currentGameMode = button.dataset.mode;
                 updateAutoplayVisibility(currentGameMode);
+                saveGameMode();
                 startSession();
             });
         });
@@ -527,7 +624,23 @@ window.Game = (function () {
         // Mix words checkbox
         if (mixWordsCheckbox) {
             mixWordsCheckbox.addEventListener('change', () => {
+                saveSettings();
                 startSession();
+            });
+        }
+
+        // Shuffle words checkbox
+        if (shuffleWordsCheckbox) {
+            shuffleWordsCheckbox.addEventListener('change', () => {
+                saveSettings();
+                startSession();
+            });
+        }
+
+        // Autoplay audio checkbox
+        if (autoplayAudioCheckbox) {
+            autoplayAudioCheckbox.addEventListener('change', () => {
+                saveSettings();
             });
         }
 
@@ -546,6 +659,13 @@ window.Game = (function () {
 
                 const checkbox = option.querySelector('input[type="checkbox"]');
                 if (!checkbox) return;
+
+                // If clicked on label, prevent the browser from firing a second
+                // synthetic click on the checkbox (which would double-toggle it).
+                // We'll toggle it manually below instead.
+                if (e.target.tagName === 'LABEL') {
+                    e.preventDefault();
+                }
 
                 if (e.target !== checkbox) {
                     checkbox.checked = !checkbox.checked;
@@ -613,12 +733,34 @@ window.Game = (function () {
 
     function handleFilterChange(changedCheckbox) {
         const allCheckbox = lessonFilterDropdown.querySelector('input[value="all"]');
-        const checkboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+        const allSubCheckboxes = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"])');
+        const mainLessonCheckboxes = lessonFilterDropdown.querySelectorAll('input[data-main-lesson]');
 
         if (changedCheckbox.value === 'all') {
-            checkboxes.forEach(cb => cb.checked = allCheckbox.checked);
+            // Toggle everything
+            allSubCheckboxes.forEach(cb => cb.checked = allCheckbox.checked);
+        } else if (changedCheckbox.dataset.mainLesson && changedCheckbox.value.startsWith('main-')) {
+            // Clicked a "whole lesson" group header
+            const mainLesson = changedCheckbox.dataset.mainLesson;
+            const subOptions = lessonFilterDropdown.querySelectorAll(`.custom-select-sub-option[data-main-lesson="${mainLesson}"] input[type="checkbox"]`);
+            subOptions.forEach(cb => cb.checked = changedCheckbox.checked);
+            // Update global "all" state
+            const leafCbs = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"]):not([value^="main-"])');
+            allCheckbox.checked = Array.from(leafCbs).every(cb => cb.checked);
         } else {
-            allCheckbox.checked = Array.from(checkboxes).every(cb => cb.checked);
+            // Clicked a sub-lesson: sync group header
+            const parentMainLesson = changedCheckbox.closest('.custom-select-sub-option')?.dataset.mainLesson;
+            if (parentMainLesson) {
+                const groupHeaderCb = lessonFilterDropdown.querySelector(`input[value="main-${parentMainLesson}"]`);
+                if (groupHeaderCb) {
+                    const subOptions = lessonFilterDropdown.querySelectorAll(`.custom-select-sub-option[data-main-lesson="${parentMainLesson}"] input[type="checkbox"]`);
+                    const allSubChecked = Array.from(subOptions).every(cb => cb.checked);
+                    groupHeaderCb.checked = allSubChecked;
+                }
+            }
+            // Update global "all" state
+            const leafCbs = lessonFilterDropdown.querySelectorAll('input[type="checkbox"]:not([value="all"]):not([value^="main-"])');
+            allCheckbox.checked = Array.from(leafCbs).every(cb => cb.checked);
         }
 
         updateLessonFilterButtonText();

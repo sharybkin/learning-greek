@@ -198,6 +198,27 @@
     margin-right: 10px;
 }
 
+.custom-select-group-header {
+    background-color: #f0f4f8;
+    border-top: 1px solid #dfe6e9;
+    border-left: 3px solid #95a5a6;
+    font-weight: 700;
+    color: #2c3e50;
+    padding: 8px 15px 8px 12px;
+}
+
+.custom-select-group-header:first-child {
+    border-top: none;
+}
+
+.custom-select-group-header:hover {
+    background-color: #dde8f0;
+}
+
+.custom-select-sub-option {
+    padding-left: 28px;
+}
+
 .game-word-front {
     font-size: clamp(1.2rem, 5vw, 2.2rem);
     font-weight: bold;
@@ -477,6 +498,39 @@
 }
 
 #mixWords:checked::before {
+    transform: translateX(22px);
+}
+
+#shuffleWords {
+    position: relative;
+    width: 50px;
+    height: 28px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #bdc3c7;
+    outline: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#shuffleWords::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+#shuffleWords:checked {
+    background-color: #3498db;
+}
+
+#shuffleWords:checked::before {
     transform: translateX(22px);
 }
 
