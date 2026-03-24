@@ -1222,3 +1222,36 @@ window.LESSONS.push({
         { greek: 'βεβαίως', russian: 'конечно' }
     ]
 });
+
+window.LESSONS.push({
+    lesson: 8.4,
+    title: 'После главы',
+    words: [
+        { greek: 'σύγχρονος', russian: 'современный' },
+        { greek: 'το κείμενο', russian: 'текст' },
+        { greek: 'άπαχος', russian: 'нежирный, низкокалорийный' },
+        { greek: 'το θέμα', russian: 'тема, вопрос' },
+        { greek: 'το κανάλι', russian: 'канал' },
+        { greek: 'νοιώθω', russian: 'чувствовать' },
+        { greek: 'η χαρά', russian: 'радость' },
+        { greek: 'ξανά', russian: 'снова' },
+        { greek: 'το κομμάτι', russian: 'кусок, штука' },
+        { greek: 'η γκαλερί // η πινακοθήκη', russian: 'галерея' },
+        { greek: 'η Πρωτοχρονιά', russian: 'Новый год' },
+        { greek: 'παράξενος', russian: 'странный' },
+        { greek: 'βραδινός', russian: 'вечерний' },
+        { greek: 'μεταφράζω', russian: 'переводить' },
+        { greek: 'γνωστός', russian: 'известный' },
+        { greek: 'κάνω δώρο', russian: 'дарить' },
+        { greek: 'το κολέγιο', russian: 'колледж' },
+        { greek: 'η υπηκοότητα', russian: 'гражданство' },
+        { greek: 'η σύνταξη', russian: 'пенсия' },
+        { greek: 'το στόμα', russian: 'рот' },
+        { greek: 'η μύτη', russian: 'нос' },
+        { greek: 'το μάτι', russian: 'глаз' },
+        { greek: 'το συμβόλαιο', russian: 'контракт' },
+        { greek: 'η πρωτεύουσα', russian: 'столица' },
+        { greek: 'το σεμινάριο', russian: 'семинар' },
+        { greek: 'το δέντρο', russian: 'дерево' }
+    ]
+});
