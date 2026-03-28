@@ -22,5 +22,7 @@ jobs:
           script: |
             cd greek/learning-greek/
             docker compose down -v
+            git fetch --all
+            git reset --hard origin/main
             git pull
             docker compose up -d --build
