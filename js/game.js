@@ -18,6 +18,8 @@ window.Game = (function () {
     let wordQueue = [];      // current queue of words to study
     let totalWordsCount = 0; // total words for current session
     let learnedCount = 0;    // words learned in current session
+    let mixPool = [];         // pool of mixed words to insert at intervals
+    let lessonWordsSinceLastMix = 0; // counter for interval-based mixing
 
     let currentGameMode = 'audio';   // 'audio', 'ru-gr', 'gr-ru'
 
@@ -339,6 +341,10 @@ window.Game = (function () {
         const learnedSet = getLearnedSet();
         const studyType = getCurrentStudyType();
 
+        // Reset mix pool
+        mixPool = [];
+        lessonWordsSinceLastMix = 0;
+
         // Handle mix settings visibility
         if (mixSetting) {
             if (studyType === 'lesson') {
@@ -362,17 +368,16 @@ window.Game = (function () {
         // Filter out already learned words
         const unlearnedWords = sessionWords.filter(w => !learnedSet.has(w.id));
 
-        // Word mixing (only in lesson mode)
-        let mixedWords = [];
+        // Word mixing: store in pool for interval-based insertion (only in lesson mode)
         if (studyType === 'lesson' && mixWordsCheckbox && mixWordsCheckbox.checked) {
-            mixedWords = getMixWords(sessionWords);
+            mixPool = getMixWords(sessionWords);
         }
 
         totalWordsCount = sessionWords.length;
         learnedCount = sessionWords.length - unlearnedWords.length;
 
-        // Build queue from unlearned + mixed
-        wordQueue = [...unlearnedWords, ...mixedWords];
+        // Build queue from unlearned words only (mixed words come from mixPool at intervals)
+        wordQueue = [...unlearnedWords];
         wordQueue.reverse(); // Reverse so pop() returns words in forward order
         if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
             shuffleArray(wordQueue);
@@ -425,8 +430,15 @@ window.Game = (function () {
     function handleRemember() {
         if (!currentWord) return;
 
+        // Mix counter: count every user response
+        lessonWordsSinceLastMix++;
+        if (lessonWordsSinceLastMix >= 5 && mixPool.length > 0) {
+            wordQueue.push(mixPool.pop());
+            lessonWordsSinceLastMix = 0;
+        }
+
         if (!currentWord.isMixed) {
-            // Mark as learned for the current session
+            // Mark as learned
             const learnedSet = getLearnedSet();
             learnedSet.add(currentWord.id);
             saveLearnedSet(learnedSet);
@@ -450,9 +462,19 @@ window.Game = (function () {
     function handleForget() {
         if (!currentWord) return;
 
-        // Put word back in queue
-        wordQueue.unshift(currentWord);
+        // Mix counter: count every user response
+        lessonWordsSinceLastMix++;
+        if (lessonWordsSinceLastMix >= 5 && mixPool.length > 0) {
+            wordQueue.push(mixPool.pop());
+            lessonWordsSinceLastMix = 0;
+        }
 
+        // Mixed words: don't return to queue — just skip to next
+        if (!currentWord.isMixed) {
+            wordQueue.unshift(currentWord);
+        }
+
+        updateProgress();
         advanceToNext();
     }
 
@@ -460,6 +482,10 @@ window.Game = (function () {
         if (totalWordsCount > 0 && learnedCount >= totalWordsCount) {
             showComplete();
             return;
+        }
+        // If lesson words are exhausted but mixPool still has words, drain them
+        if (wordQueue.length === 0 && mixPool.length > 0) {
+            wordQueue.push(mixPool.pop());
         }
         if (wordQueue.length === 0) {
             showComplete();
