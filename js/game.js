@@ -5,7 +5,7 @@ window.Game = (function () {
     let playAudioIcon, autoplayAudioCheckbox;
     let lessonFilterContainer, lessonFilterButton, lessonFilterValue, lessonFilterDropdown;
     let btnRemember, btnForget;
-    let fcProgressText, fcProgressFill, fcComplete, fcResetBtn;
+    let fcProgressText, fcProgressFill, fcProgressFillBlue, fcComplete, fcResetBtn;
     let gameScene, gameControls;
     let mixSetting, mixWordsCheckbox, mixedBadge;
     let shuffleWordsCheckbox;
@@ -18,8 +18,11 @@ window.Game = (function () {
     let wordQueue = [];      // current queue of words to study
     let totalWordsCount = 0; // total words for current session
     let learnedCount = 0;    // words learned in current session
+    let seenUnlearnedWords = new Set(); // words seen but not yet learned in current session
+    let wordsRemainingInCycle = 0; // count of non-mixed words left before the current cycle restarts
     let mixPool = [];         // pool of mixed words to insert at intervals
     let lessonWordsSinceLastMix = 0; // counter for interval-based mixing
+    let isTransitioning = false; // block rapid clicks during animations
 
     let currentGameMode = 'audio';   // 'audio', 'ru-gr', 'gr-ru'
 
@@ -50,6 +53,7 @@ window.Game = (function () {
         btnForget = elements.btnForget;
         fcProgressText = elements.fcProgressText;
         fcProgressFill = elements.fcProgressFill;
+        fcProgressFillBlue = elements.fcProgressFillBlue;
         fcComplete = elements.fcComplete;
         fcResetBtn = elements.fcResetBtn;
         gameScene = elements.gameScene;
@@ -344,6 +348,7 @@ window.Game = (function () {
         // Reset mix pool
         mixPool = [];
         lessonWordsSinceLastMix = 0;
+        seenUnlearnedWords.clear();
 
         // Handle mix settings visibility
         if (mixSetting) {
@@ -382,6 +387,9 @@ window.Game = (function () {
         if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
             shuffleArray(wordQueue);
         }
+
+        wordsRemainingInCycle = wordQueue.length;
+        isTransitioning = false;
 
         updateProgress();
 
@@ -428,7 +436,8 @@ window.Game = (function () {
     }
 
     function handleRemember() {
-        if (!currentWord) return;
+        if (!currentWord || isTransitioning) return;
+        isTransitioning = true;
 
         // Mix counter: count every user response
         lessonWordsSinceLastMix++;
@@ -443,6 +452,7 @@ window.Game = (function () {
             learnedSet.add(currentWord.id);
             saveLearnedSet(learnedSet);
             learnedCount++;
+            seenUnlearnedWords.delete(currentWord.id);
         } else {
             // If it's a mixed word from review mode, record the progress there
             const reviewKey = `fc_${currentGameMode}_review`;
@@ -460,7 +470,8 @@ window.Game = (function () {
     }
 
     function handleForget() {
-        if (!currentWord) return;
+        if (!currentWord || isTransitioning) return;
+        isTransitioning = true;
 
         // Mix counter: count every user response
         lessonWordsSinceLastMix++;
@@ -471,6 +482,7 @@ window.Game = (function () {
 
         // Mixed words: don't return to queue — just skip to next
         if (!currentWord.isMixed) {
+            seenUnlearnedWords.add(currentWord.id);
             wordQueue.unshift(currentWord);
         }
 
@@ -517,6 +529,7 @@ window.Game = (function () {
                 gameCard.classList.add('intro-animation');
                 gameCard.addEventListener('animationend', () => {
                     gameCard.classList.remove('intro-animation');
+                    isTransitioning = false;
                 }, { once: true });
             }, { once: true });
         } else {
@@ -524,17 +537,28 @@ window.Game = (function () {
             gameCard.classList.add('intro-animation');
             gameCard.addEventListener('animationend', () => {
                 gameCard.classList.remove('intro-animation');
+                isTransitioning = false;
             }, { once: true });
         }
     }
 
     function loadNewWord(isNext = true) {
+        if (wordsRemainingInCycle <= 0 && wordQueue.length > 0) {
+            seenUnlearnedWords.clear();
+            wordsRemainingInCycle = wordQueue.filter(w => !w.isMixed).length;
+            updateProgress();
+        }
+
         currentWord = wordQueue.pop();
 
         if (currentWord && currentWord.isMixed) {
             if (mixedBadge) mixedBadge.classList.remove('hidden');
         } else {
             if (mixedBadge) mixedBadge.classList.add('hidden');
+        }
+
+        if (currentWord && !currentWord.isMixed) {
+            wordsRemainingInCycle--;
         }
 
         if (!currentWord) {
@@ -576,8 +600,12 @@ window.Game = (function () {
 
     function updateProgress() {
         const percent = totalWordsCount > 0 ? Math.round((learnedCount / totalWordsCount) * 100) : 0;
+        const blueCount = learnedCount + seenUnlearnedWords.size;
+        const bluePercent = totalWordsCount > 0 ? Math.round((blueCount / totalWordsCount) * 100) : 0;
+        
         fcProgressText.textContent = `Выучено: ${learnedCount} / ${totalWordsCount}`;
         fcProgressFill.style.width = `${percent}%`;
+        if (fcProgressFillBlue) fcProgressFillBlue.style.width = `${bluePercent}%`;
     }
 
     function showComplete() {

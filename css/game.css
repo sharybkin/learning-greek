@@ -11,7 +11,7 @@
     width: 100%;
     height: 100%;
     position: relative;
-    transition: transform 0.6s, box-shadow 0.3s;
+    transition: transform 0.4s, box-shadow 0.3s;
     transform-style: preserve-3d;
     cursor: pointer;
 }
@@ -239,7 +239,7 @@
 }
 
 .intro-animation {
-    animation: show 0.5s ease-in-out;
+    animation: show 0.3s ease-in-out;
 }
 
 @keyframes hide {
@@ -255,7 +255,7 @@
 }
 
 .hide-animation {
-    animation: hide 0.5s ease-in-out;
+    animation: hide 0.3s ease-in-out;
 }
 
 .autoplay-setting {
@@ -348,17 +348,33 @@
 }
 
 .fc-progress-bar {
+    position: relative;
     height: 8px;
     background-color: #dfe6e9;
     border-radius: 4px;
     overflow: hidden;
 }
 
+.fc-progress-fill-blue {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    z-index: 1;
+}
+
 .fc-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     background: linear-gradient(90deg, #27ae60, #2ecc71);
     border-radius: 4px;
     transition: width 0.4s ease;
+    z-index: 2;
 }
 
 /* ---- Remember / Forget Buttons ---- */

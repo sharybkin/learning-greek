@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnForget: document.getElementById('btnForget'),
         fcProgressText: document.getElementById('fcProgressText'),
         fcProgressFill: document.getElementById('fcProgressFill'),
+        fcProgressFillBlue: document.getElementById('fcProgressFillBlue'),
         fcComplete: document.getElementById('fcComplete'),
         fcResetBtn: document.getElementById('fcResetBtn'),
         gameScene: document.getElementById('gameScene'),
