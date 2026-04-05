@@ -1258,7 +1258,7 @@ window.LESSONS.push({
 
 window.LESSONS.push({
     lesson: 9.1,
-    title: 'Часть 1',
+    title: 'Покупки',
     words: [
         { greek: 'το χρώμα', russian: 'цвет' },
         { greek: 'η σύνδεση', russian: 'подключение, соединение' },
@@ -1298,7 +1298,14 @@ window.LESSONS.push({
         { greek: 'ένα λεπτάκι', russian: 'минуточку' },
         { greek: 'με γεια σας', russian: 'носите на здоровье' },
         { greek: 'έχεις δίκαιο', russian: 'ты прав' },
-        { greek: 'μετρητά', russian: 'наличными, наличные' },
+        { greek: 'μετρητά', russian: 'наличными, наличные' }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 9.2,
+    title: 'Глаголы',
+    words: [
         { greek: 'εργάζομαι', russian: 'работать' },
         { greek: 'ονομάζομαι', russian: 'называться' },
         { greek: 'χρειάζομαι', russian: 'нуждаться' },
@@ -1314,7 +1321,7 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
-    lesson: 9.2,
+    lesson: 9.3,
     title: 'Ρούχα (Одежда)',
     words: [
         { greek: 'η γραβάτα', russian: 'галстук' },
@@ -1367,7 +1374,7 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
-    lesson: 9.3,
+    lesson: 9.4,
     title: 'Χρώματα (Цвета)',
     words: [
         { greek: 'κίτρινος', russian: 'жёлтый' },
@@ -1384,7 +1391,7 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
-    lesson: 9.4,
+    lesson: 9.5,
     title: 'Дополнительные слова',
     words: [
         { greek: 'ελάτε μαζί μου', russian: 'пойдёмте со мной' },
