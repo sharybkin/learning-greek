@@ -9,6 +9,18 @@
 
     .custom-select-wrapper {
         width: 100%;
+        min-width: 0;
+        flex: 1;
+    }
+
+    /* Make the filter+settings row full width and prevent overflow */
+    .setting-group:has(.custom-select-wrapper) {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    .settings-btn {
+        flex-shrink: 0;
     }
 
     .study-type-selector {
