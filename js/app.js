@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameTranslation: document.getElementById('gameTranslation'),
         gameWordFront: document.getElementById('gameWordFront'),
         playAudioIcon: document.getElementById('playAudioIcon'),
+        playAudioIconBack: document.getElementById('playAudioIconBack'),
         autoplayAudioCheckbox: document.getElementById('autoplayAudio'),
         lessonFilterContainer: document.getElementById('lessonFilterContainer'),
         lessonFilterButton: document.getElementById('lessonFilterButton'),

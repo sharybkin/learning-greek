@@ -2,7 +2,7 @@
 window.Game = (function () {
     // DOM elements
     let gameCard, gameWord, gameTranslation, gameWordFront;
-    let playAudioIcon, autoplayAudioCheckbox;
+    let playAudioIcon, playAudioIconBack, autoplayAudioCheckbox;
     let lessonFilterContainer, lessonFilterButton, lessonFilterValue, lessonFilterDropdown;
     let btnRemember, btnForget;
     let fcProgressText, fcProgressFill, fcProgressFillBlue, fcComplete, fcResetBtn;
@@ -44,6 +44,7 @@ window.Game = (function () {
         gameTranslation = elements.gameTranslation;
         gameWordFront = elements.gameWordFront;
         playAudioIcon = elements.playAudioIcon;
+        playAudioIconBack = elements.playAudioIconBack;
         autoplayAudioCheckbox = elements.autoplayAudioCheckbox;
         lessonFilterContainer = elements.lessonFilterContainer;
         lessonFilterButton = elements.lessonFilterButton;
@@ -566,10 +567,10 @@ window.Game = (function () {
             gameTranslation.textContent = '';
             gameWordFront.textContent = '';
             playAudioIcon.classList.add('hidden');
+            if (playAudioIconBack) playAudioIconBack.classList.add('hidden');
             return;
         }
 
-        playAudioIcon.classList.remove('hidden');
         gameWord.textContent = '';
         gameTranslation.textContent = '';
         gameWordFront.textContent = '';
@@ -578,6 +579,8 @@ window.Game = (function () {
 
         if (mode === 'audio') {
             playAudioIcon.classList.remove('hidden');
+            playAudioIcon.classList.remove('speaker-corner');
+            if (playAudioIconBack) playAudioIconBack.classList.add('hidden');
             gameWord.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
 
@@ -585,13 +588,17 @@ window.Game = (function () {
                 setTimeout(() => Speech.speak(currentWord.greek), 100);
             }
         } else if (mode === 'ru-gr') {
+            playAudioIcon.classList.add('hidden');
+            playAudioIcon.classList.remove('speaker-corner');
+            if (playAudioIconBack) playAudioIconBack.classList.remove('hidden');
             gameWordFront.textContent = currentWord.russian;
             gameWord.textContent = currentWord.greek;
-            playAudioIcon.classList.add('hidden');
         } else if (mode === 'gr-ru') {
+            playAudioIcon.classList.remove('hidden');
+            playAudioIcon.classList.add('speaker-corner');
+            if (playAudioIconBack) playAudioIconBack.classList.add('hidden');
             gameWordFront.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
-            playAudioIcon.classList.add('hidden');
         }
         gameCard.classList.remove('is-flipped');
     }
@@ -651,8 +658,14 @@ window.Game = (function () {
         // Card flip
         if (gameCard) gameCard.addEventListener('click', flipCard);
 
-        // Audio play
+        // Audio play (front face — audio mode)
         if (playAudioIcon) playAudioIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentWord) Speech.speak(currentWord.greek);
+        });
+
+        // Audio play (back face — ru-gr / gr-ru modes)
+        if (playAudioIconBack) playAudioIconBack.addEventListener('click', (e) => {
             e.stopPropagation();
             if (currentWord) Speech.speak(currentWord.greek);
         });

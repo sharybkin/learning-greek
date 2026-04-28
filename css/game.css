@@ -51,6 +51,54 @@
     fill: #2c3e50;
 }
 
+.card-face-back .speaker-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.card-face-back .speaker-icon:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.card-face-back .speaker-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: #2c3e50;
+}
+
+/* Front face speaker icon in corner (gr-ru mode) */
+.speaker-icon.speaker-corner {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.speaker-icon.speaker-corner:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.speaker-icon.speaker-corner svg {
+    width: 28px !important;
+    height: 28px !important;
+}
+
 .card-face-back {
     background-color: #f8f9fa;
     transform: rotateY(180deg);
