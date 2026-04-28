@@ -61,7 +61,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
 }
 
 .card-face-back .speaker-icon:hover {
@@ -86,7 +85,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
 }
 
 .speaker-icon.speaker-corner:hover {
