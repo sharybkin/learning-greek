@@ -50,8 +50,8 @@ window.Speech = (function () {
 
             // Speak the actual text after priming
             primer.onend = () => {
-                // Remove verb type annotations (1) or (2) before pronunciation
-                const cleanText = text.replace(/\s*\([12]\)\s*/g, '').trim();
+                // Remove verb type annotations like (1), (2), (2.1) before pronunciation
+                const cleanText = text.replace(/\s*\([\d.]+\)\s*/g, '').trim();
                 const utterance = new SpeechSynthesisUtterance(cleanText);
                 utterance.lang = 'el-GR';
                 if (voice) {
