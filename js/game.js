@@ -685,6 +685,11 @@ window.Game = (function () {
                 currentGameMode = button.dataset.mode;
                 updateAutoplayVisibility(currentGameMode);
                 saveGameMode();
+                if (currentGameMode === 'audio') {
+                    Speech.startKeepAlive();
+                } else {
+                    Speech.stopKeepAlive();
+                }
                 startSession();
             });
         });

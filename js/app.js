@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
             modeSelfCheckBtn.classList.add('active');
             const currentMode = document.querySelector('.game-mode-button.active').dataset.mode;
             Game.updateAutoplayVisibility(currentMode);
-            Speech.startKeepAlive();
+            if (currentMode === 'audio') {
+                Speech.startKeepAlive();
+            } else {
+                Speech.stopKeepAlive();
+            }
             Game.startSelfCheck();
             gameCard.classList.add('intro-animation');
             gameCard.addEventListener('animationend', () => {
