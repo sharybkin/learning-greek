@@ -8,6 +8,7 @@ window.Game = (function () {
     let fcProgressText, fcProgressFill, fcProgressFillBlue, fcComplete, fcResetBtn;
     let gameScene, gameControls;
     let mixSetting, mixWordsCheckbox, mixedBadge;
+    let examBadgeFront, examBadgeBack, popularBadgeFront, popularBadgeBack;
     let shuffleWordsCheckbox;
     let settingsBtn, settingsModal, closeSettingsBtn;
     let settingsResetCurrentBtn, settingsResetAllBtn;
@@ -62,6 +63,10 @@ window.Game = (function () {
         mixSetting = elements.mixSetting;
         mixWordsCheckbox = elements.mixWordsCheckbox;
         mixedBadge = elements.mixedBadge;
+        examBadgeFront = document.getElementById('examBadgeFront');
+        examBadgeBack = document.getElementById('examBadgeBack');
+        popularBadgeFront = document.getElementById('popularBadgeFront');
+        popularBadgeBack = document.getElementById('popularBadgeBack');
         shuffleWordsCheckbox = document.getElementById('shuffleWords');
 
         settingsBtn = document.getElementById('settingsBtn');
@@ -86,6 +91,8 @@ window.Game = (function () {
                 words.push({
                     greek: word.greek,
                     russian: word.russian,
+                    exam: word.exam === true,
+                    popular: word.popular === true,
                     lessonIndex,
                     wordIndex,
                     id: `${lessonIndex}:${wordIndex}`
@@ -198,7 +205,11 @@ window.Game = (function () {
 
             allCheckbox.checked = false;
             leafCheckboxes.forEach(cb => {
-                cb.checked = indices.includes(parseInt(cb.value));
+                if (cb.value === 'exam' || cb.value === 'popular') {
+                    cb.checked = indices.includes(cb.value);
+                } else {
+                    cb.checked = indices.includes(parseInt(cb.value));
+                }
             });
 
             // Sync main-lesson group headers
@@ -229,6 +240,12 @@ window.Game = (function () {
 
         const allOption = createCheckboxOption('all', 'Все уроки', true);
         lessonFilterDropdown.appendChild(allOption);
+
+        const popularOption = createCheckboxOption('popular', '⭐ Топ', true);
+        lessonFilterDropdown.appendChild(popularOption);
+
+        const examOption = createCheckboxOption('exam', '🎓 Экзамен', true);
+        lessonFilterDropdown.appendChild(examOption);
 
         // Group lessons by main lesson number
         const grouped = {};
@@ -307,10 +324,16 @@ window.Game = (function () {
         }
 
         if (checkedLeaf.length === 1) {
-            const id = checkedLeaf[0].value;
-            const lesson = LESSONS.find((l, i) => i == id);
-            if (lesson) {
-                lessonFilterValue.textContent = Sidebar.getDisplayTitle(lesson);
+            const val = checkedLeaf[0].value;
+            if (val === 'popular') {
+                lessonFilterValue.textContent = '⭐ Топ';
+            } else if (val === 'exam') {
+                lessonFilterValue.textContent = '🎓 Экзамен';
+            } else {
+                const lesson = LESSONS.find((l, i) => i == val);
+                if (lesson) {
+                    lessonFilterValue.textContent = Sidebar.getDisplayTitle(lesson);
+                }
             }
         } else {
             // Check if a whole main lesson is selected (all its sub-lessons)
@@ -336,8 +359,11 @@ window.Game = (function () {
         }
 
         return selectedLeaf
-            .map(cb => parseInt(cb.value))
-            .filter(v => !isNaN(v));
+            .map(cb => {
+                if (cb.value === 'exam' || cb.value === 'popular') return cb.value;
+                return parseInt(cb.value);
+            })
+            .filter(v => v === 'exam' || v === 'popular' || !isNaN(v));
     }
 
     // ---- Flashcard session ----
@@ -367,8 +393,17 @@ window.Game = (function () {
         if (studyType === 'review') {
             sessionWords = [...allWords];
         } else {
-            const selectedLessons = getSelectedLessonIndices();
-            sessionWords = allWords.filter(w => selectedLessons.includes(w.lessonIndex));
+            const selectedVals = getSelectedLessonIndices();
+            const includePopular = selectedVals.includes('popular');
+            const includeExam = selectedVals.includes('exam');
+            const selectedLessons = selectedVals.filter(v => typeof v === 'number');
+
+            sessionWords = allWords.filter(w => {
+                if (includePopular && w.popular) return true;
+                if (includeExam && w.exam) return true;
+                if (selectedLessons.includes(w.lessonIndex)) return true;
+                return false;
+            });
         }
 
         // Filter out already learned words
@@ -556,6 +591,22 @@ window.Game = (function () {
             if (mixedBadge) mixedBadge.classList.remove('hidden');
         } else {
             if (mixedBadge) mixedBadge.classList.add('hidden');
+        }
+
+        if (currentWord && currentWord.exam) {
+            if (examBadgeFront) examBadgeFront.classList.remove('hidden');
+            if (examBadgeBack) examBadgeBack.classList.remove('hidden');
+        } else {
+            if (examBadgeFront) examBadgeFront.classList.add('hidden');
+            if (examBadgeBack) examBadgeBack.classList.add('hidden');
+        }
+
+        if (currentWord && currentWord.popular) {
+            if (popularBadgeFront) popularBadgeFront.classList.remove('hidden');
+            if (popularBadgeBack) popularBadgeBack.classList.remove('hidden');
+        } else {
+            if (popularBadgeFront) popularBadgeFront.classList.add('hidden');
+            if (popularBadgeBack) popularBadgeBack.classList.add('hidden');
         }
 
         if (currentWord && !currentWord.isMixed) {
