@@ -1520,3 +1520,19 @@ window.LESSONS.push({
         { greek: 'θυμίζω', russian: 'напоминать' }
     ]
 });
+
+window.LESSONS.push({
+    lesson: 9.7,
+    title: 'На уроке',
+    words: [
+        { greek: 'η αλήθεια', russian: 'правда' },
+        { greek: 'μοιάζω', russian: 'похож' },
+        { greek: 'το πρόσωπο', russian: 'лицо' },
+        { greek: 'κάθομαι', russian: 'сидеть', popular: true },
+        { greek: 'ψήνω', russian: 'запекать', exam: true },
+        { greek: 'τηγανίζω', russian: 'жарить' },
+        { greek: 'πάρα πολύ', russian: 'очень много', popular: true },
+        { greek: 'αξίζω', russian: 'стоить / быть достойным' },
+        { greek: 'το κόστος', russian: 'себестоимость' }
+    ]
+});
