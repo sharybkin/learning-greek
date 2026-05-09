@@ -8,7 +8,7 @@ window.Game = (function () {
     let fcProgressText, fcProgressFill, fcProgressFillBlue, fcComplete, fcResetBtn;
     let gameScene, gameControls;
     let mixSetting, mixWordsCheckbox, mixedBadge;
-    let examBadgeFront, examBadgeBack, popularBadgeFront, popularBadgeBack;
+    let examBadgeFront, popularBadgeFront;
     let shuffleWordsCheckbox;
     let settingsBtn, settingsModal, closeSettingsBtn;
     let settingsResetCurrentBtn, settingsResetAllBtn;
@@ -64,9 +64,7 @@ window.Game = (function () {
         mixWordsCheckbox = elements.mixWordsCheckbox;
         mixedBadge = elements.mixedBadge;
         examBadgeFront = document.getElementById('examBadgeFront');
-        examBadgeBack = document.getElementById('examBadgeBack');
         popularBadgeFront = document.getElementById('popularBadgeFront');
-        popularBadgeBack = document.getElementById('popularBadgeBack');
         shuffleWordsCheckbox = document.getElementById('shuffleWords');
 
         settingsBtn = document.getElementById('settingsBtn');
@@ -595,18 +593,14 @@ window.Game = (function () {
 
         if (currentWord && currentWord.exam) {
             if (examBadgeFront) examBadgeFront.classList.remove('hidden');
-            if (examBadgeBack) examBadgeBack.classList.remove('hidden');
         } else {
             if (examBadgeFront) examBadgeFront.classList.add('hidden');
-            if (examBadgeBack) examBadgeBack.classList.add('hidden');
         }
 
         if (currentWord && currentWord.popular) {
             if (popularBadgeFront) popularBadgeFront.classList.remove('hidden');
-            if (popularBadgeBack) popularBadgeBack.classList.remove('hidden');
         } else {
             if (popularBadgeFront) popularBadgeFront.classList.add('hidden');
-            if (popularBadgeBack) popularBadgeBack.classList.add('hidden');
         }
 
         if (currentWord && !currentWord.isMixed) {
