@@ -230,6 +230,28 @@ window.Game = (function () {
         }
     }
 
+    function saveQueueState() {
+        const key = getStorageKey() + '_state';
+        
+        if (wordQueue.length === 0 && !currentWord && mixPool.length === 0) {
+            localStorage.removeItem(key);
+            return;
+        }
+
+        const queueToSave = [...wordQueue];
+        if (currentWord) {
+            queueToSave.push(currentWord);
+        }
+
+        const state = {
+            queue: queueToSave.map(w => w.id),
+            mixPool: mixPool.map(w => w.id),
+            seen: Array.from(seenUnlearnedWords),
+            sinceMix: lessonWordsSinceLastMix
+        };
+        localStorage.setItem(key, JSON.stringify(state));
+    }
+
     // ---- Lesson filter ----
 
     function populateLessonFilter() {
@@ -407,22 +429,63 @@ window.Game = (function () {
         // Filter out already learned words
         const unlearnedWords = sessionWords.filter(w => !learnedSet.has(w.id));
 
-        // Word mixing: store in pool for interval-based insertion (only in lesson mode)
-        if (studyType === 'lesson' && mixWordsCheckbox && mixWordsCheckbox.checked) {
-            mixPool = getMixWords(sessionWords);
+        const stateKey = getStorageKey() + '_state';
+        let loadedState = null;
+        try {
+            loadedState = JSON.parse(localStorage.getItem(stateKey));
+        } catch (e) {}
+
+        if (loadedState && loadedState.queue && loadedState.queue.length > 0) {
+            const idMap = new Map();
+            allWords.forEach(w => idMap.set(w.id, w));
+
+            wordQueue = loadedState.queue
+                .map(id => {
+                    const w = idMap.get(id);
+                    if (!w) return null;
+                    const isSessionWord = sessionWords.some(sw => sw.id === id);
+                    return { ...w, isMixed: !isSessionWord };
+                })
+                .filter(w => w !== null && !learnedSet.has(w.id));
+
+            mixPool = (loadedState.mixPool || [])
+                .map(id => idMap.get(id))
+                .filter(w => w !== null && !learnedSet.has(w.id))
+                .map(w => ({ ...w, isMixed: true }));
+
+            lessonWordsSinceLastMix = loadedState.sinceMix || 0;
+            
+            seenUnlearnedWords = new Set((loadedState.seen || []).filter(id => {
+                return wordQueue.some(w => w.id === id);
+            }));
+
+            // Add any new unlearned words that are missing from the loaded queue
+            const queueIds = new Set(wordQueue.map(w => w.id));
+            const newWords = unlearnedWords.filter(w => !queueIds.has(w.id));
+            if (newWords.length > 0) {
+                if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
+                    shuffleArray(newWords);
+                }
+                newWords.reverse().forEach(w => wordQueue.push(w));
+            }
+        } else {
+            // Word mixing: store in pool for interval-based insertion (only in lesson mode)
+            if (studyType === 'lesson' && mixWordsCheckbox && mixWordsCheckbox.checked) {
+                mixPool = getMixWords(sessionWords);
+            }
+
+            // Build queue from unlearned words only
+            wordQueue = [...unlearnedWords];
+            wordQueue.reverse(); // Reverse so pop() returns words in forward order
+            if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
+                shuffleArray(wordQueue);
+            }
         }
 
         totalWordsCount = sessionWords.length;
         learnedCount = sessionWords.length - unlearnedWords.length;
 
-        // Build queue from unlearned words only (mixed words come from mixPool at intervals)
-        wordQueue = [...unlearnedWords];
-        wordQueue.reverse(); // Reverse so pop() returns words in forward order
-        if (!shuffleWordsCheckbox || shuffleWordsCheckbox.checked) {
-            shuffleArray(wordQueue);
-        }
-
-        wordsRemainingInCycle = wordQueue.length;
+        wordsRemainingInCycle = wordQueue.filter(w => !w.isMixed).length;
         isTransitioning = false;
 
         updateProgress();
@@ -646,6 +709,8 @@ window.Game = (function () {
             gameTranslation.textContent = currentWord.russian;
         }
         gameCard.classList.remove('is-flipped');
+        
+        saveQueueState();
     }
 
     // ---- Progress UI ----
@@ -661,6 +726,8 @@ window.Game = (function () {
     }
 
     function showComplete() {
+        currentWord = null;
+        saveQueueState();
         gameScene.classList.add('hidden');
         gameControls.classList.add('hidden');
         fcComplete.classList.remove('hidden');
@@ -674,6 +741,8 @@ window.Game = (function () {
 
     function handleReset() {
         clearLearnedSet();
+        const stateKey = getStorageKey() + '_state';
+        localStorage.removeItem(stateKey);
         startSession();
     }
 
