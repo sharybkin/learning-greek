@@ -1169,12 +1169,13 @@ window.Game = (function () {
             
             swipeIndicatorsRemember.forEach(el => {
                 el.style.opacity = opacityRemember;
-                el.style.transform = `translate(-50%, -50%) rotate(-15deg) scale(${0.8 + opacityRemember * 0.3})`;
+                // Added translateZ(1px) to guarantee layer stacking over the card surface on Safari
+                el.style.transform = `translate(-50%, -50%) translateZ(1px) rotate(-15deg) scale(${0.8 + opacityRemember * 0.3})`;
             });
             
             swipeIndicatorsForget.forEach(el => {
                 el.style.opacity = opacityForget;
-                el.style.transform = `translate(-50%, -50%) rotate(15deg) scale(${0.8 + opacityForget * 0.3})`;
+                el.style.transform = `translate(-50%, -50%) translateZ(1px) rotate(15deg) scale(${0.8 + opacityForget * 0.3})`;
             });
         }
 
