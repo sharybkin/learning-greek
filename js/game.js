@@ -8,7 +8,7 @@ window.Game = (function () {
     let fcProgressText, fcProgressFill, fcProgressFillBlue, fcComplete, fcResetBtn;
     let gameScene, gameControls, swipeHint;
     let mixSetting, mixWordsCheckbox, mixedBadge;
-    let examBadgeFront, popularBadgeFront;
+    let examBadgeFront, group1BadgeFront, group2BadgeFront, group3BadgeFront;
     let shuffleWordsCheckbox;
     let settingsBtn, settingsModal, closeSettingsBtn;
     let settingsResetCurrentBtn, settingsResetAllBtn;
@@ -78,7 +78,9 @@ window.Game = (function () {
         mixWordsCheckbox = elements.mixWordsCheckbox;
         mixedBadge = elements.mixedBadge;
         examBadgeFront = document.getElementById('examBadgeFront');
-        popularBadgeFront = document.getElementById('popularBadgeFront');
+        group1BadgeFront = document.getElementById('group1BadgeFront');
+        group2BadgeFront = document.getElementById('group2BadgeFront');
+        group3BadgeFront = document.getElementById('group3BadgeFront');
         shuffleWordsCheckbox = document.getElementById('shuffleWords');
 
         settingsBtn = document.getElementById('settingsBtn');
@@ -110,7 +112,7 @@ window.Game = (function () {
                     greek: word.greek,
                     russian: word.russian,
                     exam: word.exam === true,
-                    popular: word.popular === true,
+                    group: word.group || 1,
                     lessonIndex,
                     wordIndex,
                     id: `${lessonIndex}:${wordIndex}`
@@ -223,7 +225,7 @@ window.Game = (function () {
 
             allCheckbox.checked = false;
             leafCheckboxes.forEach(cb => {
-                if (cb.value === 'exam' || cb.value === 'popular') {
+                if (cb.value === 'exam' || cb.value === 'group1' || cb.value === 'group2' || cb.value === 'group3') {
                     cb.checked = indices.includes(cb.value);
                 } else {
                     cb.checked = indices.includes(parseInt(cb.value));
@@ -281,8 +283,14 @@ window.Game = (function () {
         const allOption = createCheckboxOption('all', 'Все уроки', true);
         lessonFilterDropdown.appendChild(allOption);
 
-        const popularOption = createCheckboxOption('popular', '⭐ Топ', true);
-        lessonFilterDropdown.appendChild(popularOption);
+        const group1Option = createCheckboxOption('group1', '🥇 Очень частые', true);
+        lessonFilterDropdown.appendChild(group1Option);
+
+        const group2Option = createCheckboxOption('group2', '🥈 Частые', true);
+        lessonFilterDropdown.appendChild(group2Option);
+
+        const group3Option = createCheckboxOption('group3', '🥉 Редкие', true);
+        lessonFilterDropdown.appendChild(group3Option);
 
         const examOption = createCheckboxOption('exam', '🎓 Экзамен', true);
         lessonFilterDropdown.appendChild(examOption);
@@ -365,8 +373,12 @@ window.Game = (function () {
 
         if (checkedLeaf.length === 1) {
             const val = checkedLeaf[0].value;
-            if (val === 'popular') {
-                lessonFilterValue.textContent = '⭐ Топ';
+            if (val === 'group1') {
+                lessonFilterValue.textContent = '🥇 Очень частые';
+            } else if (val === 'group2') {
+                lessonFilterValue.textContent = '🥈 Частые';
+            } else if (val === 'group3') {
+                lessonFilterValue.textContent = '🥉 Редкие';
             } else if (val === 'exam') {
                 lessonFilterValue.textContent = '🎓 Экзамен';
             } else {
@@ -400,10 +412,10 @@ window.Game = (function () {
 
         return selectedLeaf
             .map(cb => {
-                if (cb.value === 'exam' || cb.value === 'popular') return cb.value;
+                if (cb.value === 'exam' || cb.value === 'group1' || cb.value === 'group2' || cb.value === 'group3') return cb.value;
                 return parseInt(cb.value);
             })
-            .filter(v => v === 'exam' || v === 'popular' || !isNaN(v));
+            .filter(v => v === 'exam' || v === 'group1' || v === 'group2' || v === 'group3' || !isNaN(v));
     }
 
     // ---- Flashcard session ----
@@ -436,12 +448,16 @@ window.Game = (function () {
             sessionWords = [...allWords];
         } else {
             const selectedVals = getSelectedLessonIndices();
-            const includePopular = selectedVals.includes('popular');
+            const includeGroup1 = selectedVals.includes('group1');
+            const includeGroup2 = selectedVals.includes('group2');
+            const includeGroup3 = selectedVals.includes('group3');
             const includeExam = selectedVals.includes('exam');
             const selectedLessons = selectedVals.filter(v => typeof v === 'number');
 
             sessionWords = allWords.filter(w => {
-                if (includePopular && w.popular) return true;
+                if (includeGroup1 && w.group === 1) return true;
+                if (includeGroup2 && w.group === 2) return true;
+                if (includeGroup3 && w.group === 3) return true;
                 if (includeExam && w.exam) return true;
                 if (selectedLessons.includes(w.lessonIndex)) return true;
                 return false;
@@ -687,10 +703,16 @@ window.Game = (function () {
             if (examBadgeFront) examBadgeFront.classList.add('hidden');
         }
 
-        if (currentWord && currentWord.popular) {
-            if (popularBadgeFront) popularBadgeFront.classList.remove('hidden');
-        } else {
-            if (popularBadgeFront) popularBadgeFront.classList.add('hidden');
+        if (group1BadgeFront) group1BadgeFront.classList.add('hidden');
+        if (group2BadgeFront) group2BadgeFront.classList.add('hidden');
+        if (group3BadgeFront) group3BadgeFront.classList.add('hidden');
+
+        if (currentWord && currentWord.group === 1) {
+            if (group1BadgeFront) group1BadgeFront.classList.remove('hidden');
+        } else if (currentWord && currentWord.group === 2) {
+            if (group2BadgeFront) group2BadgeFront.classList.remove('hidden');
+        } else if (currentWord && currentWord.group === 3) {
+            if (group3BadgeFront) group3BadgeFront.classList.remove('hidden');
         }
 
         if (currentWord && !currentWord.isMixed) {

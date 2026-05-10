@@ -7,7 +7,7 @@
     <title>Изучение греческих слов</title>
     <link rel="stylesheet" href="css/base.css?v=1">
     <link rel="stylesheet" href="css/sidebar.css?v=1">
-    <link rel="stylesheet" href="css/search.css?v=1">
+    <link rel="stylesheet" href="css/search.css?v=3">
     <link rel="stylesheet" href="css/game.css?v=23">
     <link rel="stylesheet" href="css/responsive.css?v=2">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -115,7 +115,51 @@
                             </span>
                             <div class="card-badges">
                                 <span id="examBadgeFront" class="badge-icon hidden" title="Слово из экзамена">🎓</span>
-                                <span id="popularBadgeFront" class="badge-icon hidden" title="Популярное слово">⭐</span>
+                                <span id="group1BadgeFront" class="badge-icon hidden" title="Очень частое слово">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
+                                        style="vertical-align: middle;">
+                                        <path d="M7.5 13.5 L4.5 22.5 L12 19.5 L19.5 22.5 L16.5 13.5 Z" fill="#E74C3C"
+                                            stroke="#C0392B" stroke-width="0.8" stroke-linejoin="round" />
+                                        <circle cx="12" cy="8.5" r="7.5" fill="#F1C40F" stroke="#D68910"
+                                            stroke-width="1" />
+                                        <circle cx="12" cy="8.5" r="5.5" fill="none" stroke="#D68910" stroke-width="0.5"
+                                            stroke-dasharray="1 1" />
+                                        <text x="12" y="11.5"
+                                            font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                                            font-size="9.5" font-weight="900" fill="#7E5109"
+                                            text-anchor="middle">1</text>
+                                    </svg>
+                                </span>
+                                <span id="group2BadgeFront" class="badge-icon hidden" title="Частое слово">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
+                                        style="vertical-align: middle;">
+                                        <path d="M7.5 13.5 L4.5 22.5 L12 19.5 L19.5 22.5 L16.5 13.5 Z" fill="#E74C3C"
+                                            stroke="#C0392B" stroke-width="0.8" stroke-linejoin="round" />
+                                        <circle cx="12" cy="8.5" r="7.5" fill="#ECF0F1" stroke="#BDC3C7"
+                                            stroke-width="1" />
+                                        <circle cx="12" cy="8.5" r="5.5" fill="none" stroke="#BDC3C7" stroke-width="0.5"
+                                            stroke-dasharray="1 1" />
+                                        <text x="12" y="11.5"
+                                            font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                                            font-size="9.5" font-weight="900" fill="#2C3E50"
+                                            text-anchor="middle">2</text>
+                                    </svg>
+                                </span>
+                                <span id="group3BadgeFront" class="badge-icon hidden" title="Редкое слово">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"
+                                        style="vertical-align: middle;">
+                                        <path d="M7.5 13.5 L4.5 22.5 L12 19.5 L19.5 22.5 L16.5 13.5 Z" fill="#E74C3C"
+                                            stroke="#C0392B" stroke-width="0.8" stroke-linejoin="round" />
+                                        <circle cx="12" cy="8.5" r="7.5" fill="#E59866" stroke="#BA4A00"
+                                            stroke-width="1" />
+                                        <circle cx="12" cy="8.5" r="5.5" fill="none" stroke="#BA4A00" stroke-width="0.5"
+                                            stroke-dasharray="1 1" />
+                                        <text x="12" y="11.5"
+                                            font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                                            font-size="9.5" font-weight="900" fill="#4A2305"
+                                            text-anchor="middle">3</text>
+                                    </svg>
+                                </span>
                             </div>
                             <div class="game-word-front" id="gameWordFront"></div>
                         </div>
@@ -198,11 +242,11 @@
         </div>
     </main>
 
-    <script src="js/words/lessons.js?v=25"></script>
+    <script src="js/words/lessons.js?v=26"></script>
     <script src="js/speech.js?v=2"></script>
     <script src="js/sidebar.js?v=1"></script>
-    <script src="js/search.js?v=2"></script>
-    <script src="js/game.js?v=19"></script>
+    <script src="js/search.js?v=4"></script>
+    <script src="js/game.js?v=21"></script>
     <script src="js/app.js?v=4"></script>
 </body>
 

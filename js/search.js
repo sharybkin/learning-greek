@@ -23,6 +23,33 @@ window.Search = (function () {
             .replace(/θ/g, "φ");    // Map theta to phi (for search interchangeability)
     }
 
+    // Helper: generate medal SVG for a group
+    function getMedalSvg(group) {
+        if (group === 1) {
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="vertical-align: middle;" title="Очень частое слово">
+                <path d="M7.5 13.5 L4.5 22.5 L12 19.5 L19.5 22.5 L16.5 13.5 Z" fill="#E74C3C" stroke="#C0392B" stroke-width="0.8" stroke-linejoin="round"/>
+                <circle cx="12" cy="8.5" r="7.5" fill="#F1C40F" stroke="#D68910" stroke-width="1"/>
+                <circle cx="12" cy="8.5" r="5.5" fill="none" stroke="#D68910" stroke-width="0.5" stroke-dasharray="1 1"/>
+                <text x="12" y="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="900" fill="#7E5109" text-anchor="middle">1</text>
+            </svg>`;
+        } else if (group === 2) {
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="vertical-align: middle;" title="Частое слово">
+                <path d="M7.5 13.5 L4.5 22.5 L12 19.5 L19.5 22.5 L16.5 13.5 Z" fill="#E74C3C" stroke="#C0392B" stroke-width="0.8" stroke-linejoin="round"/>
+                <circle cx="12" cy="8.5" r="7.5" fill="#ECF0F1" stroke="#BDC3C7" stroke-width="1"/>
+                <circle cx="12" cy="8.5" r="5.5" fill="none" stroke="#BDC3C7" stroke-width="0.5" stroke-dasharray="1 1"/>
+                <text x="12" y="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="900" fill="#2C3E50" text-anchor="middle">2</text>
+            </svg>`;
+        } else if (group === 3) {
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="vertical-align: middle;" title="Редкое слово">
+                <path d="M7.5 13.5 L4.5 22.5 L12 19.5 L19.5 22.5 L16.5 13.5 Z" fill="#E74C3C" stroke="#C0392B" stroke-width="0.8" stroke-linejoin="round"/>
+                <circle cx="12" cy="8.5" r="7.5" fill="#E59866" stroke="#BA4A00" stroke-width="1"/>
+                <circle cx="12" cy="8.5" r="5.5" fill="none" stroke="#BA4A00" stroke-width="0.5" stroke-dasharray="1 1"/>
+                <text x="12" y="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="900" fill="#4A2305" text-anchor="middle">3</text>
+            </svg>`;
+        }
+        return '';
+    }
+
     // Render all lessons into the main content
     function renderAllLessons() {
         if (!wordsContainer || !window.LESSONS) return;
@@ -65,12 +92,41 @@ window.Search = (function () {
                 greekDiv.appendChild(greekText);
                 greekDiv.appendChild(speakerIcon);
 
+                // Create Russian container to house text & right-aligned badges
+                const russianContainer = document.createElement('div');
+                russianContainer.className = 'russian-container';
+
                 const russianDiv = document.createElement('div');
                 russianDiv.className = 'russian';
                 russianDiv.textContent = w.russian;
 
+                // Add Badges container
+                const badgesDiv = document.createElement('div');
+                badgesDiv.className = 'word-card-badges';
+
+                if (w.exam) {
+                    const examSpan = document.createElement('span');
+                    examSpan.className = 'word-card-badge-icon';
+                    examSpan.textContent = '🎓';
+                    examSpan.title = 'Слово из экзамена';
+                    badgesDiv.appendChild(examSpan);
+                }
+
+                const medalSvg = getMedalSvg(w.group);
+                if (medalSvg) {
+                    const medalSpan = document.createElement('span');
+                    medalSpan.className = 'word-card-badge-icon';
+                    medalSpan.innerHTML = medalSvg;
+                    badgesDiv.appendChild(medalSpan);
+                }
+
+                russianContainer.appendChild(russianDiv);
+                if (badgesDiv.childNodes.length > 0) {
+                    russianContainer.appendChild(badgesDiv);
+                }
+
                 card.appendChild(greekDiv);
-                card.appendChild(russianDiv);
+                card.appendChild(russianContainer);
                 list.appendChild(card);
             });
 

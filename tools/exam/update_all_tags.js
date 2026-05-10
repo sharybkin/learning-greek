@@ -13,8 +13,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const scripts = [
-    'mark_exam_words.js',
-    'mark_popular_words.js'
+    'mark_exam_words.js'
 ];
 
 console.log('🔄 Запуск автоматического обновления всех тегов...\n');
