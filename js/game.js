@@ -6,12 +6,24 @@ window.Game = (function () {
     let lessonFilterContainer, lessonFilterButton, lessonFilterValue, lessonFilterDropdown;
     let btnRemember, btnForget;
     let fcProgressText, fcProgressFill, fcProgressFillBlue, fcComplete, fcResetBtn;
-    let gameScene, gameControls;
+    let gameScene, gameControls, swipeHint;
     let mixSetting, mixWordsCheckbox, mixedBadge;
     let examBadgeFront, popularBadgeFront;
     let shuffleWordsCheckbox;
     let settingsBtn, settingsModal, closeSettingsBtn;
     let settingsResetCurrentBtn, settingsResetAllBtn;
+    let undoBtn;
+    let historyStack = []; // Stack of { word, type: 'remember' | 'forget', learnedCountBefore }
+    let swipeIndicatorsRemember = [];
+    let swipeIndicatorsForget = [];
+    
+    // Swipe tracking
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    let isDraggingCard = false;
+    let dragThresholdPassed = false;
+    let dragX = 0;
+    let dragY = 0;
 
     // State
     let currentWord = null;
@@ -24,6 +36,7 @@ window.Game = (function () {
     let mixPool = [];         // pool of mixed words to insert at intervals
     let lessonWordsSinceLastMix = 0; // counter for interval-based mixing
     let isTransitioning = false; // block rapid clicks during animations
+    let isFirstLoadOfSession = true;
 
     let currentGameMode = 'audio';   // 'audio', 'ru-gr', 'gr-ru'
 
@@ -60,6 +73,7 @@ window.Game = (function () {
         fcResetBtn = elements.fcResetBtn;
         gameScene = elements.gameScene;
         gameControls = elements.gameControls;
+        swipeHint = document.getElementById('swipeHint');
         mixSetting = elements.mixSetting;
         mixWordsCheckbox = elements.mixWordsCheckbox;
         mixedBadge = elements.mixedBadge;
@@ -72,13 +86,19 @@ window.Game = (function () {
         closeSettingsBtn = document.getElementById('closeSettingsBtn');
         settingsResetCurrentBtn = document.getElementById('settingsResetCurrentBtn');
         settingsResetAllBtn = document.getElementById('settingsResetAllBtn');
+        undoBtn = document.getElementById('undoBtn');
+        
+        swipeIndicatorsRemember = document.querySelectorAll('.indicator-remember');
+        swipeIndicatorsForget = document.querySelectorAll('.indicator-forget');
 
         allWords = buildAllWords();
         populateLessonFilter();
         setupEventListeners();
+        setupSwipeListeners();
         restoreSettings();
         restoreGameMode();
         restoreLastLesson();
+        updateUndoButtonVisibility();
     }
 
     // Build flat array of all words with IDs
@@ -396,6 +416,8 @@ window.Game = (function () {
         mixPool = [];
         lessonWordsSinceLastMix = 0;
         seenUnlearnedWords.clear();
+        historyStack = [];
+        updateUndoButtonVisibility();
 
         // Handle mix settings visibility
         if (mixSetting) {
@@ -498,6 +520,7 @@ window.Game = (function () {
             hideComplete();
             // Pass false for isNext to prevent audio auto-play on load
             showNextCard(false, false);
+            triggerNudgeHint();
         }
 
         saveLastLesson();
@@ -536,6 +559,8 @@ window.Game = (function () {
         if (!currentWord || isTransitioning) return;
         isTransitioning = true;
 
+        pushHistory('remember');
+
         // Mix counter: count every user response
         lessonWordsSinceLastMix++;
         if (lessonWordsSinceLastMix >= 5 && mixPool.length > 0) {
@@ -569,6 +594,8 @@ window.Game = (function () {
     function handleForget() {
         if (!currentWord || isTransitioning) return;
         isTransitioning = true;
+
+        pushHistory('forget');
 
         // Mix counter: count every user response
         lessonWordsSinceLastMix++;
@@ -728,14 +755,16 @@ window.Game = (function () {
     function showComplete() {
         currentWord = null;
         saveQueueState();
-        gameScene.classList.add('hidden');
-        gameControls.classList.add('hidden');
+        if (gameScene) gameScene.classList.add('hidden');
+        if (gameControls) gameControls.classList.add('hidden');
+        if (swipeHint) swipeHint.classList.add('hidden');
         fcComplete.classList.remove('hidden');
     }
 
     function hideComplete() {
-        gameScene.classList.remove('hidden');
-        gameControls.classList.remove('hidden');
+        if (gameScene) gameScene.classList.remove('hidden');
+        if (gameControls) gameControls.classList.remove('hidden');
+        if (swipeHint) swipeHint.classList.remove('hidden');
         fcComplete.classList.add('hidden');
     }
 
@@ -770,7 +799,10 @@ window.Game = (function () {
 
     function setupEventListeners() {
         // Card flip
-        if (gameCard) gameCard.addEventListener('click', flipCard);
+        if (gameCard) gameCard.addEventListener('click', (e) => {
+            if (dragThresholdPassed) return;
+            flipCard();
+        });
 
         // Audio play (front face — audio mode)
         if (playAudioIcon) playAudioIcon.addEventListener('click', (e) => {
@@ -787,6 +819,9 @@ window.Game = (function () {
         // Remember / Forget
         if (btnRemember) btnRemember.addEventListener('click', handleRemember);
         if (btnForget) btnForget.addEventListener('click', handleForget);
+
+        // Undo
+        if (undoBtn) undoBtn.addEventListener('click', handleUndo);
 
         // Reset
         if (fcResetBtn) fcResetBtn.addEventListener('click', handleReset);
@@ -952,6 +987,229 @@ window.Game = (function () {
 
         updateLessonFilterButtonText();
         startSession();
+    }
+
+    // ---- Animations & Visual Affordance ----
+
+    function triggerNudgeHint() {
+        if (!isFirstLoadOfSession || !gameCard) return;
+        isFirstLoadOfSession = false; // only run once per full application life or reset
+        
+        setTimeout(() => {
+            // Ensure we don't overlap animations
+            gameCard.classList.add('nudge-hint');
+            gameCard.addEventListener('animationend', () => {
+                gameCard.classList.remove('nudge-hint');
+            }, { once: true });
+        }, 600); // allow intro-animation (300ms) to fully resolve first
+    }
+
+    // ---- History / Undo Logic ----
+
+    function pushHistory(type) {
+        if (!currentWord) return;
+        
+        // Store only last 5 events
+        if (historyStack.length >= 5) {
+            historyStack.shift();
+        }
+        
+        historyStack.push({
+            word: { ...currentWord },
+            type: type,
+            lessonWordsSinceLastMix: lessonWordsSinceLastMix
+        });
+        updateUndoButtonVisibility();
+    }
+
+    function updateUndoButtonVisibility() {
+        if (undoBtn) {
+            if (historyStack.length > 0) {
+                undoBtn.classList.remove('hidden');
+            } else {
+                undoBtn.classList.add('hidden');
+            }
+        }
+    }
+
+    function handleUndo() {
+        if (historyStack.length === 0 || isTransitioning) return;
+        
+        const lastAction = historyStack.pop();
+        hideComplete();
+
+        // 1. Move current card back onto top of the work queue
+        if (currentWord) {
+            wordQueue.push(currentWord);
+        }
+
+        const word = lastAction.word;
+
+        // 2. Roll back states
+        if (lastAction.type === 'remember') {
+            if (!word.isMixed) {
+                const learnedSet = getLearnedSet();
+                learnedSet.delete(word.id);
+                saveLearnedSet(learnedSet);
+                learnedCount--;
+                seenUnlearnedWords.add(word.id); // Restore it back as seen but not learned
+            } else {
+                const reviewKey = `fc_${currentGameMode}_review`;
+                try {
+                    const data = localStorage.getItem(reviewKey);
+                    if (data) {
+                        let reviewLearned = new Set(JSON.parse(data));
+                        reviewLearned.delete(word.id);
+                        localStorage.setItem(reviewKey, JSON.stringify([...reviewLearned]));
+                    }
+                } catch (e) {}
+            }
+        } else if (lastAction.type === 'forget') {
+            if (!word.isMixed) {
+                seenUnlearnedWords.delete(word.id); // It was added to seen but now we take it back
+                // Remove from the back end of the processing where unshift put it
+                wordQueue = wordQueue.filter(w => w.id !== word.id);
+            }
+        }
+
+        lessonWordsSinceLastMix = lastAction.lessonWordsSinceLastMix;
+
+        // 3. Put the historical word explicitly back at the end so pop() picks it next
+        wordQueue.push(word);
+        
+        isTransitioning = true;
+        updateProgress();
+        updateUndoButtonVisibility();
+        
+        // Perform card showing routine
+        showNextCard(true, false);
+    }
+
+    // ---- Swipe Gesture Logic ----
+
+    function setupSwipeListeners() {
+        if (!gameCard) return;
+
+        const threshold = window.innerWidth * 0.25; // 25% of viewport width is swipe
+
+        gameCard.addEventListener('touchstart', handleTouchStart, { passive: true });
+        gameCard.addEventListener('touchmove', handleTouchMove, { passive: false });
+        gameCard.addEventListener('touchend', handleTouchEnd);
+
+        gameCard.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        function handleTouchStart(e) {
+            if (isTransitioning) return;
+            const touch = e.touches[0];
+            startDrag(touch.clientX, touch.clientY);
+        }
+
+        function handleTouchMove(e) {
+            if (!isDraggingCard) return;
+            const touch = e.touches[0];
+            const curDragX = touch.clientX - swipeStartX;
+            const curDragY = touch.clientY - swipeStartY;
+
+            // Prevent page scrolling if the user is definitively dragging horizontally
+            if (Math.abs(curDragX) > Math.abs(curDragY) || Math.abs(curDragX) > 10) {
+                if (e.cancelable) e.preventDefault();
+            }
+            moveDrag(touch.clientX, touch.clientY);
+        }
+
+        function handleTouchEnd() {
+            endDrag();
+        }
+
+        function handleMouseDown(e) {
+            if (isTransitioning || e.button !== 0) return;
+            // Ignore interaction if it started on internal components
+            if (e.target.closest('.speaker-icon') || e.target.closest('.badge-icon')) return;
+            
+            startDrag(e.clientX, e.clientY);
+        }
+
+        function handleMouseMove(e) {
+            if (!isDraggingCard) return;
+            moveDrag(e.clientX, e.clientY);
+        }
+
+        function handleMouseUp() {
+            if (isDraggingCard) endDrag();
+        }
+
+        function startDrag(x, y) {
+            isDraggingCard = true;
+            dragThresholdPassed = false;
+            swipeStartX = x;
+            swipeStartY = y;
+            gameCard.classList.add('is-swiping');
+        }
+
+        function moveDrag(x, y) {
+            dragX = x - swipeStartX;
+            dragY = y - swipeStartY;
+
+            // Check threshold to block click flip
+            if (Math.abs(dragX) > 10 || Math.abs(dragY) > 10) {
+                dragThresholdPassed = true;
+            }
+
+            const rot = dragX * 0.08; // Rotate a little
+            const currentRotY = gameCard.classList.contains('is-flipped') ? 180 : 0;
+            
+            // Transform the card while maintaining preserving 3d context logic
+            gameCard.style.transform = `translateX(${dragX}px) translateY(${dragY * 0.2}px) rotateZ(${rot}deg) rotateY(${currentRotY}deg)`;
+            
+            // Visual Feedback: Drive swipe stamps opacity & scale
+            const opacityRemember = Math.min(1, Math.max(0, dragX / 100)); // Fade completely in by 100px
+            const opacityForget = Math.min(1, Math.max(0, -dragX / 100));
+            
+            swipeIndicatorsRemember.forEach(el => {
+                el.style.opacity = opacityRemember;
+                el.style.transform = `translate(-50%, -50%) rotate(-15deg) scale(${0.8 + opacityRemember * 0.3})`;
+            });
+            
+            swipeIndicatorsForget.forEach(el => {
+                el.style.opacity = opacityForget;
+                el.style.transform = `translate(-50%, -50%) rotate(15deg) scale(${0.8 + opacityForget * 0.3})`;
+            });
+        }
+
+        function endDrag() {
+            isDraggingCard = false;
+            gameCard.classList.remove('is-swiping');
+
+            // Reset stamps immediately
+            swipeIndicatorsRemember.forEach(el => { el.style.opacity = '0'; el.style.transform = ''; });
+            swipeIndicatorsForget.forEach(el => { el.style.opacity = '0'; el.style.transform = ''; });
+
+            const travelDist = dragX;
+            dragX = 0;
+            dragY = 0;
+
+            // Wait a split second before resetting threshold to let native 'click' be suppressed
+            setTimeout(() => {
+                dragThresholdPassed = false;
+            }, 50);
+
+            const dynamicThreshold = Math.max(80, window.innerWidth * 0.20);
+
+            if (Math.abs(travelDist) > dynamicThreshold) {
+                // Snap inline transform away so existing handle transitions can operate cleanly
+                gameCard.style.transform = '';
+                if (travelDist > 0) {
+                    handleRemember();
+                } else {
+                    handleForget();
+                }
+            } else {
+                // Snap card back inline (transition automatically applies because is-swiping class removed)
+                gameCard.style.transform = '';
+            }
+        }
     }
 
     return {

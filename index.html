@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/base.css?v=1">
     <link rel="stylesheet" href="css/sidebar.css?v=1">
     <link rel="stylesheet" href="css/search.css?v=1">
-    <link rel="stylesheet" href="css/game.css?v=13">
+    <link rel="stylesheet" href="css/game.css?v=14">
     <link rel="stylesheet" href="css/responsive.css?v=2">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
@@ -82,7 +82,17 @@
                 </div>
 
                 <div class="fc-progress" id="fcProgress">
-                    <div class="fc-progress-text" id="fcProgressText">Выучено: 0 / 0</div>
+                    <div class="fc-progress-header">
+                        <div class="fc-progress-text" id="fcProgressText">Выучено: 0 / 0</div>
+                        <button id="undoBtn" class="undo-btn hidden" title="Отменить последнее действие">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 7v6h6"></path>
+                                <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <div class="fc-progress-bar">
                         <div class="fc-progress-fill-blue" id="fcProgressFillBlue" style="width: 0%"></div>
                         <div class="fc-progress-fill" id="fcProgressFill" style="width: 0%"></div>
@@ -93,6 +103,9 @@
                     <div id="mixedBadge" class="mixed-badge hidden">★ Из других уроков</div>
                     <div class="game-card" id="gameCard">
                         <div class="card-face card-face-front">
+                            <div class="swipe-indicator indicator-remember">Помню</div>
+                            <div class="swipe-indicator indicator-forget">Не помню</div>
+
                             <span class="speaker-icon" id="playAudioIcon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
                                     <path
@@ -107,6 +120,9 @@
                             <div class="game-word-front" id="gameWordFront"></div>
                         </div>
                         <div class="card-face card-face-back">
+                            <div class="swipe-indicator indicator-remember">Помню</div>
+                            <div class="swipe-indicator indicator-forget">Не помню</div>
+
                             <span class="speaker-icon hidden" id="playAudioIconBack">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
                                     <path
@@ -126,9 +142,23 @@
                     <button class="fc-reset-btn" id="fcResetBtn">Сбросить прогресс</button>
                 </div>
 
-                <div class="game-controls" id="gameControls">
-                    <button class="fc-btn fc-btn-forget" id="btnForget">Не помню ✗</button>
-                    <button class="fc-btn fc-btn-remember" id="btnRemember">Помню ✓</button>
+                <div class="swipe-hint-text" id="swipeHint">
+                    <span class="hint-text-red">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                            style="margin-right: 6px;">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        Не помню
+                    </span>
+                    <span class="hint-separator">•</span>
+                    <span class="hint-text-green">
+                        Помню
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px;">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </span>
                 </div>
 
                 <div id="settingsModal" class="settings-modal hidden">
@@ -173,7 +203,7 @@
     <script src="js/speech.js?v=2"></script>
     <script src="js/sidebar.js?v=1"></script>
     <script src="js/search.js?v=2"></script>
-    <script src="js/game.js?v=12"></script>
+    <script src="js/game.js?v=14"></script>
     <script src="js/app.js?v=4"></script>
 </body>
 
