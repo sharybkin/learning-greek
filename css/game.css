@@ -984,3 +984,26 @@
 .btn-danger:hover {
     background-color: #c0392b;
 }
+
+/* ---- Card Example Phrase ---- */
+.card-example {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-style: italic;
+    font-size: clamp(0.78rem, 3.2vw, 1rem);
+    color: #7f8c8d;
+    line-height: 1.5;
+    text-align: center;
+    word-break: break-word;
+    width: 100%;
+    transition: opacity 0.2s ease;
+}
+
+.card-face-back .card-example {
+    color: #6c7a7d;
+}
+
+.card-example.hidden {
+    display: none;
+}

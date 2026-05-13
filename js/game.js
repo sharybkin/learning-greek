@@ -13,6 +13,7 @@ window.Game = (function () {
     let settingsBtn, settingsModal, closeSettingsBtn;
     let settingsResetCurrentBtn, settingsResetAllBtn;
     let undoBtn;
+    let cardExampleFront, cardExampleBack;
     let historyStack = []; // Stack of { word, type: 'remember' | 'forget', learnedCountBefore }
     let swipeIndicatorsRemember = [];
     let swipeIndicatorsForget = [];
@@ -92,6 +93,8 @@ window.Game = (function () {
         
         swipeIndicatorsRemember = document.querySelectorAll('.indicator-remember');
         swipeIndicatorsForget = document.querySelectorAll('.indicator-forget');
+        cardExampleFront = document.getElementById('cardExampleFront');
+        cardExampleBack = document.getElementById('cardExampleBack');
 
         allWords = buildAllWords();
         populateLessonFilter();
@@ -113,6 +116,8 @@ window.Game = (function () {
                     russian: word.russian,
                     exam: word.exam === true,
                     group: word.group || 1,
+                    example_greek: word.example_greek || '',
+                    example_russian: word.example_russian || '',
                     lessonIndex,
                     wordIndex,
                     id: `${lessonIndex}:${wordIndex}`
@@ -731,31 +736,66 @@ window.Game = (function () {
         gameWord.textContent = '';
         gameTranslation.textContent = '';
         gameWordFront.textContent = '';
+        if (cardExampleFront) { cardExampleFront.textContent = ''; cardExampleFront.classList.add('hidden'); }
+        if (cardExampleBack) { cardExampleBack.textContent = ''; cardExampleBack.classList.add('hidden'); }
 
         const mode = currentGameMode;
 
         if (mode === 'audio') {
+            // Front: speaker icon (plays audio). Show Russian example as a contextual hint.
+            // Back: Greek word + Russian translation. Show Greek example.
             playAudioIcon.classList.remove('hidden');
             playAudioIcon.classList.remove('speaker-corner');
             if (playAudioIconBack) playAudioIconBack.classList.add('hidden');
             gameWord.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
+
+            if (cardExampleFront) {
+                cardExampleFront.textContent = currentWord.example_russian || '';
+                cardExampleFront.classList.toggle('hidden', !currentWord.example_russian);
+            }
+            if (cardExampleBack) {
+                cardExampleBack.textContent = currentWord.example_greek || '';
+                cardExampleBack.classList.toggle('hidden', !currentWord.example_greek);
+            }
 
             if (autoplayAudioCheckbox.checked && isNext) {
                 setTimeout(() => Speech.speak(currentWord.greek), 100);
             }
         } else if (mode === 'ru-gr') {
+            // Front: Russian word. Show Russian example.
+            // Back: Greek word. Show Greek example.
             playAudioIcon.classList.add('hidden');
             playAudioIcon.classList.remove('speaker-corner');
             if (playAudioIconBack) playAudioIconBack.classList.remove('hidden');
             gameWordFront.textContent = currentWord.russian;
             gameWord.textContent = currentWord.greek;
+
+            if (cardExampleFront) {
+                cardExampleFront.textContent = currentWord.example_russian || '';
+                cardExampleFront.classList.toggle('hidden', !currentWord.example_russian);
+            }
+            if (cardExampleBack) {
+                cardExampleBack.textContent = currentWord.example_greek || '';
+                cardExampleBack.classList.toggle('hidden', !currentWord.example_greek);
+            }
         } else if (mode === 'gr-ru') {
+            // Front: Greek word. Show Greek example.
+            // Back: Russian translation. Show Russian example.
             playAudioIcon.classList.remove('hidden');
             playAudioIcon.classList.add('speaker-corner');
             if (playAudioIconBack) playAudioIconBack.classList.add('hidden');
             gameWordFront.textContent = currentWord.greek;
             gameTranslation.textContent = currentWord.russian;
+
+            if (cardExampleFront) {
+                cardExampleFront.textContent = currentWord.example_greek || '';
+                cardExampleFront.classList.toggle('hidden', !currentWord.example_greek);
+            }
+            if (cardExampleBack) {
+                cardExampleBack.textContent = currentWord.example_russian || '';
+                cardExampleBack.classList.toggle('hidden', !currentWord.example_russian);
+            }
         }
         gameCard.classList.remove('is-flipped');
         
