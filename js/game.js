@@ -909,6 +909,9 @@ window.Game = (function () {
         if (mixWordsCheckbox) {
             mixWordsCheckbox.addEventListener('change', () => {
                 saveSettings();
+                // Clear saved queue so the new mix setting is applied immediately
+                const stateKey = getStorageKey() + '_state';
+                localStorage.removeItem(stateKey);
                 startSession();
             });
         }
@@ -917,6 +920,9 @@ window.Game = (function () {
         if (shuffleWordsCheckbox) {
             shuffleWordsCheckbox.addEventListener('change', () => {
                 saveSettings();
+                // Clear saved queue so the new shuffle setting is applied immediately
+                const stateKey = getStorageKey() + '_state';
+                localStorage.removeItem(stateKey);
                 startSession();
             });
         }
