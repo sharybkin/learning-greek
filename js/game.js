@@ -499,7 +499,7 @@ window.Game = (function () {
             lessonWordsSinceLastMix = loadedState.sinceMix || 0;
             
             seenUnlearnedWords = new Set((loadedState.seen || []).filter(id => {
-                return wordQueue.some(w => w.id === id);
+                return wordQueue.some(w => w.id === id && !w.isMixed);
             }));
 
             // Add any new unlearned words that are missing from the loaded queue
@@ -528,7 +528,7 @@ window.Game = (function () {
         totalWordsCount = sessionWords.length;
         learnedCount = sessionWords.length - unlearnedWords.length;
 
-        wordsRemainingInCycle = wordQueue.filter(w => !w.isMixed).length;
+        wordsRemainingInCycle = wordQueue.filter(w => !w.isMixed).length - seenUnlearnedWords.size;
         isTransitioning = false;
 
         updateProgress();
@@ -807,7 +807,7 @@ window.Game = (function () {
     function updateProgress() {
         const percent = totalWordsCount > 0 ? Math.round((learnedCount / totalWordsCount) * 100) : 0;
         const blueCount = learnedCount + seenUnlearnedWords.size;
-        const bluePercent = totalWordsCount > 0 ? Math.round((blueCount / totalWordsCount) * 100) : 0;
+        const bluePercent = totalWordsCount > 0 ? Math.min(100, Math.round((blueCount / totalWordsCount) * 100)) : 0;
         
         fcProgressText.textContent = `Выучено: ${learnedCount} / ${totalWordsCount}`;
         fcProgressFill.style.width = `${percent}%`;
@@ -1114,7 +1114,6 @@ window.Game = (function () {
                 learnedSet.delete(word.id);
                 saveLearnedSet(learnedSet);
                 learnedCount--;
-                seenUnlearnedWords.add(word.id); // Restore it back as seen but not learned
             } else {
                 const reviewKey = `fc_${currentGameMode}_review`;
                 try {
@@ -1138,6 +1137,8 @@ window.Game = (function () {
 
         // 3. Put the historical word explicitly back at the end so pop() picks it next
         wordQueue.push(word);
+        
+        wordsRemainingInCycle = wordQueue.filter(w => !w.isMixed).length - seenUnlearnedWords.size;
         
         isTransitioning = true;
         updateProgress();
