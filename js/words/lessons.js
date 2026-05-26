@@ -3478,3 +3478,1374 @@ window.LESSONS.push({
             example_russian: "Мне нужна новая машина.", exam: true }
     ]
 });
+
+window.LESSONS.push({
+    lesson: 11.1,
+    title: 'Основные слова',
+    words: [
+        {
+            greek: "καλώς (+ винит.παдеж)",
+            russian: "рад видеть (у себя)",
+            example_greek: "Καλώς τον φίλο μου!",
+            example_russian: "Добро пожаловать (рад видеть), мой друг!",
+            group: 1
+        },
+        {
+            greek: "τέτοιος",
+            russian: "такой",
+            example_greek: "Δεν θέλω τέτοιο πράγμα.",
+            example_russian: "Я не хочу такую вещь.",
+            group: 2, exam: true },
+        {
+            greek: "Πώς απ’ εδώ;",
+            russian: "какими судьбами?",
+            example_greek: "Καλώς τον! Πώς απ’ εδώ;",
+            example_russian: "Рад видеть! Какими судьбами?",
+            group: 2
+        },
+        {
+            greek: "ευχαρίστως",
+            russian: "с удовольствием",
+            example_greek: "Θέλω να πάω εκεί ευχαρίστως.",
+            example_russian: "Я хочу пойти туда с удовольствием.",
+            group: 1
+        },
+        {
+            greek: "ο δήμος",
+            russian: "мэрия",
+            example_greek: "Ο δήμος είναι στο κέντρο.",
+            example_russian: "Мэрия (муниципалитет) находится в центре.",
+            group: 2, exam: true },
+        {
+            greek: "ο υδραυλικός",
+            russian: "сантехник",
+            example_greek: "Ο υδραυλικός διορθώνει τη βρύση.",
+            example_russian: "Сантехник чинит кран.",
+            group: 2
+        },
+        {
+            greek: "το ενοίκιο",
+            russian: "оплата за аренду",
+            example_greek: "Πληρώνω το ενοίκιο για το διαμέρισμα.",
+            example_russian: "Я плачу аренду за квартиру.",
+            group: 1, exam: true },
+        {
+            greek: "τετραγωνικός",
+            russian: "квадратный",
+            example_greek: "Το δωμάτιο είναι είκοσι τετραγωνικά μέτρα.",
+            example_russian: "Комната площадью двадцать квадратных метров.",
+            group: 2
+        },
+        {
+            greek: "η λάμπα",
+            russian: "лампа",
+            example_greek: "Η λάμπα είναι στο τραπέζι.",
+            example_russian: "Лампа стоит на столе.",
+            group: 1
+        },
+        {
+            greek: "ο κλέφτης",
+            russian: "вор",
+            example_greek: "Ο κλέφτης παίρνει τα λεφτά.",
+            example_russian: "Вор забирает деньги.",
+            group: 2
+        },
+        {
+            greek: "εθνικός",
+            russian: "национальный",
+            example_greek: "Αυτή είναι η εθνική ομάδα.",
+            example_russian: "Это национальная команда.",
+            group: 2
+        },
+        {
+            greek: "τρομερός",
+            russian: "ужасный",
+            example_greek: "Έχει τρομερό θόρυβο στον δρόμο.",
+            example_russian: "На улице ужасный шум.",
+            group: 2
+        },
+        {
+            greek: "το μποτιλιάρισμα",
+            russian: "пробка (на дороге)",
+            example_greek: "Έχει τρομερό μποτιλιάρισμα στη λεωφόρο.",
+            example_russian: "На проспекте ужасная пробка.",
+            group: 2
+        },
+        {
+            greek: "η ουρά",
+            russian: "хвост, очередь",
+            example_greek: "Έχει μεγάλη ουρά στο ταμείο.",
+            example_russian: "В кассе большая очередь.",
+            group: 1, exam: true },
+        {
+            greek: "ο πανικός",
+            russian: "паника",
+            example_greek: "Δεν θέλω πανικό τώρα.",
+            example_russian: "Я не хочу паники сейчас.",
+            group: 2
+        },
+        {
+            greek: "θυμάμαι",
+            russian: "помнить",
+            example_greek: "Θυμάμαι το όνομά σου.",
+            example_russian: "Я помню твое имя.",
+            group: 1, exam: true },
+        {
+            greek: "φοβάμαι",
+            russian: "бояться",
+            example_greek: "Φοβάμαι τον κλέφτη.",
+            example_russian: "Я боюсь вора.",
+            group: 1, exam: true },
+        {
+            greek: "λυπάμαι",
+            russian: "жалеть",
+            example_greek: "Λυπάμαι για το πρόβλημα.",
+            example_russian: "Мне жаль (я сожалею) из-за этой проблемы.",
+            group: 1
+        },
+        {
+            greek: "η νοσταλγία",
+            russian: "ностальгия",
+            example_greek: "Έχω νοσταλγία για το χωριό μου.",
+            example_russian: "У меня ностальгия по моей деревне.",
+            group: 2
+        },
+        {
+            greek: "σκοτεινός",
+            russian: "тёмный",
+            example_greek: "Το υπόγειο είναι σκοτεινό.",
+            example_russian: "Подвал темный.",
+            group: 2
+        },
+        {
+            greek: "ο κατάλογος",
+            russian: "каталог",
+            example_greek: "Κοιτάζω τον κατάλογο στο μαγαζί.",
+            example_russian: "Я смотрю каталог в магазине.",
+            group: 2
+        },
+        {
+            greek: "το δυάρι",
+            russian: "квартира с 2 спальнями",
+            example_greek: "Ενοικιάζω ένα δυάρι στο κέντρο.",
+            example_russian: "Я снимаю двухкомнатную квартиру в центре.",
+            group: 2
+        },
+        {
+            greek: "δεύτερος",
+            russian: "второй",
+            example_greek: "Το δωμάτιο είναι στον δεύτερο όροφο.",
+            example_russian: "Комната находится на втором этаже.",
+            group: 1, exam: true },
+        {
+            greek: "η ερώτηση",
+            russian: "вопрос",
+            example_greek: "Έχω μια ερώτηση για το μάθημα.",
+            example_russian: "У меня есть вопрос по уроку.",
+            group: 1, exam: true },
+        {
+            greek: "προχωρώ",
+            russian: "продвигаться",
+            example_greek: "Προχωρώ ευθεία στον δρόμο.",
+            example_russian: "Я иду (продвигаюсь) прямо по дороге.",
+            group: 2, exam: true },
+        {
+            greek: "ευθεία",
+            russian: "прямо",
+            example_greek: "Πήγαινε όλο ευθεία.",
+            example_russian: "Иди все время прямо.",
+            group: 1
+        },
+        {
+            greek: "το στενό",
+            russian: "переулок",
+            example_greek: "Στρίβω στο πρώτο στενό.",
+            example_russian: "Поворачиваю в первый переулок.",
+            group: 2
+        },
+        {
+            greek: "στρίβω",
+            russian: "поворачивать",
+            example_greek: "Στρίβω αριστερά στη γωνία.",
+            example_russian: "Поворачиваю налево на углу.",
+            group: 1, exam: true },
+        {
+            greek: "η γωνιά",
+            russian: "угол",
+            example_greek: "Το περίπτερο είναι στη γωνία.",
+            example_russian: "Киоск находится на углу.",
+            group: 1
+        },
+        {
+            greek: "το φανάρι",
+            russian: "светофор",
+            example_greek: "Σταματάω στο κόκκινο φανάρι.",
+            example_russian: "Останавливаюсь на красный свет (светофор).",
+            group: 1, exam: true },
+        {
+            greek: "το υπόγειο",
+            russian: "подвал",
+            example_greek: "Η αποθήκη είναι στο υπόγειο.",
+            example_russian: "Кладовка находится в подвале.",
+            group: 2
+        },
+        {
+            greek: "το ισόγειο",
+            russian: "нулевой этаж",
+            example_greek: "Το κατάστημα είναι στο ισόγειο.",
+            example_russian: "Магазин находится на первом (нулевом) этаже.",
+            group: 1, exam: true },
+        {
+            greek: "η γκαρσονιέρα",
+            russian: "студия",
+            example_greek: "Η γκαρσονιέρα είναι μικρή και φτηνή.",
+            example_russian: "Квартира-студия маленькая и дешевая.",
+            group: 2
+        },
+        {
+            greek: "το στούντιο",
+            russian: "студия",
+            example_greek: "Θέλω ένα στούντιο για τον γιο μου.",
+            example_russian: "Я хочу студию для своего сына.",
+            group: 2
+        },
+        {
+            greek: "το τριάρι",
+            russian: "квартира с 3 спальнями",
+            example_greek: "Αυτό το τριάρι είναι πολύ μεγάλο.",
+            example_russian: "Эта трехкомнатная квартира очень большая.",
+            group: 2
+        },
+        {
+            greek: "το τεσσάρι",
+            russian: "квартира с 4 спальнями",
+            example_greek: "Ψάχνω για ένα τεσσάρι στην πόλη.",
+            example_russian: "Я ищу четырехкомнатную квартиру в городе.",
+            group: 2
+        },
+        {
+            greek: "η μεζονέτα",
+            russian: "мезонет",
+            example_greek: "Η μεζονέτα έχει δύο ορόφους.",
+            example_russian: "Мезонет имеет два этажа.",
+            group: 2
+        },
+        {
+            greek: "η μονοκατοικία",
+            russian: "дом",
+            example_greek: "Η μονοκατοικία έχει μεγάλο κήπο.",
+            example_russian: "Частный дом имеет большой сад.",
+            group: 2, exam: true },
+        {
+            greek: "η λεωφόρος",
+            russian: "проспект",
+            example_greek: "Η λεωφόρος έχει πολλή κίνηση.",
+            example_russian: "На проспекте сильное движение.",
+            group: 1, exam: true },
+        {
+            greek: "η παιδική χαρά",
+            russian: "детская игровая площадка",
+            example_greek: "Το παιδί παίζει στην παιδική χαρά.",
+            example_russian: "Ребенок играет на детской площадке.",
+            group: 1
+        },
+        {
+            greek: "η διάβαση",
+            russian: "переход",
+            example_greek: "Προσέχω στη διάβαση.",
+            example_russian: "Я внимателен на переходе.",
+            group: 2
+        },
+        {
+            greek: "αμέσως",
+            russian: "сразу",
+            example_greek: "Έρχομαι αμέσως στο γραφείο.",
+            example_russian: "Я сразу прихожу в офис.",
+            group: 1, exam: true },
+        {
+            greek: "το ρετιρέ",
+            russian: "пентхаус",
+            example_greek: "Το ρετιρέ έχει υπέροχη θέα.",
+            example_russian: "Пентхаус имеет чудесный вид.",
+            group: 3
+        },
+        {
+            greek: "η κρεβατοκάμαρα (το υπνοδωμάτιο)",
+            russian: "спальня",
+            example_greek: "Η κρεβατοκάμαρα είναι φωτεινή.",
+            example_russian: "Спальня светлая.",
+            group: 1
+        },
+        {
+            greek: "φωτεινός",
+            russian: "светлый",
+            example_greek: "Το σαλόνι είναι πολύ φωτεινό.",
+            example_russian: "Зал очень светлый.",
+            group: 2, exam: true },
+        {
+            greek: "κάπως",
+            russian: "как-то",
+            example_greek: "Το δωμάτιο είναι κάπως σκοτεινό.",
+            example_russian: "Комната как-то темновата.",
+            group: 2
+        },
+        {
+            greek: "το ντουλάπι",
+            russian: "шкафчик",
+            example_greek: "Το ποτήρι είναι στο ντουλάπι.",
+            example_russian: "Стакан в шкафчике.",
+            group: 1
+        },
+        {
+            greek: "το κλιματιστικό",
+            russian: "кондиционер",
+            example_greek: "Ανάβω το κλιματιστικό γιατί έχει ζέστη.",
+            example_russian: "Включаю кондиционер, потому что жарко.",
+            group: 1
+        },
+        {
+            greek: "όπως θέλετε",
+            russian: "как хотите",
+            example_greek: "Κάντε όλο όπως θέλετε.",
+            example_russian: "Делайте все, как хотите.",
+            group: 1
+        },
+        {
+            greek: "η τραπεζαρία",
+            russian: "столовая",
+            example_greek: "Το τραπέζι είναι στην τραπεζαρία.",
+            example_russian: "Стол находится в столовой.",
+            group: 2
+        },
+        {
+            greek: "η αποθήκη",
+            russian: "кладовка, склад",
+            example_greek: "Τα πράγματα είναι στην αποθήκη.",
+            example_russian: "Вещи находятся в кладовке.",
+            group: 2
+        },
+        {
+            greek: "το καθιστικό",
+            russian: "жилая комната",
+            example_greek: "Βλέπω τηλεόραση στο καθιστικό.",
+            example_russian: "Я смотрю телевизор в жилой комнате.",
+            group: 2
+        },
+        {
+            greek: "το συρτάρι",
+            russian: "ящик",
+            example_greek: "Το στυλό είναι στο συρτάρι.",
+            example_russian: "Ручка в ящике.",
+            group: 1
+        },
+        {
+            greek: "η βρύση",
+            russian: "кран",
+            example_greek: "Η βρύση είναι ανοικτή.",
+            example_russian: "Кран открыт.",
+            group: 1, exam: true },
+        {
+            greek: "ο νεροχύτης",
+            russian: "раковина (на кухне)",
+            example_greek: "Τα πιάта είναι στον νεροχύτη.",
+            example_russian: "Посуда в раковине.",
+            group: 1
+        },
+        {
+            greek: "το κομοδίνο",
+            russian: "тумбочка",
+            example_greek: "Το ρολόι είναι στο κομοδίνο.",
+            example_russian: "Часы на тумбочке.",
+            group: 2
+        },
+        {
+            greek: "η ντουλάπα",
+            russian: "шкаф",
+            example_greek: "Τα ρούха είναι στην ντουλάπα.",
+            example_russian: "Одежда в шкафу.",
+            group: 1, exam: true },
+        {
+            greek: "ο καθρέφτης",
+            russian: "зеркало",
+            example_greek: "Κοιτάζω τον καθρέφτη.",
+            example_russian: "Я смотрю в зеркало.",
+            group: 1
+        },
+        {
+            greek: "η πολυθρόνα",
+            russian: "кресло",
+            example_greek: "Η πολυθρόνα είναι πολύ άνετη.",
+            example_russian: "Кресло очень удобное.",
+            group: 2
+        },
+        {
+            greek: "το χαλί",
+            russian: "ковёр",
+            example_greek: "Το χαλί στο πάτωμα είναι πράσινο.",
+            example_russian: "Ковер на полу зеленый.",
+            group: 2
+        },
+        {
+            greek: "το φωτιστικό",
+            russian: "осветительный прибор",
+            example_greek: "Αγοράζω ένα μοντέρνο φωτιστικό.",
+            example_russian: "Я покупаю современный светильник.",
+            group: 2
+        },
+        {
+            greek: "οι κουρτίνες",
+            russian: "занавеси",
+            example_greek: "Κλείνω τις κουρτίνες το βράδυ.",
+            example_russian: "Закрываю занавески вечером.",
+            group: 2
+        },
+        {
+            greek: "η μπανιέρα",
+            russian: "ванна",
+            example_greek: "Η μπανιέρα είναι καθαρή.",
+            example_russian: "Вαννα чистая.",
+            group: 2
+        },
+        {
+            greek: "ο νιπτήρας",
+            russian: "раковина (в туалете / ванной)",
+            example_greek: "Πλένω τα χέρια μου στον νιπτήρα.",
+            example_russian: "Я мою руки в раковине.",
+            group: 1
+        },
+        {
+            greek: "η λεκάνη τουαλέτας",
+            russian: "унитаз",
+            example_greek: "Η λεκάνη τουαλέτας είναι καινούργια.",
+            example_russian: "Унитаз новый.",
+            group: 2
+        },
+        {
+            greek: "το μπολ",
+            russian: "миска",
+            example_greek: "Το μπολ είναι στο τραπέζι.",
+            example_russian: "Миска на столе.",
+            group: 1
+        },
+        {
+            greek: "το αποχωρητήριο",
+            russian: "туалет",
+            example_greek: "Πού είναι το αποχωρητήριο;",
+            example_russian: "Где находится туалет?",
+            group: 1
+        },
+        {
+            greek: "επιπλωμένος",
+            russian: "меблированный",
+            example_greek: "Το διαμέρισμα είναι πλήρως επιπλωμένο.",
+            example_russian: "Квартира полностью меблирована.",
+            group: 2
+        },
+        {
+            greek: "η θέα",
+            russian: "вид",
+            example_greek: "Το ρετιρέ έχει θέα στη θάλασσα.",
+            example_russian: "Πентхаус имеет вид на море.",
+            group: 1
+        },
+        {
+            greek: "ο μεσίτης",
+            russian: "посредник",
+            example_greek: "Ο μεσίτης δείχνει το σπίτι.",
+            example_russian: "Риелтор показывает дом.",
+            group: 2
+        },
+        {
+            greek: "πλήρως",
+            russian: "полностью",
+            example_greek: "Το σπίτι είναι πλήρως ανακαινισμένο.",
+            example_russian: "Дом полностью отремонтирован.",
+            group: 2
+        },
+        {
+            greek: "η πρόσβαση",
+            russian: "доступ",
+            example_greek: "Το σπίτι έχει εύκολη πρόσβαση.",
+            example_russian: "К дому есть легкий доступ.",
+            group: 2
+        },
+        {
+            greek: "οι συγκοινωνίες",
+            russian: "транспорт",
+            example_greek: "Η περιοχή έχει καλές συγκοινωνίες.",
+            example_russian: "В районе хорошее транспортное сообщение.",
+            group: 2
+        },
+        {
+            greek: "ο ηλιακός θερμοσίφωνας",
+            russian: "солнечный нагреватель воды",
+            example_greek: "Έχουμε ηλιακό θερμοσίφωνα στη στέγη.",
+            example_russian: "У нас есть солнечный водонагреватель на крыше.",
+            group: 1
+        },
+        {
+            greek: "κατάλληλος",
+            russian: "подходящий",
+            example_greek: "Αυτή η δουλειά είναι κατάλληλη για μένα.",
+            example_russian: "Эта работа мне подходит.",
+            group: 2
+        },
+        {
+            greek: "η κατασκευή",
+            russian: "конструкция, сооружение, строительство",
+            example_greek: "Η οικοδομή είναι νέα κατασκευή.",
+            example_russian: "Здание — это новая постройка.",
+            group: 2
+        },
+        {
+            greek: "το ιατρείο",
+            russian: "кабинет врача",
+            example_greek: "Το ιατρείο είναι στον πρώτο όροφο.",
+            example_russian: "Кабинет врача находится на втором (первом) этаже.",
+            group: 2, exam: true },
+        {
+            greek: "γωνιακός",
+            russian: "угловой",
+            example_greek: "Το διαμέρισμα είναι γωνιακό και φωτεινό.",
+            example_russian: "Квартира угловая и светлая.",
+            group: 2
+        },
+        {
+            greek: "οι ηλεκτρικές συσκευές",
+            russian: "электроприборы",
+            example_greek: "Η κουζίνα έχει όλες τις ηλεκτρικές συσκευές.",
+            example_russian: "На кухне есть все электроприборы.",
+            group: 2
+        },
+        {
+            greek: "γουστάρω",
+            russian: "хотеть, нравиться",
+            example_greek: "Γουστάρω πολύ αυτή τη μουσική.",
+            example_russian: "Мне очень нравится эта музыка.",
+            group: 1
+        },
+        {
+            greek: "άπειρος",
+            russian: "бесчисленный, неопытный",
+            example_greek: "Ο υπάλληλος είναι άπειρος ακόμα.",
+            example_russian: "Сотрудник пока еще неопытен.",
+            group: 2
+        },
+        {
+            greek: "το ψάξιμο",
+            russian: "поиск",
+            example_greek: "Το ψάξιμο για σπίτι τελειώνει.",
+            example_russian: "Поиски дома заканчиваются.",
+            group: 2
+        },
+        {
+            greek: "το μυαλό",
+            russian: "мозг, ум",
+            example_greek: "Έχει πολύ μυαλό αυτό το παιδί.",
+            example_russian: "У этого ребенка много ума (он очень умный).",
+            group: 2
+        },
+        {
+            greek: "η τέντα",
+            russian: "тент, навес",
+            example_greek: "Η τέντα είναι για τον ήλιο.",
+            example_russian: "Навес (тент) нужен от солнца.",
+            group: 2
+        },
+        {
+            greek: "κύριος",
+            russian: "главный",
+            example_greek: "Αυτό το κύριο πρόβλημα.", // Wait, prompt says: "Αυτό είναι το κύριο πρόβλημα."
+            example_greek: "Αυτό είναι το κύριο πρόβλημα.",
+            example_russian: "Это главная проблема.",
+            group: 2, exam: true },
+        {
+            greek: "η πόρτα ασφαλείας",
+            russian: "дверь с замками для безопасности",
+            example_greek: "Το σπίτι έχει πόρτα ασφαλείας.",
+            example_russian: "В доме установлена бронированная (защитная) дверь.",
+            group: 2
+        },
+        {
+            greek: "πόσο χαίρομαι που",
+            russian: "как я рад что",
+            example_greek: "Πόσο χαίρομαι που είσαι εδώ!",
+            example_russian: "Как я рад, что ты здесь!",
+            group: 1
+        },
+        {
+            greek: "επιτέλους",
+            russian: "наконец-то",
+            example_greek: "Επιτέλους, το ταξίδι αρχίζει!",
+            example_russian: "Наконец-то путешествие начинается!",
+            group: 1
+        },
+        {
+            greek: "ξανά",
+            russian: "снова",
+            example_greek: "Πηγαίνω εκεί ξανά αύριο.",
+            example_russian: "Я снова иду туда завтра.",
+            group: 1, exam: true },
+        {
+            greek: "φαίνομαι",
+            russian: "казаться",
+            example_greek: "Αυτό το σπίτι φαίνεται ωραίο.",
+            example_russian: "Этот дом кажется красивым.",
+            group: 2
+        },
+        {
+            greek: "σύντομα",
+            russian: "кратко, скоро, в скором времени",
+            example_greek: "Έρχομαι σύντομα κοντά σας.",
+            example_russian: "Я скоро приеду к вам.",
+            group: 1
+        },
+        {
+            greek: "το θυροτηλέφωνο",
+            russian: "домофон",
+            example_greek: "Το θυροτηλέφωνο δεν λειτουργεί.",
+            example_russian: "Домофон не работает.",
+            group: 2
+        },
+        {
+            greek: "η θέση πάρκινγκ",
+            russian: "парковка",
+            example_greek: "Το διαμέρισμα έχει θέση πάρκινγκ.",
+            example_russian: "У квартиры есть парковочное место.",
+            group: 1
+        },
+        {
+            greek: "ανακαινισμένος",
+            russian: "отремонтированный",
+            example_greek: "Το σπίτι είναι πλήρως ανακαινισμένο.",
+            example_russian: "Дом полностью отремонтирован.",
+            group: 2
+        },
+        {
+            greek: "φρεσκοβαμμένος",
+            russian: "вежеокрашенный", // Wait, user wrote "свежеокрашенный"
+            example_russian: "свежеокрашенный",
+            example_greek: "Το δωμάτιο είναι φρεσκοβαμμένο.",
+            group: 2
+        },
+        {
+            greek: "τα κοινόχρηστα",
+            russian: "плата за общее пользование (подъезд)",
+            example_greek: "Πληρώνω τα κοινόχρηστα κάθε μήνα.",
+            example_russian: "Я плачу за общедомовые нужды каждый месяц.",
+            group: 1
+        },
+        {
+            greek: "η σοφίτα",
+            russian: "мансарда",
+            example_greek: "Το δωμάτιο στη σοφίτα είναι μικρό.",
+            example_russian: "Комната в мансарде маленькая.",
+            group: 3
+        },
+        {
+            greek: "η σκεπή (η στέγη)",
+            russian: "крыша",
+            example_greek: "Η σκεπή έχει πρόβλημα.",
+            example_russian: "С крышей есть проблема.",
+            group: 2
+        },
+        {
+            greek: "τα κεраμίδια", // Wait, prompt has: "τα κεραμίδια" with Greek rho. Let's make sure it is rho: "τα κεραμίδια"
+            greek: "τα κεραμίδια",
+            russian: "черепица",
+            example_greek: "Τα κεραμίδια είναι κόκκινα.",
+            example_russian: "Черепица красная.",
+            group: 3
+        },
+        {
+            greek: "τα κάγκελα",
+            russian: "решётка",
+            example_greek: "Το παράθυρο έχει κάγκελα.",
+            example_russian: "На окне есть решетки.",
+            group: 2
+        },
+        {
+            greek: "ο φράκτης",
+            russian: "забор, ограда",
+            example_greek: "Ο φράκτης είναι ξύλινος.",
+            example_russian: "Забор деревянный.",
+            group: 2
+        },
+        {
+            greek: "η αυλή",
+            russian: "двор",
+            example_greek: "Τα παιδιά παίζουν στην αυλή.",
+            example_russian: "Дети играют во дворе.",
+            group: 1, exam: true },
+        {
+            greek: "η πισίνα",
+            russian: "бассейн",
+            example_greek: "Κολυμπώ στην πισίνα.",
+            example_russian: "Я плаваю в бассейн.", // Wait, prompt says: "Я плаваю в бассейне."
+            example_russian: "Я плаваю в бассейне.",
+            group: 2
+        },
+        {
+            greek: "το παγκάκι",
+            russian: "лавочка",
+            example_greek: "Κάθομαι στο παγκάκι στο πάρκο.",
+            example_russian: "Я сижу на лавочке в парке.",
+            group: 1
+        },
+        {
+            greek: "η κούνια",
+            russian: "качели",
+            example_greek: "Το παιδί είναι στην κούνια.",
+            example_russian: "Ребенок на качелях.",
+            group: 2
+        },
+        {
+            greek: "ο ιδιοκτήτης / η ιδιοκτήτρια",
+            russian: "владелец",
+            example_greek: "Ο ιδιοκτήτης είναι πολύ ευγενικός.",
+            example_russian: "Владелец очень вежлив.",
+            group: 1
+        },
+        {
+            greek: "ο ενοικιαστής / η ενοικιάστρια",
+            russian: "квартиросъёмщик",
+            example_greek: "Ο ενοικιαστής μένει στο διαμέρισμα.",
+            example_russian: "Арендатор живет в квартире.",
+            group: 1
+        },
+        {
+            greek: "μετακομίζω",
+            russian: "переезжать",
+            example_greek: "Μετακομίζω σε νέο σπίτι.",
+            example_russian: "Я переезжаю в новый дом.",
+            group: 1, exam: true },
+        {
+            greek: "η πέτρα",
+            russian: "камень",
+            example_greek: "Αυτή η πέτρα είναι μεγάλη.",
+            example_russian: "Этот камень большой.",
+            group: 2
+        },
+        {
+            greek: "πέτρινος",
+            russian: "каменный",
+            example_greek: "Το σπίτι είναι πέτρινο και παλιό.",
+            example_russian: "Дом каменный и старый.",
+            group: 2
+        },
+        {
+            greek: "το ξύλο",
+            russian: "дерево",
+            example_greek: "Το τραπέζι είναι από ξύλο.",
+            example_russian: "Стол сделан из дерева.",
+            group: 2
+        },
+        {
+            greek: "ξύλινος",
+            russian: "деревянный",
+            example_greek: "Η καρέκλα είναι ξύλινη.",
+            example_russian: "Стул деревянный.",
+            group: 2
+        },
+        {
+            greek: "το τούβλο",
+            russian: "кирпич",
+            example_greek: "Η οικοδομή έχει πολλά τούβλα.",
+            example_russian: "На стройке много кирпичей.",
+            group: 3
+        },
+        {
+            greek: "ενδιαφέρομαι",
+            russian: "интересоваться",
+            example_greek: "Ενδιαφέρομαι για τη δουλειά.",
+            example_russian: "Я интересуюсь этой работой.",
+            group: 1
+        },
+        {
+            greek: "η ευκαιρία",
+            russian: "удобный случай, шанс",
+            example_greek: "Αυτό το σπίτι είναι μεγάλη ευκαιρία.",
+            example_russian: "Этот дом — отличная возможность (шанс).",
+            group: 2, exam: true },
+        {
+            greek: "στρογγυλός",
+            russian: "круглый",
+            example_greek: "Το τραπέζι στην κουζίνα είναι στρογγυλό.",
+            example_russian: "Стол на кухне круглый.",
+            group: 2
+        },
+        {
+            greek: "ονειρεύομαι",
+            russian: "мечтать",
+            example_greek: "Ονειρεύομαι ένα ταξίδι στην Ελλάδα.",
+            example_russian: "Я мечтаю о путешествии в Грецию.",
+            group: 2, exam: true },
+        {
+            greek: "βιάζομαι",
+            russian: "спешить",
+            example_greek: "Φεύγω τώρα γιατί βιάζομαι.",
+            example_russian: "Я сейчас ухожу, потому что спешу.",
+            group: 1
+        },
+        {
+            greek: "αγχώνομαι",
+            russian: "волноваться",
+            example_greek: "Αγχώνομαι για το διαγώνισμα.",
+            example_russian: "Я волнуюсь из-за контрольной.",
+            group: 2
+        },
+        {
+            greek: "αισθάνομαι",
+            russian: "чувствовать",
+            example_greek: "Αισθάνομαι κουρασμένος σήμερα.",
+            example_russian: "Я чувствую себя уставшим сегодня.",
+            group: 1
+        },
+        {
+            greek: "σιχαίνομαι",
+            russian: "испытывать отвращение, брезговать",
+            example_greek: "Σιχαίνομαι τη βροχή.",
+            example_russian: "Я терпеть не могу (испытываю отвращение к) дождь.",
+            group: 2
+        },
+        {
+            greek: "αδέσποτος",
+            russian: "бездомный (животное)",
+            example_greek: "Βλέπω έναν αδέσποτο σκύλο.",
+            example_russian: "Я вижу бездомную собаку.",
+            group: 2
+        },
+        {
+            greek: "θετικός",
+            russian: "положительный",
+            example_greek: "Έχω μια θετική ιδέα.",
+            example_russian: "У меня есть положительная идея.",
+            group: 2
+        },
+        {
+            greek: "το σημείο",
+            russian: "точка, пункт",
+            example_greek: "Το σημείο είναι στον χάρτη.",
+            example_russian: "Эта точка находится на карте.",
+            group: 2
+        },
+        {
+            greek: "προηγούμενος",
+            russian: "предыдущий",
+            example_greek: "Ο προηγούμενος ενοικιαστής έφυγε.",
+            example_russian: "Предыдущий жилец уехал.",
+            group: 2
+        },
+        {
+            greek: "η απόφαση",
+            russian: "решение",
+            example_greek: "Αυτή είναι η απόφαση για το σπίτι.",
+            example_russian: "Это решение по поводу дома.",
+            group: 2
+        }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 11.2,
+    title: 'Дополнительные слова к Р.П.',
+    words: [
+        {
+            greek: "το εξώφυλλο",
+            russian: "обложка",
+            group: 2,
+            example_greek: "Βλέπω το εξώφυλλο.",
+            example_russian: "Я вижу обложку."
+        },
+        {
+            greek: "τα υποδήματα",
+            russian: "обувь",
+            group: 2,
+            example_greek: "Τα υποδήματα είναι ακριβά.",
+            example_russian: "Обувь дорогая."
+        },
+        {
+            greek: "το κτήριο",
+            russian: "здание",
+            group: 2,
+            example_greek: "Το κτήριο είναι μεγάλο.",
+            example_russian: "Здание большое."
+        },
+        {
+            greek: "η χρήση",
+            russian: "использование",
+            group: 2,
+            example_greek: "Η χρήση είναι εύκολη.",
+            example_russian: "Использование легкое."
+        },
+        {
+            greek: "η κριτική",
+            russian: "критика",
+            group: 2,
+            example_greek: "Η κριτική είναι αυστηρή.",
+            example_russian: "Критика строгая."
+        },
+        {
+            greek: "κατηγορώ",
+            russian: "обвинять",
+            group: 2,
+            example_greek: "Ο κύριος κατηγορεί.",
+            example_russian: "Господин обвиняет."
+        },
+        {
+            greek: "ο πρόεδρος",
+            russian: "президент",
+            group: 2,
+            example_greek: "Ο πρόεδρος είναι έξυπνος.",
+            example_russian: "Президент умный."
+        },
+        {
+            greek: "το εισόδημα",
+            russian: "доход",
+            group: 2,
+            example_greek: "Το εισόδημα είναι μεγάλο.",
+            example_russian: "Доход большой."
+        },
+        {
+            greek: "η Μεσόγειος",
+            russian: "Средиземное море, Средиземноморье",
+            group: 3,
+            example_greek: "Η Μεσόγειος είναι όμορφη.",
+            example_russian: "Средиземное море красивое."
+        },
+        {
+            greek: "προσφέρω",
+            russian: "предоставлять, преподносить",
+            group: 2,
+            example_greek: "Ο φίλος προσφέρει βοήθεια.",
+            example_russian: "Друг предоставляет помощь.", exam: true },
+        {
+            greek: "άριστος",
+            russian: "отличный",
+            group: 2,
+            example_greek: "Ο γιατρός είναι άριστος.",
+            example_russian: "Врач отличный."
+        },
+        {
+            greek: "η ποιότητα",
+            russian: "качество",
+            group: 2,
+            example_greek: "Η ποιότητα είναι καλή.",
+            example_russian: "Качество хорошее."
+        },
+        {
+            greek: "ο κάτοχος",
+            russian: "владелец",
+            group: 2,
+            example_greek: "Ο κάτοχος είναι εδώ.",
+            example_russian: "Владелец здесь."
+        },
+        {
+            greek: "η παράσταση",
+            russian: "спектакль",
+            group: 2,
+            example_greek: "Η παράσταση αρχίζει.",
+            example_russian: "Спектакль начинается."
+        },
+        {
+            greek: "τα χρωματιστά",
+            russian: "цветные карандаши",
+            group: 2,
+            example_greek: "Έχω τα χρωματιστά.",
+            example_russian: "У меня есть цветные карандаши."
+        },
+        {
+            greek: "ο επιστήμονας",
+            russian: "ученый",
+            group: 2,
+            example_greek: "Ο επιστήμονας διαβάζει το βιβλίο.",
+            example_russian: "Ученый читает книгу."
+        },
+        {
+            greek: "πεντάστερος",
+            russian: "пятизвездочный",
+            group: 2,
+            example_greek: "Το ξενοδοχείο είναι πεντάστερο.",
+            example_russian: "Гостиница пятизвездочная."
+        },
+        {
+            greek: "το τέλος",
+            russian: "конец",
+            group: 1,
+            example_greek: "Το τέλος είναι καλό.",
+            example_russian: "Конец хороший.", exam: true },
+        {
+            greek: "η καριέρα",
+            russian: "карьера",
+            group: 2,
+            example_greek: "Η καριέρα είναι μεγάλη.",
+            example_russian: "Карьера большая."
+        },
+        {
+            greek: "οι συνομιλίες, οι διαπραγмаτεύσεις",
+            russian: "переговоры",
+            group: 2,
+            example_greek: "Οι συνομιλίες αρχίζουν.",
+            example_russian: "Переговоры начинаются."
+        },
+        {
+            greek: "η σημασία",
+            russian: "значение",
+            group: 2,
+            example_greek: "Η σημασία είναι μεγάλη.",
+            example_russian: "Значение большое."
+        },
+        {
+            greek: "η συνάντηση",
+            russian: "встреча",
+            group: 2,
+            example_greek: "Η συνάντηση είναι αύριο.",
+            example_russian: "Встреча завтра.", exam: true },
+        {
+            greek: "ο επιχειρηματίας",
+            russian: "предприниматель",
+            group: 2,
+            example_greek: "Ο επιχειρηματίας έχει λεφτά.",
+            example_russian: "У предпринимателя есть деньги."
+        },
+        {
+            greek: "σέβομαι",
+            russian: "уважать",
+            group: 2,
+            example_greek: "Σέβομαι τον δάσκαλο.",
+            example_russian: "Я уважаю учителя.", exam: true },
+        {
+            greek: "ο πολίτης",
+            russian: "гражданин",
+            group: 2,
+            example_greek: "Ο πολίτης πληρώνει.",
+            example_russian: "Гражданин платит."
+        },
+        {
+            greek: "το έγγραφο",
+            russian: "документ",
+            group: 2,
+            example_greek: "Διαβάζω το έγγραφο.",
+            example_russian: "Я читаю документ."
+        },
+        {
+            greek: "ο κάτοικος",
+            russian: "житель",
+            group: 2,
+            example_greek: "Ο κάτοικος μένει στο νησί.",
+            example_russian: "Житель живет на острове."
+        },
+        {
+            greek: "ο κανόνας",
+            russian: "правило",
+            group: 2,
+            example_greek: "Ο κανόνας είναι αυστηρός.",
+            example_russian: "Правило строгое."
+        },
+        {
+            greek: "ελέγχω",
+            russian: "проверять",
+            group: 2,
+            example_greek: "Ελέγχω το διαγώνισμα.",
+            example_russian: "Я проверяю контрольную."
+        },
+        {
+            greek: "το εμπόρευμα",
+            russian: "товар",
+            group: 2,
+            example_greek: "Το εμπόρευμα είναι ακριβό.",
+            example_russian: "Товар дорогой."
+        },
+        {
+            greek: "τα στοιχεία",
+            russian: "данные",
+            group: 2,
+            example_greek: "Διαβάζω τα στοιχεία.",
+            example_russian: "Я читаю данные."
+        },
+        {
+            greek: "η ανθοδέσμη",
+            russian: "букет",
+            group: 2,
+            example_greek: "Η ανθοδέσμη είναι όμορφη.",
+            example_russian: "Букет красивый."
+        },
+        {
+            greek: "γνωρίζω",
+            russian: "знакомить, знать",
+            group: 1,
+            example_greek: "Γνωρίζω τον κύριο.",
+            example_russian: "Я знаком с господином."
+        },
+        {
+            greek: "το μοναστήρι, η μονή",
+            russian: "монастырь",
+            group: 3,
+            example_greek: "Το μοναστήρι είναι παλιό.",
+            example_russian: "Монастырь старый."
+        },
+        {
+            greek: "η αγορά",
+            russian: "покупка, рынок",
+            group: 1,
+            example_greek: "Η αγορά είναι μεγάλη.",
+            example_russian: "Рынок большой.", exam: true },
+        {
+            greek: "η επιτυχία",
+            russian: "успех",
+            group: 2,
+            example_greek: "Η επιτυχία είναι μεγάλη.",
+            example_russian: "Успех большой.", exam: true },
+        {
+            greek: "ο πληθυσμός",
+            russian: "население",
+            group: 2,
+            example_greek: "Ο πληθυσμός είναι μεγάλος.",
+            example_russian: "Население большое."
+        },
+        {
+            greek: "το οικόπεδο",
+            russian: "участок земли",
+            group: 2,
+            example_greek: "Αγοράζω το οικόπεδο.",
+            example_russian: "Я покупаю участок земли."
+        },
+        {
+            greek: "αδιαφορώ",
+            russian: "быть безразличным",
+            group: 2,
+            example_greek: "Ο πελάτης αδιαφορεί.",
+            example_russian: "Клиент безразличен."
+        },
+        {
+            greek: "η μυρωδιά",
+            russian: "запах",
+            group: 2,
+            example_greek: "Η μυρωδιά είναι καλή.",
+            example_russian: "Запах хороший."
+        },
+        {
+            greek: "η οδηγία",
+            russian: "директива, инструкция",
+            group: 2,
+            example_greek: "Διαβάζω την οδηγία.",
+            example_russian: "Я читаю инструкцию.", exam: true },
+        {
+            greek: "ήσυχος",
+            russian: "спокойный",
+            group: 1,
+            example_greek: "Ο άνθρωπος είναι ήσυχος.",
+            example_russian: "Человек спокойный.", exam: true },
+        {
+            greek: "η κοινωνία",
+            russian: "общество",
+            group: 2,
+            example_greek: "Η κοινωνία είναι σύγχρονη.",
+            example_russian: "Общество современное."
+        }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 11.3,
+    title: 'Дополнительные слова (р.п. мн.ч.)',
+    words: [
+        {
+            greek: "η προστασία",
+            russian: "защита, охрана",
+            group: 2,
+            example_greek: "Το παιδί χρειάζεται προστασία.",
+            example_russian: "Ребёнок нуждается в защите.", exam: true },
+        {
+            greek: "ο ξεναγός",
+            russian: "гид",
+            group: 2,
+            example_greek: "Ο ξεναγός δείχνει το μουσείο.",
+            example_russian: "Гид показывает музей."
+        },
+        {
+            greek: "η λύση",
+            russian: "решение",
+            group: 2,
+            example_greek: "Βρίσκω τη λύση για το πρόβλημα.",
+            example_russian: "Я нахожу решение для проблемы.", exam: true },
+        {
+            greek: "η μελέτη",
+            russian: "изучение",
+            group: 2,
+            example_greek: "Η μελέτη είναι δύσκολη.",
+            example_russian: "Изучение трудное."
+        },
+        {
+            greek: "το εξωτερικό",
+            russian: "территория за пределами страны",
+            group: 2,
+            example_greek: "Ταξιδεύω στο εξωτερικό.",
+            example_russian: "Я путешествую за границу."
+        },
+        {
+            greek: "το στολίδι",
+            russian: "украшение",
+            group: 2,
+            example_greek: "Αγοράζω ένα ωραίο στολίδι.",
+            example_russian: "Я покупаю красивое украшение."
+        },
+        {
+            greek: "το λογιστήριο",
+            russian: "бухгалтерия",
+            group: 2,
+            example_greek: "Δουλεύω στο λογιστήριο.",
+            example_russian: "Я работаю в бухгалтерии."
+        },
+        {
+            greek: "η νίκη",
+            russian: "победа",
+            group: 2,
+            example_greek: "Η ομάδα θέλει τη νίκη.",
+            example_russian: "Команда хочет победу.", exam: true },
+        {
+            greek: "το πρωτάθλημα",
+            russian: "чемпионат",
+            group: 2,
+            example_greek: "Βλέπω το πρωτάθλημα ποδοσφαίρου.",
+            example_russian: "Я смотрю чемпионат по футболу."
+        },
+        {
+            greek: "αλλάζω",
+            russian: "менять",
+            group: 1,
+            example_greek: "Αλλάζω το παλιό αυτοκίνητο.",
+            example_russian: "Я меняю старую машину.", exam: true },
+        {
+            greek: "ο λαός",
+            russian: "народ",
+            group: 2,
+            example_greek: "Ο λαός θέλει δουλειά.",
+            example_russian: "Народ хочет работу."
+        },
+        {
+            greek: "η Ευρωπαϊκή Ένωση",
+            russian: "Евросоюз",
+            group: 2,
+            example_greek: "Η Ελλάδα είναι στην Ευρωπαϊκή Ένωση.",
+            example_russian: "Греция находится в Евросоюзе."
+        },
+        {
+            greek: "η ασθένεια",
+            russian: "заболевание",
+            group: 2,
+            example_greek: "Ο γιατρός ξέρει την ασθένεια.",
+            example_russian: "Врач знает это заболевание."
+        },
+        {
+            greek: "η θεραπεία",
+            russian: "лечение",
+            group: 2,
+            example_greek: "Κάνω θεραπεία στο νοσοκομείο.",
+            example_russian: "Я прохожу лечение в больнице."
+        },
+        {
+            greek: "σημερινός",
+            russian: "сегодняшний",
+            group: 1,
+            example_greek: "Το σημερινό μάθημα είναι εύκολο.",
+            example_russian: "Сегодняшний урок легкий."
+        },
+        {
+            greek: "το άρθρο",
+            russian: "статья",
+            group: 2,
+            example_greek: "Διαβάζω το άρθρο στην εφημερίδα.",
+            example_russian: "Я читаю статью в газете.", exam: true },
+        {
+            greek: "ο ωκεανός",
+            russian: "океан",
+            group: 2,
+            example_greek: "Ο ωκεανός είναι μεγάλος.",
+            example_russian: "Океан большой."
+        },
+        {
+            greek: "το αποτέλεσμα",
+            russian: "результат",
+            group: 2,
+            example_greek: "Το τεστ έχει καλό αποτέλεσμα.",
+            example_russian: "У теста хороший результат."
+        }
+    ]
+});
+
+window.LESSONS.push({
+    lesson: 11.4,
+    title: 'На Уроке',
+    words: [
+        {
+            greek: "η στολή",
+            russian: "униформа",
+            group: 2,
+            example_greek: "Ο γιατρός έχει μια άσπρη στολή.",
+            example_russian: "У врача белая униформа."
+        },
+        {
+            greek: "η ποδιά",
+            russian: "фартук",
+            group: 2,
+            example_greek: "Ο μάγειρας φοράει μια καθαρή ποδιά.",
+            example_russian: "Повар носит чистый фартук."
+        },
+        {
+            greek: "το χαμόγελο",
+            russian: "улыбка",
+            group: 2,
+            example_greek: "Η κοπέλα έχει ένα όμορφο χαμόγελο.",
+            example_russian: "У девушки красивая улыбка."
+        },
+        {
+            greek: "χαμογελώ (2.1)",
+            russian: "улыбаться",
+            group: 2,
+            example_greek: "Το παιδί χαμογελάει πάντα.",
+            example_russian: "Ребёнок всегда улыбается."
+        },
+        {
+            greek: "κρατώ (2.1)",
+            russian: "держать",
+            group: 1,
+            example_greek: "Η γυναίκα κρατάει την τσάντα.",
+            example_russian: "Женщина держит сумку.", exam: true },
+        {
+            greek: "η κουτάλα",
+            russian: "половник",
+            group: 3,
+            example_greek: "Η κουτάλα είναι στην κουζίνα.",
+            example_russian: "Половник находится на кухне."
+        },
+        {
+            greek: "ο δίσκος",
+            russian: "поднос",
+            group: 2,
+            example_greek: "Ο σερβιτόρος έχει έναν δίσκο.",
+            example_russian: "У официанта есть поднос."
+        },
+        {
+            greek: "το εργαλείο",
+            russian: "инструмент",
+            group: 2,
+            example_greek: "Ο εργάτης χρειάζεται το εργαλείο.",
+            example_russian: "Рабочему нужен инструмент."
+        },
+        {
+            greek: "το κράνος",
+            russian: "шлем",
+            group: 2,
+            example_greek: "Ο οδηγός φοράει το κράνος.",
+            example_russian: "Водитель надевает шлем."
+        },
+        {
+            greek: "η πετσέτα",
+            russian: "полотенце",
+            group: 1,
+            example_greek: "Η πετσέτα είναι στο μπάνιο.",
+            example_russian: "Полотенце в ванной."
+        }
+    ]
+});
