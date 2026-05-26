@@ -98,6 +98,8 @@
     background-color: rgba(255, 255, 255, 0.92);
     white-space: nowrap;
     /* Prevent line wrap */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Ensure it fits inside tiny mobile screens without overflow */

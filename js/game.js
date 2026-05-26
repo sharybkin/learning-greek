@@ -1236,15 +1236,29 @@ window.Game = (function () {
             const opacityRemember = Math.min(1, Math.max(0, dragX / 100)); // Fade completely in by 100px
             const opacityForget = Math.min(1, Math.max(0, -dragX / 100));
             
+            // Only show/update swipe indicators on the active face to prevent mirroring leaks on iOS Safari
+            const isFlipped = gameCard.classList.contains('is-flipped');
+            const activeFaceClass = isFlipped ? '.card-face-back' : '.card-face-front';
+
             swipeIndicatorsRemember.forEach(el => {
-                el.style.opacity = opacityRemember;
-                // Added translateZ(1px) to guarantee layer stacking over the card surface on Safari
-                el.style.transform = `translate(-50%, -50%) translateZ(1px) rotate(-15deg) scale(${0.8 + opacityRemember * 0.3})`;
+                if (el.closest(activeFaceClass)) {
+                    el.style.opacity = opacityRemember;
+                    // Added translateZ(1px) to guarantee layer stacking over the card surface on Safari
+                    el.style.transform = `translate(-50%, -50%) translateZ(1px) rotate(-15deg) scale(${0.8 + opacityRemember * 0.3})`;
+                } else {
+                    el.style.opacity = '0';
+                    el.style.transform = '';
+                }
             });
             
             swipeIndicatorsForget.forEach(el => {
-                el.style.opacity = opacityForget;
-                el.style.transform = `translate(-50%, -50%) translateZ(1px) rotate(15deg) scale(${0.8 + opacityForget * 0.3})`;
+                if (el.closest(activeFaceClass)) {
+                    el.style.opacity = opacityForget;
+                    el.style.transform = `translate(-50%, -50%) translateZ(1px) rotate(15deg) scale(${0.8 + opacityForget * 0.3})`;
+                } else {
+                    el.style.opacity = '0';
+                    el.style.transform = '';
+                }
             });
         }
 
