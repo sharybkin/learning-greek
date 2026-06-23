@@ -1,12 +1,18 @@
 // js/search.js — Search & word rendering module
 window.Search = (function () {
     let wordsContainer, searchInput;
+    let searchTimeout;
 
     function init(elements) {
         wordsContainer = elements.wordsContainer;
         searchInput = elements.searchInput;
 
-        if (searchInput) searchInput.addEventListener('input', handleSearch);
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(handleSearch, 150);
+            });
+        }
     }
 
     // Helper to normalize text (remove accents and lower case)
@@ -74,6 +80,8 @@ window.Search = (function () {
                 card.className = 'word-card';
                 card.dataset.greek = w.greek;
                 card.dataset.russian = w.russian;
+                card.dataset.greekNorm = normalizeText(w.greek);
+                card.dataset.russianNorm = normalizeText(w.russian);
 
                 const greekDiv = document.createElement('div');
                 greekDiv.className = 'greek greek-container';
@@ -140,25 +148,39 @@ window.Search = (function () {
         const searchTerm = normalizeText(searchInput.value || '').trim();
         const lessonSections = document.querySelectorAll('.lesson-section');
 
-        lessonSections.forEach(section => {
-            const cards = section.querySelectorAll('.word-card');
-            let anyVisible = false;
+        requestAnimationFrame(() => {
+            lessonSections.forEach(section => {
+                const cards = section.querySelectorAll('.word-card');
+                let anyVisible = false;
 
-            cards.forEach(card => {
-                const greek = normalizeText(card.dataset.greek || '');
-                const russian = normalizeText(card.dataset.russian || '');
+                cards.forEach(card => {
+                    const greekNorm = card.dataset.greekNorm || '';
+                    const russianNorm = card.dataset.russianNorm || '';
 
-                const matches = !searchTerm || greek.includes(searchTerm) || russian.includes(searchTerm);
+                    const matches = !searchTerm || greekNorm.includes(searchTerm) || russianNorm.includes(searchTerm);
 
-                if (matches) {
-                    card.classList.remove('hidden');
-                    anyVisible = true;
+                    if (matches) {
+                        if (card.classList.contains('hidden')) {
+                            card.classList.remove('hidden');
+                        }
+                        anyVisible = true;
+                    } else {
+                        if (!card.classList.contains('hidden')) {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+
+                if (anyVisible) {
+                    if (section.classList.contains('hidden')) {
+                        section.classList.remove('hidden');
+                    }
                 } else {
-                    card.classList.add('hidden');
+                    if (!section.classList.contains('hidden')) {
+                        section.classList.add('hidden');
+                    }
                 }
             });
-
-            if (anyVisible) section.classList.remove('hidden'); else section.classList.add('hidden');
         });
     }
 

@@ -23,6 +23,9 @@
 .lesson-section {
     margin-bottom: 30px;
     scroll-margin-top: 80px;
+    contain: content;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 400px;
 }
 
 .lesson-section h2 {
@@ -43,7 +46,7 @@
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    contain: layout style paint;
 }
 
 .russian-container {
@@ -69,9 +72,11 @@
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-.word-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+@media (hover: hover) {
+    .word-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
 }
 
 .greek {
