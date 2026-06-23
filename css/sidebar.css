@@ -147,7 +147,9 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    transition: left 0.3s ease, background-color 0.2s;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: transform 0.3s ease, background-color 0.2s;
 }
 
 .sidebar-toggle:hover {
@@ -163,7 +165,8 @@
 }
 
 .sidebar-toggle.active {
-    left: 300px;
+    -webkit-transform: translateX(280px) translateZ(0);
+    transform: translateX(280px) translateZ(0);
 }
 
 .sidebar-toggle.active span:nth-child(1) {
@@ -180,7 +183,6 @@
 
 /* Overlay for mobile */
 .sidebar-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -189,10 +191,16 @@
     height: 100dvh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .sidebar-overlay.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }

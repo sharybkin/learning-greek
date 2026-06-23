@@ -23,9 +23,6 @@
 .lesson-section {
     margin-bottom: 30px;
     scroll-margin-top: 80px;
-    contain: content;
-    content-visibility: auto;
-    contain-intrinsic-size: auto 400px;
 }
 
 .lesson-section h2 {
