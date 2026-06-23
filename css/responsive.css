@@ -82,12 +82,10 @@
 
     .sidebar-toggle {
         left: 20px;
-        transform: translateZ(0);
     }
 
     .sidebar-toggle.active {
-        -webkit-transform: translateX(280px) translateZ(0);
-        transform: translateX(280px) translateZ(0);
+        left: 300px;
     }
 
     .main-content {
