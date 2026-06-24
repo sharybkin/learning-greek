@@ -4846,6 +4846,39 @@ window.LESSONS.push({
             group: 1,
             example_greek: "Η πετσέτα είναι στο μπάνιο.",
             example_russian: "Полотенце в ванной."
+        },
+        {
+            greek: "η υγεία",
+            russian: "здоровье",
+            group: 1,
+            example_greek: "Η κατάσταση της υγείας του προέδρου είναι καλή.",
+            example_russian: "Состояние здоровья президента хорошее.", exam: true },
+        {
+            greek: "η αυλή",
+            russian: "двор",
+            group: 1,
+            example_greek: "Τα παιδιά παίζουν στην αυλή του σχολείου.",
+            example_russian: "Дети играют во дворе школы.", exam: true },
+        {
+            greek: "η αποθήκη",
+            russian: "склад",
+            group: 2,
+            example_greek: "Πού είναι το κλειδί της αποθήκης;",
+            example_russian: "Где ключ от склада?"
+        },
+        {
+            greek: "το γεγονός",
+            russian: "событие",
+            group: 2,
+            example_greek: "Δεν θυμάμαι αυτό το γεγονός.",
+            example_russian: "Я не помню это событие."
+        },
+        {
+            greek: "η συνεδρίαση",
+            russian: "совещание",
+            group: 3,
+            example_greek: "Το θέμα της συνεδρίασης είναι δύσκολο.",
+            example_russian: "Тема совещания сложная."
         }
     ]
 });
