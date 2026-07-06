@@ -135,7 +135,7 @@ window.Sidebar = (function () {
     function scrollToLesson(index) {
         const lessonElement = document.getElementById(`lesson-${index}`);
         if (lessonElement) {
-            lessonElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            lessonElement.scrollIntoView({ behavior: 'auto', block: 'start' });
             updateActiveLessonMenuItem(index);
         }
     }
