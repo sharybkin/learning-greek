@@ -135,7 +135,19 @@ window.Sidebar = (function () {
     function scrollToLesson(index) {
         const lessonElement = document.getElementById(`lesson-${index}`);
         if (lessonElement) {
-            lessonElement.scrollIntoView({ behavior: 'auto', block: 'start' });
+            const jump = () => {
+                const targetY = lessonElement.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo(0, targetY);
+            };
+            
+            jump();
+            
+            // Fix for content-visibility layout shifts when jumping upwards.
+            // iOS Safari handles window.scrollTo much better than scrollIntoView in timeouts.
+            setTimeout(jump, 10);
+            setTimeout(jump, 50);
+            setTimeout(jump, 100);
+
             updateActiveLessonMenuItem(index);
         }
     }

@@ -67,6 +67,11 @@ window.Search = (function () {
             lessonSection.dataset.lesson = lesson.lesson;
             lessonSection.dataset.lessonIndex = index;
             lessonSection.id = `lesson-${index}`;
+            
+            // Dynamically calculate estimated height to prevent layout shifts with content-visibility
+            // ~70px for header + ~105px per word card
+            const estimatedHeight = 70 + (lesson.words ? lesson.words.length * 105 : 0);
+            lessonSection.style.containIntrinsicSize = `auto ${estimatedHeight}px`;
 
             const heading = document.createElement('h2');
             heading.textContent = Sidebar.getDisplayTitle(lesson);
