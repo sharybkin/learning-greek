@@ -3,7 +3,13 @@ greek.sharybkin.ru {
     encode zstd gzip
 }
 
+ellinika.sharybkin.ru {
+    reverse_proxy ellinika-app:8080
+    encode zstd gzip
+}
+
 http:// {
     # Optional: redirect plain http to https
     redir https://{host}{uri} 308
 }
+
