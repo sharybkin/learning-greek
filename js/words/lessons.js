@@ -4884,6 +4884,33 @@ window.LESSONS.push({
 });
 
 window.LESSONS.push({
+    lesson: 11.5,
+    title: 'Работа по дому',
+    words: [
+        { greek: "καθαρίζω", russian: "чистить, убирать", group: 1, exam: true },
+        { greek: "σκουπίζω", russian: "подметать", group: 1, exam: true },
+        { greek: "σφουγγαρίζω", russian: "мыть пол", group: 1 },
+        { greek: "ξεσκονίζω", russian: "вытирать пыль", group: 1 },
+        { greek: "στρώνω το κρεβάτι μου", russian: "заправлять кровать", group: 1 },
+        { greek: "πλένω τα πιάτα", russian: "мыть посуду", group: 1 },
+        { greek: "πλένω τα ρούχα", russian: "стирать одежду", group: 1 },
+        { greek: "βάζω πλυντήριο", russian: "загружать стиральную машину", group: 1 },
+        { greek: "σιδερώνω", russian: "гладить", group: 1, exam: true },
+        { greek: "τακτοποιώ / φτιάχνω το δωμάτιό μου, την ντουλάπα μου", russian: "наводить порядок", group: 1 },
+        { greek: "βάζω ηλεκτρική σκούπα", russian: "пылесосить", group: 1 },
+        { greek: "καθαρίζω τα τζάμια", russian: "мыть окна", group: 1 },
+        { greek: "η σκούπα", russian: "веник", group: 2 },
+        { greek: "το φαράσι", russian: "совок", group: 2 },
+        { greek: "η ηλεκτρική σκούπα", russian: "пылесос", group: 2 },
+        { greek: "ο κουβάς", russian: "ведро", group: 2 },
+        { greek: "η σφουγγαρίστρα", russian: "швабра", group: 2 },
+        { greek: "το λάστιχο", russian: "шланг", group: 2 },
+        { greek: "τα απορρυπαντικά", russian: "порошки", group: 2 },
+        { greek: "τα καθαριστικά", russian: "чистящие средства", group: 2 }
+    ]
+});
+
+window.LESSONS.push({
     lesson: 12.1,
     title: 'Основные слова',
     words: [
@@ -4892,8 +4919,7 @@ window.LESSONS.push({
             russian: "миг, мгновение",
             group: 1,
             example_greek: "Περίμενε μια στιγμή, σε παρακαλώ.",
-            example_russian: "Подожди минутку, пожалуйста."
-        },
+            example_russian: "Подожди минутку, пожалуйста.", exam: true },
         {
             greek: "η μπάλα",
             russian: "мяч",
@@ -4976,8 +5002,7 @@ window.LESSONS.push({
             russian: "мотор",
             group: 2,
             example_greek: "Η μηχανή του αυτοκινήτου δεν δουλεύει.",
-            example_russian: "Мотор машины не работает."
-        },
+            example_russian: "Мотор машины не работает.", exam: true },
         {
             greek: "το σωσίβιο",
             russian: "спасательный жилет / круг",
@@ -5018,8 +5043,7 @@ window.LESSONS.push({
             russian: "совет",
             group: 1,
             example_greek: "Θέλω μια συμβουλή από εσένα.",
-            example_russian: "Мне нужен совет от тебя."
-        },
+            example_russian: "Мне нужен совет от тебя.", exam: true },
         {
             greek: "η έξοδος κινδύνου",
             russian: "запасной выход",
@@ -5074,8 +5098,7 @@ window.LESSONS.push({
             russian: "нужный, полезный",
             group: 1,
             example_greek: "Αυτό το βιβλίο είναι πολύ χρήσιμο.",
-            example_russian: "Эта книга очень полезная."
-        },
+            example_russian: "Эта книга очень полезная.", exam: true },
         {
             greek: "η λογοτεχνία",
             russian: "литература",
@@ -5130,8 +5153,7 @@ window.LESSONS.push({
             russian: "дирекция",
             group: 2,
             example_greek: "Η διεύθυνση του σχολείου είναι στον πρώτο όροφο.",
-            example_russian: "Дирекция школы находится на первом этаже."
-        },
+            example_russian: "Дирекция школы находится на первом этаже.", exam: true },
         {
             greek: "η θεραπεία",
             russian: "лечение",
@@ -5207,8 +5229,7 @@ window.LESSONS.push({
             russian: "посетитель",
             group: 2,
             example_greek: "Οι επισκέπτες του μουσείου είναι πολλοί το καλοκαίρι.",
-            example_russian: "Летом у музея много посетителей."
-        },
+            example_russian: "Летом у музея много посетителей.", exam: true },
         {
             greek: "η ακρογιαλιά",
             russian: "берег моря",
@@ -5263,8 +5284,7 @@ window.LESSONS.push({
             russian: "богатый",
             group: 1,
             example_greek: "Ο γείτονάς μας είναι πολύ πλούσιος.",
-            example_russian: "Наш сосед очень богатый."
-        },
+            example_russian: "Наш сосед очень богатый.", exam: true },
         {
             greek: "το πουλί",
             russian: "птица",
@@ -5291,8 +5311,7 @@ window.LESSONS.push({
             russian: "вид спорта",
             group: 2,
             example_greek: "Το αγαπημένο μου άθλημα είναι το κολύμπι.",
-            example_russian: "Мой любимый вид спорта — плавание."
-        },
+            example_russian: "Мой любимый вид спорта — плавание.", exam: true },
         {
             greek: "το κλίμα",
             russian: "климат",
@@ -5361,8 +5380,7 @@ window.LESSONS.push({
             russian: "имидж, образ",
             group: 2,
             example_greek: "Η εταιρεία θέλει να αλλάξει την εικόνα της.",
-            example_russian: "Компания хочет изменить свой имидж."
-        },
+            example_russian: "Компания хочет изменить свой имидж.", exam: true },
         {
             greek: "εκτός από",
             russian: "кроме",
@@ -5403,22 +5421,19 @@ window.LESSONS.push({
             russian: "высокая температура (жар)",
             group: 1,
             example_greek: "Το παιδί έχει πυρετό από χθες.",
-            example_russian: "У ребёнка температура со вчерашнего дня."
-        },
+            example_russian: "У ребёнка температура со вчерашнего дня.", exam: true },
         {
             greek: "το δάσος",
             russian: "лес",
             group: 1,
             example_greek: "Περπατήσαμε στο δάσος όλο το πρωί.",
-            example_russian: "Мы гуляли по лесу всё утро."
-        },
+            example_russian: "Мы гуляли по лесу всё утро.", exam: true },
         {
             greek: "ήσυχος / ήρεμος",
             russian: "спокойный",
             group: 1,
             example_greek: "Μένουμε σε μια ήσυχη γειτονιά.",
-            example_russian: "Мы живём в спокойном районе."
-        },
+            example_russian: "Мы живём в спокойном районе.", exam: true },
         {
             greek: "η ταχύτητα",
             russian: "скорость",
@@ -5508,8 +5523,7 @@ window.LESSONS.push({
             russian: "сюрприз",
             group: 1,
             example_greek: "Ετοιμάζουμε μια έκπληξη για τη μαμά.",
-            example_russian: "Мы готовим сюрприз для мамы."
-        },
+            example_russian: "Мы готовим сюрприз для мамы.", exam: true },
         {
             greek: "η φτώχια",
             russian: "бедность",
@@ -5529,15 +5543,13 @@ window.LESSONS.push({
             russian: "копия",
             group: 2,
             example_greek: "Χρειάζομαι ένα αντίγραφο του διαβατηρίου.",
-            example_russian: "Мне нужна копия паспорта."
-        },
+            example_russian: "Мне нужна копия паспорта.", exam: true },
         {
             greek: "το άρθρο",
             russian: "статья",
             group: 2,
             example_greek: "Διάβασα ένα ενδιαφέρον άρθρο στην εφημερίδα.",
-            example_russian: "Я прочитал интересную статью в газете."
-        },
+            example_russian: "Я прочитал интересную статью в газете.", exam: true },
         {
             greek: "η βάρκα",
             russian: "лодка",
@@ -5578,8 +5590,7 @@ window.LESSONS.push({
             russian: "смерть",
             group: 2,
             example_greek: "Ο θάνατος του ήρωα είναι το τέλος της ταινίας.",
-            example_russian: "Смерть героя — конец фильма."
-        },
+            example_russian: "Смерть героя — конец фильма.", exam: true },
         {
             greek: "το θύμα",
             russian: "жертва, пострадавший",
@@ -5655,8 +5666,7 @@ window.LESSONS.push({
             russian: "биология",
             group: 2,
             example_greek: "Η κόρη μου αγαπάει τη βιολογία.",
-            example_russian: "Моя дочь любит биологию."
-        },
+            example_russian: "Моя дочь любит биологию.", exam: true },
         {
             greek: "ο σκελετός",
             russian: "скелет",
@@ -5669,8 +5679,7 @@ window.LESSONS.push({
             russian: "бесплатно",
             group: 1,
             example_greek: "Η είσοδος στο μουσείο είναι δωρεάν την Κυριακή.",
-            example_russian: "Вход в музей по воскресеньям бесплатный."
-        },
+            example_russian: "Вход в музей по воскресеньям бесплатный.", exam: true },
         {
             greek: "τα μούρα",
             russian: "ягоды",
@@ -5690,8 +5699,7 @@ window.LESSONS.push({
             russian: "причина",
             group: 1,
             example_greek: "Ποιος είναι ο λόγος της καθυστέρησης;",
-            example_russian: "В чём причина задержки?"
-        },
+            example_russian: "В чём причина задержки?", exam: true },
         {
             greek: "η κτηνιατρική κλινική",
             russian: "ветеринарная клиника",
@@ -5725,8 +5733,7 @@ window.LESSONS.push({
             russian: "матч, борьба, соревнование",
             group: 1,
             example_greek: "Ο αγώνας αρχίζει στις επτά.",
-            example_russian: "Матч начинается в семь."
-        },
+            example_russian: "Матч начинается в семь.", exam: true },
         {
             greek: "το φόντο",
             russian: "фон",
@@ -5879,22 +5886,19 @@ window.LESSONS.push({
             russian: "луна",
             group: 1,
             example_greek: "Απόψε το φεγγάρι είναι πολύ φωτεινό.",
-            example_russian: "Сегодня вечером луна очень яркая."
-        },
+            example_russian: "Сегодня вечером луна очень яркая.", exam: true },
         {
             greek: "χαλασμένος",
             russian: "испорченный",
             group: 1,
             example_greek: "Το γάλα είναι χαλασμένο.",
-            example_russian: "Молоко испорчено."
-        },
+            example_russian: "Молоко испорчено.", exam: true },
         {
             greek: "το ποίημα",
             russian: "стихотворение",
             group: 2,
             example_greek: "Έμαθε ένα ποίημα απέξω.",
-            example_russian: "Он выучил стихотворение наизусть."
-        },
+            example_russian: "Он выучил стихотворение наизусть.", exam: true },
         {
             greek: "ο ποιητής",
             russian: "поэт",
@@ -5956,8 +5960,7 @@ window.LESSONS.push({
             russian: "надежда",
             group: 2,
             example_greek: "Υπάρχει πάντα ελπίδα.",
-            example_russian: "Надежда есть всегда."
-        },
+            example_russian: "Надежда есть всегда.", exam: true },
         {
             greek: "η εφορία",
             russian: "налоговая",
@@ -6033,8 +6036,7 @@ window.LESSONS.push({
             russian: "роль",
             group: 2,
             example_greek: "Έπαιξε τον πρώτο ρόλο στο θέατρο.",
-            example_russian: "Он играл главную роль в театре."
-        },
+            example_russian: "Он играл главную роль в театре.", exam: true },
         {
             greek: "ούτε",
             russian: "ни",
@@ -6068,8 +6070,7 @@ window.LESSONS.push({
             russian: "дело",
             group: 2,
             example_greek: "Η υπόθεση είναι στα χέρια του δικηγόρου.",
-            example_russian: "Дело в руках адвоката."
-        },
+            example_russian: "Дело в руках адвоката.", exam: true },
         {
             greek: "το ασθενοφόρο",
             russian: "машина скорой помощи",
@@ -6117,8 +6118,7 @@ window.LESSONS.push({
             russian: "герой",
             group: 2,
             example_greek: "Ο ήρωας του βιβλίου είναι ένας νέος γιατρός.",
-            example_russian: "Герой книги — молодой врач."
-        },
+            example_russian: "Герой книги — молодой врач.", exam: true },
         {
             greek: "οδικός",
             russian: "дорожный",
@@ -6166,85 +6166,73 @@ window.LESSONS.push({
             russian: "работать",
             group: 1,
             example_greek: "Δουλεύω σε ένα γραφείο στο κέντρο.",
-            example_russian: "Я работаю в офисе в центре."
-        },
+            example_russian: "Я работаю в офисе в центре.", exam: true },
         {
             greek: "ανοίγω",
             russian: "открывать",
             group: 1,
             example_greek: "Το μαγαζί ανοίγει στις εννιά.",
-            example_russian: "Магазин открывается в девять."
-        },
+            example_russian: "Магазин открывается в девять.", exam: true },
         {
             greek: "ξοδεύω",
             russian: "тратить",
             group: 2,
             example_greek: "Ξοδεύω πολλά χρήματα κάθε μήνα.",
-            example_russian: "Я трачу много денег каждый месяц."
-        },
+            example_russian: "Я трачу много денег каждый месяц.", exam: true },
         {
             greek: "ταξιδεύω",
             russian: "путешествовать",
             group: 1,
             example_greek: "Ταξιδεύουμε στην Ελλάδα κάθε καλοκαίρι.",
-            example_russian: "Мы ездим в Грецию каждое лето."
-        },
+            example_russian: "Мы ездим в Грецию каждое лето.", exam: true },
         {
             greek: "αρχίζω",
             russian: "начинать",
             group: 1,
             example_greek: "Το μάθημα αρχίζει στις δέκα.",
-            example_russian: "Урок начинается в десять."
-        },
+            example_russian: "Урок начинается в десять.", exam: true },
         {
             greek: "μαγειρεύω",
             russian: "готовить еду",
             group: 1,
             example_greek: "Η μητέρα μου μαγειρεύει πολύ ωραία.",
-            example_russian: "Моя мама готовит очень вкусно."
-        },
+            example_russian: "Моя мама готовит очень вкусно.", exam: true },
         {
             greek: "ετοιμάζω",
             russian: "готовить",
             group: 1,
             example_greek: "Ετοιμάζω το φαγητό για αύριο.",
-            example_russian: "Я готовлю еду на завтра."
-        },
+            example_russian: "Я готовлю еду на завтра.", exam: true },
         {
             greek: "τελειώνω",
             russian: "заканчивать",
             group: 1,
             example_greek: "Η δουλειά μου τελειώνει στις πέντε.",
-            example_russian: "Моя работа заканчивается в пять."
-        },
+            example_russian: "Моя работа заканчивается в пять.", exam: true },
         {
             greek: "αγοράζω",
             russian: "покупать",
             group: 1,
             example_greek: "Αγοράζω ψωμί κάθε πρωί.",
-            example_russian: "Я покупаю хлеб каждое утро."
-        },
+            example_russian: "Я покупаю хлеб каждое утро.", exam: true },
         {
             greek: "σιδερώνω",
             russian: "гладить",
             group: 2,
             example_greek: "Σιδερώνω τα πουκάμισά μου το Σάββατο.",
-            example_russian: "Я глажу свои рубашки в субботу."
-        },
+            example_russian: "Я глажу свои рубашки в субботу.", exam: true },
         {
             greek: "πληρώνω",
             russian: "платить",
             group: 1,
             example_greek: "Πληρώνω πάντα με κάρτα.",
-            example_russian: "Я всегда плачу картой."
-        },
+            example_russian: "Я всегда плачу картой.", exam: true },
         {
             greek: "αφήνω",
             russian: "оставлять",
             group: 1,
             example_greek: "Άφησα το κινητό μου στο σπίτι.",
-            example_russian: "Я оставил телефон дома."
-        },
+            example_russian: "Я оставил телефон дома.", exam: true },
         {
             greek: "καπνίζω",
             russian: "курить",
@@ -6278,22 +6266,19 @@ window.LESSONS.push({
             russian: "заполнять",
             group: 2,
             example_greek: "Συμπληρώστε αυτή τη φόρμα, παρακαλώ.",
-            example_russian: "Заполните эту форму, пожалуйста."
-        },
+            example_russian: "Заполните эту форму, пожалуйста.", exam: true },
         {
             greek: "παίζω",
             russian: "играть",
             group: 1,
             example_greek: "Τα παιδιά παίζουν στην αυλή.",
-            example_russian: "Дети играют во дворе."
-        },
+            example_russian: "Дети играют во дворе.", exam: true },
         {
             greek: "γυρίζω",
             russian: "возвращаться",
             group: 1,
             example_greek: "Γυρίζω σπίτι στις έξι.",
-            example_russian: "Я возвращаюсь домой в шесть."
-        },
+            example_russian: "Я возвращаюсь домой в шесть.", exam: true },
         {
             greek: "πλέκω",
             russian: "вязать",
@@ -6341,8 +6326,7 @@ window.LESSONS.push({
             russian: "решать (принимать решение)",
             group: 1,
             example_greek: "Αποφασίσαμε να μείνουμε εδώ.",
-            example_russian: "Мы решили остаться здесь."
-        },
+            example_russian: "Мы решили остаться здесь.", exam: true },
         {
             greek: "λύνω",
             russian: "решать (находить выход)",
@@ -6355,22 +6339,19 @@ window.LESSONS.push({
             russian: "показывать",
             group: 1,
             example_greek: "Δείξε μου τη φωτογραφία.",
-            example_russian: "Покажи мне фотографию."
-        },
+            example_russian: "Покажи мне фотографию.", exam: true },
         {
             greek: "ρίχνω",
             russian: "бросать, кидать",
             group: 2,
             example_greek: "Μη ρίχνεις σκουπίδια στον δρόμο.",
-            example_russian: "Не бросай мусор на дорогу."
-        },
+            example_russian: "Не бросай мусор на дорогу.", exam: true },
         {
             greek: "αλλάζω",
             russian: "менять",
             group: 1,
             example_greek: "Αλλάζω δουλειά τον άλλο μήνα.",
-            example_russian: "Я меняю работу в следующем месяце."
-        },
+            example_russian: "Я меняю работу в следующем месяце.", exam: true },
         {
             greek: "κλέβω",
             russian: "воровать",
@@ -6404,15 +6385,13 @@ window.LESSONS.push({
             russian: "терять",
             group: 1,
             example_greek: "Έχασα το λεωφορείο σήμερα.",
-            example_russian: "Я сегодня опоздал на автобус."
-        },
+            example_russian: "Я сегодня опоздал на автобус.", exam: true },
         {
             greek: "προσέχω",
             russian: "быть внимательным, замечать",
             group: 1,
             example_greek: "Πρόσεχε στον δρόμο!",
-            example_russian: "Будь осторожен на дороге!"
-        },
+            example_russian: "Будь осторожен на дороге!", exam: true },
         {
             greek: "σφίγγω",
             russian: "сжимать",
@@ -6425,8 +6404,7 @@ window.LESSONS.push({
             russian: "резать",
             group: 1,
             example_greek: "Κόβω το ψωμί με το μαχαίρι.",
-            example_russian: "Я режу хлеб ножом."
-        },
+            example_russian: "Я режу хлеб ножом.", exam: true },
         {
             greek: "δροσίζω",
             russian: "освежать",
@@ -6460,8 +6438,7 @@ window.LESSONS.push({
             russian: "тушить, запекать (в духовке)",
             group: 2,
             example_greek: "Ψήνω το κοτόπουλο στον φούρνο.",
-            example_russian: "Я запекаю курицу в духовке."
-        },
+            example_russian: "Я запекаю курицу в духовке.", exam: true },
         {
             greek: "γεμίζω",
             russian: "наполнять",
@@ -6474,29 +6451,25 @@ window.LESSONS.push({
             russian: "искать",
             group: 1,
             example_greek: "Ψάχνω τα κλειδιά μου παντού.",
-            example_russian: "Я везде ищу свои ключи."
-        },
+            example_russian: "Я везде ищу свои ключи.", exam: true },
         {
             greek: "βρέχω",
             russian: "мочить",
             group: 2,
             example_greek: "Μη βρέχεις το πάτωμα.",
-            example_russian: "Не мочи пол."
-        },
+            example_russian: "Не мочи пол.", exam: true },
         {
             greek: "τρέχω",
             russian: "бежать",
             group: 1,
             example_greek: "Τρέχω κάθε πρωί στο πάρκο.",
-            example_russian: "Я бегаю каждое утро в парке."
-        },
+            example_russian: "Я бегаю каждое утро в парке.", exam: true },
         {
             greek: "λείπω",
             russian: "отсутствовать",
             group: 1,
             example_greek: "Ο διευθυντής λείπει σήμερα.",
-            example_russian: "Директор сегодня отсутствует."
-        },
+            example_russian: "Директор сегодня отсутствует.", exam: true },
         {
             greek: "ζηλεύω",
             russian: "ревновать, завидовать",
@@ -6523,15 +6496,13 @@ window.LESSONS.push({
             russian: "выбирать",
             group: 1,
             example_greek: "Διάλεξε ένα χρώμα για τον τοίχο.",
-            example_russian: "Выбери цвет для стены."
-        },
+            example_russian: "Выбери цвет для стены.", exam: true },
         {
             greek: "κερδίζω",
             russian: "выигрывать",
             group: 1,
             example_greek: "Η ομάδα μας κέρδισε τον αγώνα.",
-            example_russian: "Наша команда выиграла матч."
-        },
+            example_russian: "Наша команда выиграла матч.", exam: true },
         {
             greek: "προβλέπω",
             russian: "предвидеть",
@@ -6565,8 +6536,7 @@ window.LESSONS.push({
             russian: "рисовать",
             group: 1,
             example_greek: "Η κόρη μου ζωγραφίζει πολύ ωραία.",
-            example_russian: "Моя дочь очень хорошо рисует."
-        },
+            example_russian: "Моя дочь очень хорошо рисует.", exam: true },
         {
             greek: "πιάνω",
             russian: "брать, хватать",
@@ -6586,15 +6556,13 @@ window.LESSONS.push({
             russian: "расти",
             group: 1,
             example_greek: "Τα παιδιά μεγαλώνουν πολύ γρήγορα.",
-            example_russian: "Дети растут очень быстро."
-        },
+            example_russian: "Дети растут очень быстро.", exam: true },
         {
             greek: "κλείνω",
             russian: "закрывать",
             group: 1,
             example_greek: "Κλείνω το παράθυρο γιατί κάνει κρύο.",
-            example_russian: "Я закрываю окно, потому что холодно."
-        },
+            example_russian: "Я закрываю окно, потому что холодно.", exam: true },
         {
             greek: "ανάβω",
             russian: "зажигать",
@@ -6621,8 +6589,7 @@ window.LESSONS.push({
             russian: "чистить",
             group: 1,
             example_greek: "Καθαρίζω το σπίτι κάθε Σάββατο.",
-            example_russian: "Я убираю дом каждую субботу."
-        },
+            example_russian: "Я убираю дом каждую субботу.", exam: true },
         {
             greek: "σβήνω",
             russian: "выключать, гасить",
@@ -6635,15 +6602,13 @@ window.LESSONS.push({
             russian: "собирать",
             group: 2,
             example_greek: "Μαζεύω τα παιχνίδια από το πάτωμα.",
-            example_russian: "Я собираю игрушки с пола."
-        },
+            example_russian: "Я собираю игрушки с пола.", exam: true },
         {
             greek: "σπουδάζω",
             russian: "учиться в вузе",
             group: 1,
             example_greek: "Σπουδάζει ιατρική στην Αθήνα.",
-            example_russian: "Он учится на врача в Афинах."
-        },
+            example_russian: "Он учится на врача в Афинах.", exam: true },
         {
             greek: "γυρεύω",
             russian: "искать",
@@ -6656,8 +6621,7 @@ window.LESSONS.push({
             russian: "делать",
             group: 1,
             example_greek: "Φτιάχνω καφέ για όλους.",
-            example_russian: "Я делаю кофе для всех."
-        },
+            example_russian: "Я делаю кофе для всех.", exam: true },
         {
             greek: "κουρεύω",
             russian: "стричь",
@@ -6677,8 +6641,7 @@ window.LESSONS.push({
             russian: "достигать, прибывать",
             group: 1,
             example_greek: "Το τρένο φτάνει στις οκτώ.",
-            example_russian: "Поезд прибывает в восемь."
-        },
+            example_russian: "Поезд прибывает в восемь.", exam: true },
         {
             greek: "κανονίζω",
             russian: "урегулировать, договариваться",
@@ -6691,15 +6654,13 @@ window.LESSONS.push({
             russian: "делать покупки",
             group: 1,
             example_greek: "Ψωνίζω στη λαϊκή αγορά κάθε Σάββατο.",
-            example_russian: "Я делаю покупки на рынке каждую субботу."
-        },
+            example_russian: "Я делаю покупки на рынке каждую субботу.", exam: true },
         {
             greek: "νομίζω",
             russian: "думать, полагать",
             group: 1,
             example_greek: "Νομίζω ότι έχεις δίκιο.",
-            example_russian: "Я думаю, что ты прав."
-        },
+            example_russian: "Я думаю, что ты прав.", exam: true },
         {
             greek: "διώχνω",
             russian: "выгонять",
@@ -6712,8 +6673,7 @@ window.LESSONS.push({
             russian: "пробовать",
             group: 1,
             example_greek: "Δοκίμασε αυτό το γλυκό, είναι νόστιμο.",
-            example_russian: "Попробуй этот десерт, он вкусный."
-        },
+            example_russian: "Попробуй этот десерт, он вкусный.", exam: true },
         {
             greek: "ενοικιάζω",
             russian: "арендовать",
@@ -6761,113 +6721,97 @@ window.LESSONS.push({
             russian: "говорить",
             group: 1,
             example_greek: "Τι λες για έναν καφέ;",
-            example_russian: "Как насчёт кофе?"
-        },
+            example_russian: "Как насчёт кофе?", exam: true },
         {
             greek: "κάνω",
             russian: "делать",
             group: 1,
             example_greek: "Τι κάνεις σήμερα το βράδυ;",
-            example_russian: "Что ты делаешь сегодня вечером?"
-        },
+            example_russian: "Что ты делаешь сегодня вечером?", exam: true },
         {
             greek: "περιμένω",
             russian: "ждать",
             group: 1,
             example_greek: "Σε περιμένω στην είσοδο.",
-            example_russian: "Я жду тебя у входа."
-        },
+            example_russian: "Я жду тебя у входа.", exam: true },
         {
             greek: "βλέπω",
             russian: "видеть",
             group: 1,
             example_greek: "Βλέπω τηλεόραση κάθε βράδυ.",
-            example_russian: "Я смотрю телевизор каждый вечер."
-        },
+            example_russian: "Я смотрю телевизор каждый вечер.", exam: true },
         {
             greek: "βάζω",
             russian: "класть, ставить",
             group: 1,
             example_greek: "Βάζω τα βιβλία στο ράφι.",
-            example_russian: "Я ставлю книги на полку."
-        },
+            example_russian: "Я ставлю книги на полку.", exam: true },
         {
             greek: "βγάζω",
             russian: "снимать, доставать",
             group: 1,
             example_greek: "Βγάλε τα παπούτσια σου στην πόρτα.",
-            example_russian: "Сними обувь у двери."
-        },
+            example_russian: "Сними обувь у двери.", exam: true },
         {
             greek: "δίνω",
             russian: "давать",
             group: 1,
             example_greek: "Δώσε μου το αλάτι, παρακαλώ.",
-            example_russian: "Передай мне соль, пожалуйста."
-        },
+            example_russian: "Передай мне соль, пожалуйста.", exam: true },
         {
             greek: "παίρνω",
             russian: "брать",
             group: 1,
             example_greek: "Παίρνω το λεωφορείο κάθε μέρα.",
-            example_russian: "Я езжу на автобусе каждый день."
-        },
+            example_russian: "Я езжу на автобусе каждый день.", exam: true },
         {
             greek: "τρώω",
             russian: "кушать",
             group: 1,
             example_greek: "Τρώμε συνήθως στις οκτώ.",
-            example_russian: "Мы обычно едим в восемь."
-        },
+            example_russian: "Мы обычно едим в восемь.", exam: true },
         {
             greek: "πίνω",
             russian: "пить",
             group: 1,
             example_greek: "Πίνω τον καφέ μου χωρίς ζάχαρη.",
-            example_russian: "Я пью кофе без сахара."
-        },
+            example_russian: "Я пью кофе без сахара.", exam: true },
         {
             greek: "βρίσκω",
             russian: "находить",
             group: 1,
             example_greek: "Δεν βρίσκω το κινητό μου.",
-            example_russian: "Я не могу найти свой телефон."
-        },
+            example_russian: "Я не могу найти свой телефон.", exam: true },
         {
             greek: "πηγαίνω",
             russian: "идти",
             group: 1,
             example_greek: "Πηγαίνω στη δουλειά με τα πόδια.",
-            example_russian: "Я хожу на работу пешком."
-        },
+            example_russian: "Я хожу на работу пешком.", exam: true },
         {
             greek: "φεύγω",
             russian: "уходить",
             group: 1,
             example_greek: "Φεύγουμε αύριο το πρωί.",
-            example_russian: "Мы уезжаем завтра утром."
-        },
+            example_russian: "Мы уезжаем завтра утром.", exam: true },
         {
             greek: "μένω",
             russian: "проживать, оставаться",
             group: 1,
             example_greek: "Μένω στη Λάρνακα τρία χρόνια.",
-            example_russian: "Я живу в Ларнаке три года."
-        },
+            example_russian: "Я живу в Ларнаке три года.", exam: true },
         {
             greek: "μπαίνω",
             russian: "входить",
             group: 1,
             example_greek: "Μπες μέσα, κάνει κρύο έξω.",
-            example_russian: "Заходи внутрь, на улице холодно."
-        },
+            example_russian: "Заходи внутрь, на улице холодно.", exam: true },
         {
             greek: "βγαίνω",
             russian: "выходить",
             group: 1,
             example_greek: "Βγαίνουμε έξω κάθε Σάββατο.",
-            example_russian: "Мы выходим гулять каждую субботу."
-        },
+            example_russian: "Мы выходим гулять каждую субботу.", exam: true },
         {
             greek: "κλαίω",
             russian: "плакать",
@@ -6894,8 +6838,7 @@ window.LESSONS.push({
             russian: "слушать",
             group: 1,
             example_greek: "Ακούω μουσική στο αυτοκίνητο.",
-            example_russian: "Я слушаю музыку в машине."
-        },
+            example_russian: "Я слушаю музыку в машине.", exam: true },
         {
             greek: "ανεβαίνω",
             russian: "подниматься",
@@ -6915,43 +6858,37 @@ window.LESSONS.push({
             russian: "приходить",
             group: 1,
             example_greek: "Έρχομαι σε δέκα λεπτά.",
-            example_russian: "Я приду через десять минут."
-        },
+            example_russian: "Я приду через десять минут.", exam: true },
         {
             greek: "γίνομαι",
             russian: "становиться",
             group: 1,
             example_greek: "Θέλει να γίνει γιατρός.",
-            example_russian: "Он хочет стать врачом."
-        },
+            example_russian: "Он хочет стать врачом.", exam: true },
         {
             greek: "κάθομαι",
             russian: "сидеть",
             group: 1,
             example_greek: "Καθόμαστε στο μπαλκόνι το βράδυ.",
-            example_russian: "Вечером мы сидим на балконе."
-        },
+            example_russian: "Вечером мы сидим на балконе.", exam: true },
         {
             greek: "πλένω",
             russian: "мыть, стирать",
             group: 1,
             example_greek: "Πλένω τα πιάτα μετά το φαγητό.",
-            example_russian: "Я мою посуду после еды."
-        },
+            example_russian: "Я мою посуду после еды.", exam: true },
         {
             greek: "στέλνω",
             russian: "посылать",
             group: 1,
             example_greek: "Σου στέλνω ένα μήνυμα το βράδυ.",
-            example_russian: "Я пришлю тебе сообщение вечером."
-        },
+            example_russian: "Я пришлю тебе сообщение вечером.", exam: true },
         {
             greek: "πέφτω",
             russian: "падать",
             group: 1,
             example_greek: "Το παιδί έπεσε από το ποδήλατο.",
-            example_russian: "Ребёнок упал с велосипеда."
-        },
+            example_russian: "Ребёнок упал с велосипеда.", exam: true },
         {
             greek: "παχαίνω",
             russian: "полнеть",
@@ -6964,15 +6901,13 @@ window.LESSONS.push({
             russian: "понимать",
             group: 1,
             example_greek: "Δεν καταλαβαίνω αυτή τη λέξη.",
-            example_russian: "Я не понимаю это слово."
-        },
+            example_russian: "Я не понимаю это слово.", exam: true },
         {
             greek: "φέρνω",
             russian: "приносить",
             group: 1,
             example_greek: "Φέρε μου ένα ποτήρι νερό.",
-            example_russian: "Принеси мне стакан воды."
-        },
+            example_russian: "Принеси мне стакан воды.", exam: true },
         {
             greek: "αρέσω",
             russian: "нравиться",
@@ -6985,15 +6920,13 @@ window.LESSONS.push({
             russian: "учить, узнавать",
             group: 1,
             example_greek: "Μαθαίνω ελληνικά έναν χρόνο.",
-            example_russian: "Я учу греческий год."
-        },
+            example_russian: "Я учу греческий год.", exam: true },
         {
             greek: "ξέρω",
             russian: "знать",
             group: 1,
             example_greek: "Ξέρεις πού είναι η στάση;",
-            example_russian: "Ты знаешь, где остановка?"
-        },
+            example_russian: "Ты знаешь, где остановка?", exam: true },
         {
             greek: "παθαίνω",
             russian: "случаться (о плохом)",
@@ -7027,15 +6960,13 @@ window.LESSONS.push({
             russian: "заболевать",
             group: 2,
             example_greek: "Αρρωσταίνω συχνά τον χειμώνα.",
-            example_russian: "Зимой я часто болею."
-        },
+            example_russian: "Зимой я часто болею.", exam: true },
         {
             greek: "θέλω",
             russian: "хотеть",
             group: 1,
             example_greek: "Θέλω έναν καφέ, παρακαλώ.",
-            example_russian: "Я хочу кофе, пожалуйста."
-        },
+            example_russian: "Я хочу кофе, пожалуйста.", exam: true },
         {
             greek: "λαμβάνω",
             russian: "получать, принимать",
@@ -7048,22 +6979,19 @@ window.LESSONS.push({
             russian: "заказывать",
             group: 2,
             example_greek: "Παραγγέλνουμε πίτσα απόψε.",
-            example_russian: "Сегодня вечером мы закажем пиццу."
-        },
+            example_russian: "Сегодня вечером мы закажем пиццу.", exam: true },
         {
             greek: "παρκάρω",
             russian: "парковаться",
             group: 2,
             example_greek: "Πού μπορώ να παρκάρω εδώ;",
-            example_russian: "Где я могу здесь припарковаться?"
-        },
+            example_russian: "Где я могу здесь припарковаться?", exam: true },
         {
             greek: "υπάρχω",
             russian: "существовать",
             group: 1,
             example_greek: "Υπάρχει ένα φαρμακείο κοντά;",
-            example_russian: "Есть ли поблизости аптека?"
-        },
+            example_russian: "Есть ли поблизости аптека?", exam: true },
         {
             greek: "χορταίνω",
             russian: "наедаться",
@@ -7083,8 +7011,7 @@ window.LESSONS.push({
             russian: "удаваться, получаться",
             group: 2,
             example_greek: "Δεν κατάφερα να τον βρω.",
-            example_russian: "Мне не удалось его найти."
-        },
+            example_russian: "Мне не удалось его найти.", exam: true },
         {
             greek: "ζεσταίνω",
             russian: "согревать",
@@ -7104,8 +7031,7 @@ window.LESSONS.push({
             russian: "звонить",
             group: 1,
             example_greek: "Σου τηλεφωνώ το βράδυ.",
-            example_russian: "Я позвоню тебе вечером."
-        },
+            example_russian: "Я позвоню тебе вечером.", exam: true },
         {
             greek: "ρωτώ",
             russian: "спрашивать",
@@ -7125,22 +7051,19 @@ window.LESSONS.push({
             russian: "просыпаться",
             group: 1,
             example_greek: "Ξυπνάω στις έξι κάθε πρωί.",
-            example_russian: "Я просыпаюсь в шесть каждое утро."
-        },
+            example_russian: "Я просыпаюсь в шесть каждое утро.", exam: true },
         {
             greek: "πουλώ",
             russian: "продавать",
             group: 1,
             example_greek: "Πουλάνε φρέσκα φρούτα εδώ.",
-            example_russian: "Здесь продают свежие фрукты."
-        },
+            example_russian: "Здесь продают свежие фрукты.", exam: true },
         {
             greek: "κολυμπώ",
             russian: "плавать",
             group: 1,
             example_greek: "Κολυμπάω κάθε μέρα το καλοκαίρι.",
-            example_russian: "Летом я плаваю каждый день."
-        },
+            example_russian: "Летом я плаваю каждый день.", exam: true },
         {
             greek: "χτυπώ",
             russian: "бить, стучать",
@@ -7181,15 +7104,13 @@ window.LESSONS.push({
             russian: "водить",
             group: 1,
             example_greek: "Οδηγώ πάντα προσεκτικά.",
-            example_russian: "Я всегда вожу осторожно."
-        },
+            example_russian: "Я всегда вожу осторожно.", exam: true },
         {
             greek: "εξηγώ",
             russian: "объяснять",
             group: 1,
             example_greek: "Ο δάσκαλος εξηγεί τον κανόνα.",
-            example_russian: "Учитель объясняет правило."
-        },
+            example_russian: "Учитель объясняет правило.", exam: true },
         {
             greek: "βοηθώ",
             russian: "помогать",
@@ -7202,15 +7123,13 @@ window.LESSONS.push({
             russian: "жить",
             group: 1,
             example_greek: "Ζω στην Κύπρο πέντε χρόνια.",
-            example_russian: "Я живу на Кипре пять лет."
-        },
+            example_russian: "Я живу на Кипре пять лет.", exam: true },
         {
             greek: "αργώ",
             russian: "опаздывать",
             group: 1,
             example_greek: "Συγγνώμη, άργησα λίγο.",
-            example_russian: "Извини, я немного опоздал."
-        },
+            example_russian: "Извини, я немного опоздал.", exam: true },
         {
             greek: "καθυστερώ",
             russian: "опаздывать, задерживаться",
@@ -7223,36 +7142,31 @@ window.LESSONS.push({
             russian: "петь",
             group: 1,
             example_greek: "Τραγουδάει πολύ ωραία.",
-            example_russian: "Она очень красиво поёт."
-        },
+            example_russian: "Она очень красиво поёт.", exam: true },
         {
             greek: "συμφωνώ",
             russian: "соглашаться",
             group: 1,
             example_greek: "Συμφωνώ απόλυτα μαζί σου.",
-            example_russian: "Я полностью с тобой согласен."
-        },
+            example_russian: "Я полностью с тобой согласен.", exam: true },
         {
             greek: "λειτουργώ",
             russian: "действовать, функционировать",
             group: 2,
             example_greek: "Το ασανσέρ δεν λειτουργεί σήμερα.",
-            example_russian: "Лифт сегодня не работает."
-        },
+            example_russian: "Лифт сегодня не работает.", exam: true },
         {
             greek: "προτιμώ",
             russian: "предпочитать",
             group: 1,
             example_greek: "Προτιμώ τσάι από καφέ.",
-            example_russian: "Я предпочитаю чай кофе."
-        },
+            example_russian: "Я предпочитаю чай кофе.", exam: true },
         {
             greek: "περπατώ",
             russian: "прогуливаться",
             group: 1,
             example_greek: "Περπατάμε μία ώρα κάθε μέρα.",
-            example_russian: "Мы гуляем по часу каждый день."
-        },
+            example_russian: "Мы гуляем по часу каждый день.", exam: true },
         {
             greek: "απεργώ",
             russian: "бастовать",
@@ -7293,8 +7207,7 @@ window.LESSONS.push({
             russian: "обсуждать",
             group: 2,
             example_greek: "Θα συζητήσουμε το θέμα αύριο.",
-            example_russian: "Мы обсудим этот вопрос завтра."
-        },
+            example_russian: "Мы обсудим этот вопрос завтра.", exam: true },
         {
             greek: "πληροφορώ",
             russian: "информировать",
@@ -7314,15 +7227,13 @@ window.LESSONS.push({
             russian: "следовать",
             group: 2,
             example_greek: "Ακολουθήστε με, παρακαλώ.",
-            example_russian: "Следуйте за мной, пожалуйста."
-        },
+            example_russian: "Следуйте за мной, пожалуйста.", exam: true },
         {
             greek: "παρακολουθώ",
             russian: "наблюдать",
             group: 2,
             example_greek: "Παρακολουθώ μαθήματα ελληνικών.",
-            example_russian: "Я посещаю уроки греческого."
-        },
+            example_russian: "Я посещаю уроки греческого.", exam: true },
         {
             greek: "μισώ",
             russian: "ненавидеть",
@@ -7335,8 +7246,7 @@ window.LESSONS.push({
             russian: "начинать, выезжать",
             group: 1,
             example_greek: "Ξεκινάμε νωρίς το πρωί.",
-            example_russian: "Мы выезжаем рано утром."
-        },
+            example_russian: "Мы выезжаем рано утром.", exam: true },
         {
             greek: "επιθυμώ",
             russian: "желать (хотеть)",
@@ -7349,8 +7259,7 @@ window.LESSONS.push({
             russian: "уезжать",
             group: 2,
             example_greek: "Το πλοίο αναχωρεί στις επτά.",
-            example_russian: "Корабль отправляется в семь."
-        },
+            example_russian: "Корабль отправляется в семь.", exam: true },
         {
             greek: "δημιουργώ",
             russian: "создавать",
@@ -7370,15 +7279,13 @@ window.LESSONS.push({
             russian: "продвигаться",
             group: 2,
             example_greek: "Η δουλειά προχωράει αργά.",
-            example_russian: "Работа продвигается медленно."
-        },
+            example_russian: "Работа продвигается медленно.", exam: true },
         {
             greek: "συναντώ",
             russian: "встречать",
             group: 1,
             example_greek: "Συναντάω τους φίλους μου το Σάββατο.",
-            example_russian: "Я встречаюсь с друзьями в субботу."
-        }
+            example_russian: "Я встречаюсь с друзьями в субботу.", exam: true }
     ]
 });
 
@@ -7391,8 +7298,7 @@ window.LESSONS.push({
             russian: "забывать",
             group: 1,
             example_greek: "Ξεχνάω συνέχεια τα κλειδιά μου.",
-            example_russian: "Я постоянно забываю свои ключи."
-        },
+            example_russian: "Я постоянно забываю свои ключи.", exam: true },
         {
             greek: "πεινώ",
             russian: "быть голодным",
@@ -7426,8 +7332,7 @@ window.LESSONS.push({
             russian: "портить(ся)",
             group: 2,
             example_greek: "Χάλασε το ψυγείο μας.",
-            example_russian: "У нас сломался холодильник."
-        },
+            example_russian: "У нас сломался холодильник.", exam: true },
         {
             greek: "γελώ",
             russian: "смеяться",
@@ -7447,15 +7352,13 @@ window.LESSONS.push({
             russian: "проходить, проводить",
             group: 1,
             example_greek: "Περνάμε πολύ καλά στις διακοπές.",
-            example_russian: "Мы отлично проводим время в отпуске."
-        },
+            example_russian: "Мы отлично проводим время в отпуске.", exam: true },
         {
             greek: "μπορώ",
             russian: "мочь",
             group: 1,
             example_greek: "Μπορείς να με βοηθήσεις;",
-            example_russian: "Ты можешь мне помочь?"
-        },
+            example_russian: "Ты можешь мне помочь?", exam: true },
         {
             greek: "φορώ",
             russian: "носить, надевать",
@@ -7468,22 +7371,19 @@ window.LESSONS.push({
             russian: "вызывать, приглашать",
             group: 2,
             example_greek: "Κάλεσαν αμέσως τον γιατρό.",
-            example_russian: "Они сразу вызвали врача."
-        },
+            example_russian: "Они сразу вызвали врача.", exam: true },
         {
             greek: "παρακαλώ",
             russian: "просить",
             group: 1,
             example_greek: "Σε παρακαλώ, μίλα πιο αργά.",
-            example_russian: "Прошу тебя, говори медленнее."
-        },
+            example_russian: "Прошу тебя, говори медленнее.", exam: true },
         {
             greek: "προσκαλώ",
             russian: "приглашать",
             group: 2,
             example_greek: "Μας προσκάλεσαν στον γάμο τους.",
-            example_russian: "Нас пригласили на их свадьбу."
-        },
+            example_russian: "Нас пригласили на их свадьбу.", exam: true },
         {
             greek: "προκαλώ",
             russian: "причинять, вызывать",
@@ -7496,8 +7396,7 @@ window.LESSONS.push({
             russian: "чувствовать боль",
             group: 1,
             example_greek: "Με πονάει το κεφάλι μου.",
-            example_russian: "У меня болит голова."
-        },
+            example_russian: "У меня болит голова.", exam: true },
         {
             greek: "συγχωρώ",
             russian: "прощать",
