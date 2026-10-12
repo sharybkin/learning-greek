@@ -7517,3 +7517,31 @@ window.LESSONS.push({
         { greek: 'το πάθος', russian: 'пафос', group: 2 }
     ]
 });
+
+window.LESSONS.push({
+    lesson: 14.0,
+    title: 'Урок 14',
+    words: [
+        { greek: 'το βαρέλι', russian: 'бочка', group: 3 },
+        { greek: 'το ορεκτικό', russian: 'закуска', group: 2 },
+        { greek: 'το σαγανάκι', russian: 'маленькая сковорода с 2 ручками / приготовленная в ней еда', group: 3 },
+        { greek: 'το παϊδάκι', russian: 'рёбрышко', group: 3 },
+        { greek: 'η στατιστική', russian: 'статистика', group: 2 },
+        { greek: 'λυπημένος', russian: 'грустный', group: 1, exam: true },
+        { greek: 'το σουβλατζίδικο', russian: 'шашлычная', group: 2 },
+        { greek: 'το φιλέτο', russian: 'филе', group: 2 },
+        { greek: 'το βύσσινο', russian: 'вишня', group: 3 },
+        { greek: 'ο λύκος', russian: 'волк', group: 2 },
+        { greek: 'το γουρουνάκι', russian: 'поросёнок', group: 3 },
+        { greek: 'ξεναγώ', russian: 'проводить экскурсию', group: 2 },
+        { greek: 'το κάπνισμα', russian: 'курение', group: 2 },
+        { greek: 'όσιος', russian: 'святой, священный', group: 3 },
+        { greek: 'πλαστικός', russian: 'пластиковый, пластический', group: 2 },
+        { greek: 'το πιατάκι', russian: 'блюдце', group: 2 },
+        { greek: 'ο έλεγχος', russian: 'контроль, проверка', group: 1 },
+        { greek: 'η αναμονή', russian: 'ожидание', group: 2 },
+        { greek: 'το άγχος', russian: 'стресс', group: 1 },
+        { greek: 'η πετσέτα', russian: 'полотенце', group: 1 },
+        { greek: 'η οδήγηση', russian: 'вождение', group: 1 }
+    ]
+});
